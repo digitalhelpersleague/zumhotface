@@ -1,0 +1,33 @@
+div ng-controller='zum.AttachmentsCtrl'
+  ul.attachment-tabs ng-init='new_attachment = "file"'
+    li : button.btn.btn-lg href="#file" role="tab" ng-class='{ active: new_attachment == "file", "btn-default": new_attachment != "file" }' ng-click='new_attachment="file"' Upload file
+    li : button.btn.btn-lg href="#link" role="tab" ng-class='{ active: new_attachment == "link", "btn-default": new_attachment != "link" }' ng-click='new_attachment="link"' Attach link
+    li : button.btn.btn-lg href="#code" role="tab" ng-class='{ active: new_attachment == "code", "btn-default": new_attachment != "code" }' ng-click='new_attachment="code"' Paste code
+
+  div ng-switch='' on='new_attachment'
+    .attachment-form.animate-switch ng-switch-when='file'
+      form role="form" enctype="multipart/form-data"
+        .form-group.fileupload-buttonbar
+          span.btn.btn-success.btn-lg.fileinput-button ng-class="{disabled: disabled}"
+            span Browse
+            input type="file" name="files[]" multiple='' ng-disabled="disabled" ng-model='files'
+          button.btn.btn-primary.btn-lg type="submit" ng-disabled='!files' Upload
+    .attachment-form.animate-switch ng-switch-when='link'
+      form role="form"
+        .form-group
+          input.form-control placeholder="http://" type="text" ng-model='link' ng-pattern='/^https?\:\/\/.+/'
+        button.btn.btn-primary.btn-lg type="submit" ng-disabled='!link' Submit
+    .attachment-form.animate-switch ng-switch-when='code' 
+      form role="form"
+        .form-group
+          textarea.form-control placeholder='echo "Hello world!"' type="text" ng-model='code' cols='70' rows='5'
+        .form-group
+          label
+            input type="checkbox"
+              |  use encryption
+        button.btn.btn-primary.btn-lg type="submit" ng-disabled='!code' Submit
+
+/p.lead Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.
+/p.lead
+  /a.btn.btn-lg.btn-default href="#"  Learn more
+

@@ -1,0 +1,19 @@
+h1 Listing attachments
+
+table
+  thead
+    tr
+      th
+      th
+      th
+
+  tbody
+    - @attachments.each do |attachment|
+      tr
+        td = link_to 'Show', attachment
+        td = link_to 'Edit', edit_attachment_path(attachment)
+        td = link_to 'Destroy', attachment, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Attachment', new_attachment_path

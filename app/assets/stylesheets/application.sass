@@ -1,3 +1,21 @@
 //= require_self
-//= require bootstrap
-//= require_tree .
+//= require "bootstrap/dist/css/bootstrap"
+//=// require "jquery-file-upload"
+
+@import "cover"
+@import "animations"
+@import "fileupload"
+
+ul.attachment-tabs
+  padding: 0px
+  margin-bottom: 30px
+  > li
+    list-style: none
+    display: inline
+    margin: 5px
+
+.attachment-form
+  width: 400px
+  left: 50%
+  margin-left: -200px
+  position: absolute

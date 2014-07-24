@@ -1,0 +1,41 @@
+doctype 5
+html
+  head
+    title = yield(:title).presence || Rails.application.class.parent_name
+    meta charset="utf-8"
+    meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"
+    meta http-equiv="keywords" content=""
+    meta http-equiv="description" content=""
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    meta name="title" content="#{ yield(:title).presence || Rails.application.class.parent_name }"
+
+    link rel="shortcut icon" href="/favicon.ico"
+    link rel="apple-touch-icon" href="/favicon.png"
+
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+
+  body ng-app='zum' class="#{controller_name}" ng-controller='zum.MainCtrl'
+    .site-wrapper
+      .site-wrapper-inner
+        .cover-container
+          header.clearfix
+            .inner
+              h3.header-brand
+                ' Secure sharing with
+                = yield(:title).presence || Rails.application.class.parent_name.downcase
+              ul.header-nav
+                li
+                  // button.btn.btn-default href="#" Sign in
+                  button.btn.btn-default href="#" Log out
+          .inner.cover
+            /h1.cover-heading Share
+            /p.lead Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.
+            /p.lead
+            == yield
+          footer
+            .inner
+              p
+                ' powered by
+                a href='//github.com/kressh/zumhotface' zumhotface
