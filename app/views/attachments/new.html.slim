@@ -23,7 +23,7 @@ div ng-controller='zum.AttachmentsCtrl'
             td
               | {{ file.name }}
             td
-              | {{ file.size }}
+              | {{ file.size | humanizeSize }}
             td
         = render partial: 'shared_form'
       .attachment-form.animate-switch ng-switch-when='link'

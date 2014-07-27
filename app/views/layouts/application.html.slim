@@ -20,13 +20,12 @@ html
   body ng-app='zum' class="#{controller_name}" ng-controller='zum.MainCtrl'
     .wrapper
       .wrapper-inner
-        - if current_user.guest?
-          = render partial: 'layouts/welcome'
+        == yield(:jumbotron).presence
         .content-container
           = render partial: 'layouts/header'
           .content-inner
-            - if current_user.member?
-              = render_flash_messages
-              == yield
+            = render partial: 'shared/sign_in'
+            = render_flash_messages
+            == yield
         = render partial: 'layouts/footer'
 

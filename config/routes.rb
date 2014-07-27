@@ -1,10 +1,15 @@
 Zumhotface::Application.routes.draw do
+
+  get '/welcome' => 'pages#welcome'
+  get '/features' => 'pages#features'
+
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'attachments#new'
+
+  root 'pages#welcome'
 
   resources :attachments
 

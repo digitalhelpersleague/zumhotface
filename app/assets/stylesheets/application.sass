@@ -8,6 +8,7 @@
 @import "sign_in"
 
 @import url(//fonts.googleapis.com/css?family=Yanone+Kaffeesatz:300,400)
+@import url(//fonts.googleapis.com/css?family=Roboto+Slab&subset=latin,cyrillic)
 
 html, body
   height: 100%
@@ -94,11 +95,26 @@ footer
     background-color: rgba(255,255,255,0.1) !important
     color: $gray-lighter
   &:focus
-    color: $gray-lighter
-    outline: 0
+    color: $gray-lighter !important
+    background-color: rgba(255,255,255,0.1) !important
+    outline: 0 !important
   &:active, &.active
     color: $gray-darker
     background-color: rgba(255, 255, 255, 0.4)
+
+.alert
+  background-color: transparent
+  border-color: transparent
+  font-size: 24px
+  &.alert-success
+    color: #2AA61D
+  &.alert-warning
+    color: #B00A0A
+  //&.alert-danger
+    //color: #2AA61D
+  //&.alert-info
+    //color: #2AA61D
+
 
 .user-nav > li
   padding-top: $navbar-height / 2 - 20px
@@ -118,6 +134,9 @@ a.navbar-brand
   margin-right: auto
   margin-left: auto
 
+.jumbotron
+  margin-top: 170px
+
 .content-inner
   padding-top: 70px
   text-align: center
@@ -135,9 +154,13 @@ header
     margin-right: auto
 
 table.table
+  white-space: nowrap
+  vertical-align: middle !important
+  font-family: 'Roboto Slab', serif
   color: $gray-darker
   text-shadow: none
-  font-weight: 300
+  font-size: 14px
+  //font-weight: 300
   tr:nth-child(even)
     background-color: rgba(255,255,255,0.5)
   tr:nth-child(odd)
@@ -151,7 +174,13 @@ table.table
     text-align: left
     button + button
       margin-left: 5px
-  
+  td.actions
+    text-align: center
+  .btn
+    font-family: $font-family-base
+    //font-size: 12px
+  & > tr > td
+    vertical-align: middle !important
 
 @media (min-width: 768px)
   .wrapper-inner
@@ -165,6 +194,9 @@ table.table
 
   .content-inner
     margin-top: -100px
+
+  .jumbotron
+    margin-top: -60px
 
 @media (min-width: 992px)
   .content-container
