@@ -1,0 +1,6 @@
+- unless flash.present?
+  = render_flash_message(text: 'Forgot your password?', message_type: 'alert', closeable: false)
+
+#forgot-password
+  = render partial: 'form'
+  = render 'devise/shared/links'

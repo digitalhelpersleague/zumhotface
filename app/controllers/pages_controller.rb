@@ -6,6 +6,9 @@ class PagesController < ApplicationController
     end
   end
 
-  def features
+  def about
+  end
+
+  def privacy
   end
 end

@@ -1,3 +1,6 @@
+- unless flash.present?
+  = render_flash_message(text: 'Upload something.')
+
 div ng-controller='zum.AttachmentsCtrl'
   ul.attachment-tabs ng-init='new_attachment = "file"'
     li : button.btn.btn-transparent.btn-lg href="#file" role="tab" ng-class='{ active: new_attachment == "file", "btn-default": new_attachment != "file" }' ng-click='new_attachment="file"' Upload file

@@ -3,9 +3,9 @@
     .modal-content ng-switch='' on='signin_modal' ng-init="signin_modal='signin'"
       //style='width: 100%'
       /.modal-header
-        /button type="button" class="close" data-dismiss="modal"
-          /span aria-hidden="true" &times;
-          /span.sr-only Close
+      /button type="button" class="close" data-dismiss="modal"
+        /span aria-hidden="true" &times;
+        /span.sr-only Close
       .modal-body
         .animate-switch ng-switch-when='signup'
           = render partial: 'devise/registrations/form'

@@ -1,7 +1,8 @@
 Zumhotface::Application.routes.draw do
 
   get '/welcome' => 'pages#welcome'
-  get '/features' => 'pages#features'
+  get '/about' => 'pages#about'
+  get '/privacy' => 'pages#privacy'
 
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.

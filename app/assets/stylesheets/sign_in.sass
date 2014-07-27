@@ -1,19 +1,24 @@
 #sign-in, #sign-up, #forgot-password
-  .modal-dialog > .modal-content
-    background: $gray-darker
-    .modal-header
-      border-bottom: 1px solid $gray-dark
-    .modal-body
-      height: 300px
-      .animate-switch
-        width: 300px
-        left: 50%
-        margin-left: -150px
-      h4
-        color: $gray-lighter
-      label
-        font-weight: 300
-    .modal-footer
-      height: 50px
-      border-top: 1px solid $gray-dark
-      text-align: center
+  &.modal
+    .modal-dialog > .modal-content
+      background: #0F212A
+      .modal-header
+        border-bottom: 1px solid $gray-dark
+      .modal-body
+        height: 300px
+        .animate-switch
+          width: 300px
+          left: 50%
+          margin-left: -150px
+        h4
+          color: $gray-lighter
+      .modal-footer
+        height: 50px
+        border-top: 1px solid #1F2D36
+        text-align: center
+
+  &:not(.modal)
+    width: 300px
+    margin-left: auto
+    margin-right: auto
+

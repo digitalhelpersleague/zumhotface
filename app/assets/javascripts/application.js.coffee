@@ -1,7 +1,12 @@
 #= require jquery
 #= require jquery_ujs
 #####=#  require turbolinks
-#= require bootstrap-sass-official
+#
+#= require bootstrap-sass-official/transition
+#= require bootstrap-sass-official/alert
+#= require bootstrap-sass-official/button
+#= require bootstrap-sass-official/modal
+#
 #= require lodash
 #= require moment
 #
@@ -11,13 +16,9 @@
 #= require angular-sanitize
 #= require angular-moment
 #
-#= require jquery-file-upload/jquery.fileupload
-#= require jquery-file-upload/jquery.fileupload-angular
-#= require jquery-file-upload/jquery.iframe-transport
-#
 #= require ng-rails-csrf 
 #
 #= require_self
 #= require_tree .
 
-@zum = angular.module 'zum', ['ngResource', 'ng-rails-csrf', 'ngSanitize', 'angularMoment', 'ngAnimate', 'blueimp.fileupload']
+@zum = angular.module 'zum', ['ngResource', 'ng-rails-csrf', 'ngSanitize', 'angularMoment', 'ngAnimate']

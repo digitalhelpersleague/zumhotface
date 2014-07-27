@@ -49,7 +49,12 @@ ul.attachment-tabs
   -webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.7)
   box-shadow: inset 0 0 100px rgba(0,0,0,.7)
 
+label
+  font-weight: 300
+
 footer
+  font-weight: 300
+  font-size: 16px
   width: 100%
   position: fixed
   bottom: 0
@@ -71,7 +76,6 @@ footer
   padding-bottom: 5px
   padding-right: 0
   padding-left: 0
-  font-size: 16px
   color: $gray-lighter
   border-bottom: 3px solid transparent
   &.active
@@ -109,27 +113,33 @@ footer
   font-size: 32px
   padding-top: 220px
   color: $gray-lighter !important
+  background-position: top center !important
   &.alert-success
     background: image-url('happy-steve.png') no-repeat
-    background-position: top center
     //color: #2AA61D
   &.alert-warning
-    color: #B00A0A
+    background: image-url('embarassed-steve.png') no-repeat
   //&.alert-danger
     //color: #2AA61D
-  //&.alert-info
+  &.alert-info
+    background: image-url('pocker-steve.png') no-repeat
+    //background-position: top center
     //color: #2AA61D
+  .close
+    color: $gray-lighter
+    float: none
+    padding-left: 5px
+    top: -10px
+    right: inherit
+    opacity: 0.7
+    font-size: 32px
 
 
 .user-nav > li
   padding-top: $navbar-height / 2 - 20px
 
 a.navbar-brand
-  color: $gray-lighter
-  font-size: 28px
-  font-weight: 400
-  &:hover
-    color: $gray-lighter
+  padding: 15px 10px !important
 
 .wrapper-inner
   display: table-cell
@@ -171,6 +181,8 @@ table.table
   tr:nth-child(odd)
     background-color: rgba(255,255,255,0.7)
   tr:first-child
+    font-family: $font-family-base
+    font-size: $font-size-base
     color: $gray-lighter
     background-color: transparent
     th
