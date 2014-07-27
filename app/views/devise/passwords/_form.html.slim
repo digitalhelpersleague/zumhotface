@@ -1,0 +1,8 @@
+form action="#{ user_password_path }" method='POST'
+  input name="authenticity_token" value="#{ form_authenticity_token }" type='hidden'
+  h3 Forgot your password?
+  .form-group
+    input.form-control type='text' name='user[email]' autofocus='true' placeholder='Email'
+  .form-group
+    button.btn.btn-primary name='commit' type='submit'
+      | Reset my password

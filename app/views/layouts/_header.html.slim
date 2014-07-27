@@ -1,0 +1,20 @@
+header.navbar.navbar-inverted.navbar-static-top role="navigation"
+  /.container
+  .navbar-header
+    /button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-collapse"
+      /span.sr-only Toggle navigation
+      /span.icon-bar
+      /span.icon-bar
+      /span.icon-bar
+    a.navbar-brand href='/' ZUMHOTFACE
+  /.navbar-collapse.collapse
+  ul.header-nav.nav.navbar-nav
+    li : a href='#' FEATURES
+    li class=header_active?('attachments') : a href='#' UPLOADS
+  ul.nav.user-nav.navbar-right
+    - if current_user.member?
+      li = current_user.email
+      li = link_to "LOG OUT", destroy_user_session_path, method: :delete, class: 'btn btn-default btn-transparent'
+    - else
+      li : a.btn.btn-default.btn-transparent data-toggle="modal" data-target="#sign-in" SIGN IN
+= render partial: 'shared/sign_in'

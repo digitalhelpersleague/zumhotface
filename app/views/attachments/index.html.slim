@@ -1,19 +1,56 @@
-h1 Listing attachments
+table.table
+  /.table-striped
+  tr
+    th
+    th Name
+    th Size
+    th Encryption
+    th Password
+    th Downloads
+    th Link
+    th Uploaded on
+    th
+  tr
+    td
+    td http://www.dafont.co...
+    td 2.5 Mb
+    td AES256
+    td Yes
+    td 11
+    td : a http://zhf.io/_sdkop
+    td 26.07.2014
+    td
+      button.btn.btn-success.btn-xs DOWNLOAD
+      button.btn.btn-danger.btn-xs DESTROY
+  tr
+    td
+    td http://www.dafont.co...
+    td 2.5 Mb
+    td AES256
+    td Yes
+    td 11
+    td : a http://zhf.io/_sdkop
+    td 26.07.2014
+    td
+      button.btn.btn-success.btn-xs DOWNLOAD
+      button.btn.btn-danger.btn-xs DESTROY
+  tr
+    td
+    td http://www.dafont.co...
+    td 2.5 Gb
+    td AES256
+    td Yes
+    td 11
+    td : a http://zhf.io/_sdkop
+    td 26.07.2014
+    td
+      button.btn.btn-success.btn-xs DOWNLOAD
+      button.btn.btn-danger.btn-xs DESTROY
 
-table
-  thead
+  - @attachments.each do |attachment|
     tr
-      th
-      th
-      th
+      td
+      td = link_to 'Edit', edit_attachment_path(attachment)
+      td = link_to 'Destroy', attachment, data: {:confirm => 'Are you sure?'}, :method => :delete
 
-  tbody
-    - @attachments.each do |attachment|
-      tr
-        td = link_to 'Show', attachment
-        td = link_to 'Edit', edit_attachment_path(attachment)
-        td = link_to 'Destroy', attachment, data: {:confirm => 'Are you sure?'}, :method => :delete
-
-br
-
-= link_to 'New Attachment', new_attachment_path
+= link_to 'NEW ATTACHMENT', new_attachment_path, class: 'btn btn-success'

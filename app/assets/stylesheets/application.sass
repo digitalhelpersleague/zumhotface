@@ -1,10 +1,29 @@
-//= require_self
-//= require "bootstrap/dist/css/bootstrap"
-//=// require "jquery-file-upload"
+//=/// require "bootstrap_variables"
 
-@import "cover"
+@import "bootstrap_and_overrides"
+
+// @import "cover"
 @import "animations"
 @import "fileupload"
+@import "sign_in"
+
+@import url(//fonts.googleapis.com/css?family=Yanone+Kaffeesatz:300,400)
+
+html, body
+  height: 100%
+
+body
+  background-image: image-url('camo-bg2.png')
+  text-shadow: 0 1px 3px rgba(0,0,0,.7)
+
+//a.navbar-brand
+  //color: $body
+
+.jumbotron
+  -webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.7)
+  box-shadow: inset 0 0 100px rgba(0,0,0,.7)
+  padding-top: 20px
+  padding-bottom: 50px
 
 ul.attachment-tabs
   padding: 0px
@@ -18,4 +37,153 @@ ul.attachment-tabs
   width: 400px
   left: 50%
   margin-left: -200px
-  position: absolute
+
+.wrapper
+  display: table
+  //background: rgba(74, 73, 41, 0.6)
+  width: 100%
+  height: 100%
+  min-height: 100%
+  -webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.7)
+  box-shadow: inset 0 0 100px rgba(0,0,0,.7)
+
+footer
+  width: 100%
+  position: fixed
+  bottom: 0
+  text-align: center
+
+.header-nav
+  padding-left: 40px
+  text-align: center
+
+.user-nav
+  text-align: center
+
+.header-nav > li, .user-nav > li
+  display: inline-block
+  & + li
+    margin-left: 30px
+
+.header-nav > li > a
+  padding-bottom: 5px
+  padding-right: 0
+  padding-left: 0
+  font-size: 16px
+  color: $gray-lighter
+  border-bottom: 3px solid transparent
+  &.active
+    border-bottom-color: $gray-lighter
+  &:hover, &:focus, &:active
+    color: $gray-lighter
+    background-color: transparent
+    border-bottom-color: $gray-lighter
+
+.header-nav > .active > a,
+.header-nav > .active > a:hover,
+.header-nav > .active > a:focus
+  color: #fff
+  border-bottom-color: #fff
+
+
+.btn-transparent
+  //font-weight: 300
+  background-color: transparent
+  color: $gray-lighter
+  &:hover
+    background-color: rgba(255,255,255,0.1) !important
+    color: $gray-lighter
+  &:focus
+    color: $gray-lighter
+    outline: 0
+  &:active, &.active
+    color: $gray-darker
+    background-color: rgba(255, 255, 255, 0.4)
+
+.user-nav > li
+  padding-top: $navbar-height / 2 - 20px
+
+a.navbar-brand
+  color: $gray-lighter
+  font-size: 28px
+  font-weight: 400
+  &:hover
+    color: $gray-lighter
+
+.wrapper-inner
+  display: table-cell
+  vertical-align: top
+
+.content-container
+  margin-right: auto
+  margin-left: auto
+
+.content-inner
+  padding-top: 70px
+  text-align: center
+  padding: 30px
+  vertical-align: middle
+  margin-top: 170px
+
+header
+  position: fixed !important
+  top: 0 !important
+  width: 100%
+  text-align: center
+  .navbar
+    margin-left: auto
+    margin-right: auto
+
+table.table
+  color: $gray-darker
+  text-shadow: none
+  font-weight: 300
+  tr:nth-child(even)
+    background-color: rgba(255,255,255,0.5)
+  tr:nth-child(odd)
+    background-color: rgba(255,255,255,0.7)
+  tr:first-child
+    color: $gray-lighter
+    background-color: transparent
+    th
+      font-weight: 400
+  td
+    text-align: left
+    button + button
+      margin-left: 5px
+  
+
+@media (min-width: 768px)
+  .wrapper-inner
+    vertical-align: middle
+
+  .navbar
+    width: 100%
+
+  .content-container
+    width: 100%
+
+  .content-inner
+    margin-top: -100px
+
+@media (min-width: 992px)
+  .content-container
+    width: 100%
+
+@media (min-width: 1200px)
+  .content-container
+    width: 1100px
+
+  .navbar
+    width: 1100px
+
+
+.jumbotron
+  .zhf-logo
+    //width: 300px
+    //padding: 40px
+    //font-size: 64px
+  .zhf-description
+    width: 600px
+    float: right
+

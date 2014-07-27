@@ -1,7 +1,7 @@
 #= require jquery
 #= require jquery_ujs
 #####=#  require turbolinks
-#=#### require bootstrap
+#= require bootstrap-sass-official
 #= require lodash
 #= require moment
 #

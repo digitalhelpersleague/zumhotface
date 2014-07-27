@@ -1,0 +1,28 @@
+#sign-in.modal.fade role="dialog" aria-labelledby="SignIn" aria-hidden="true"
+  .modal-dialog
+    .modal-content ng-switch='' on='signin_modal' ng-init="signin_modal='signin'"
+      //style='width: 100%'
+      /.modal-header
+        /button type="button" class="close" data-dismiss="modal"
+          /span aria-hidden="true" &times;
+          /span.sr-only Close
+      .modal-body
+        .animate-switch ng-switch-when='signup'
+          = render partial: 'devise/registrations/form'
+
+        .animate-switch ng-switch-when='signin'
+          = render partial: 'devise/sessions/form'
+
+        .animate-switch ng-switch-when='forgot'
+          = render partial: 'devise/passwords/form'
+
+      .modal-footer
+        ul.list-inline
+          li : a href='javascript:;' ng-click="signin_modal = 'signup';"
+            | Sign up
+          li.divider
+          li : a href='javascript:;' ng-click="signin_modal = 'signin';"
+            | Sign in
+          li.divider
+          li : a href='javascript:;' ng-click="signin_modal = 'forgot';"
+            | Forgot your password?

@@ -1,0 +1,7 @@
+form action="#{ user_registration_path }" method='POST' role='form'
+  input name="authenticity_token" value="#{ form_authenticity_token }" type='hidden'
+  h3 Interested? Register!
+  .form-group
+    input.form-control type='text' name='user[email]' autofocus='true' placeholder='Email'
+  .form-group
+    button.btn.btn-success name='commit' type='submit' Sign up

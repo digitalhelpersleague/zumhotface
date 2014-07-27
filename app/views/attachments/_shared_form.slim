@@ -1,0 +1,23 @@
+.attachment-actions
+  /.form-group
+    /label
+      /input type='checkbox' name='encryption' ng-model='encryption'
+        /|  Encryption
+  /.form-group ng-show='encryption'
+    /label
+      /input type='radio' name='aes_type' ng-model='aes_type' value='AES128'
+        /|  AES128
+    /label
+      /input type='radio' name='aes_type' ng-model='aes_type' value='AES256' selected='selected'
+        /|  AES256
+  /.form-group ng-show='aes_type'
+    /label
+      /' Secure with
+    /input name='encryption_passphrase' type='password' placeholder='passphrase'
+  /.form-group ng-show='aes_type'
+    /label
+      /' or GPG key 
+    /select name='gpg_key'
+      /option Alice
+      /option Bob
+  button.btn.btn-primary.btn-lg type='submit' ng-disabled='!ready' Submit

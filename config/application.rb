@@ -21,5 +21,9 @@ module Zumhotface
     # config.i18n.default_locale = :de
 
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
+
+    config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+
+    config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
   end
 end

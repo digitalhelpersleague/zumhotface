@@ -74,6 +74,11 @@ GEM
       request_store (~> 1.0.3)
     erubis (2.7.0)
     execjs (2.2.1)
+    gon (5.1.2)
+      actionpack (>= 2.3.0)
+      json
+      multi_json
+      request_store (>= 1.0.5)
     has_scope (0.6.0.rc)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
@@ -146,7 +151,7 @@ GEM
     rails-assets-blueimp-canvas-to-blob (2.1.0)
     rails-assets-blueimp-load-image (1.11.1)
     rails-assets-blueimp-tmpl (2.5.4)
-    rails-assets-bootstrap (3.2.0)
+    rails-assets-bootstrap-sass-official (3.2.0)
       rails-assets-jquery (>= 1.9.0)
     rails-assets-jquery (2.1.1)
     rails-assets-jquery-file-upload (9.7.0)
@@ -177,6 +182,7 @@ GEM
     sdoc (0.4.0)
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
+    settingslogic (2.0.9)
     slim (2.0.3)
       temple (~> 0.6.6)
       tilt (>= 1.3.3, < 2.1)
@@ -251,6 +257,7 @@ DEPENDENCIES
   devise
   devise_invitable
   draper
+  gon
   inherited_resources
   jquery-rails
   less
@@ -268,12 +275,13 @@ DEPENDENCIES
   rails-assets-angular-moment
   rails-assets-angular-resource
   rails-assets-angular-sanitize
-  rails-assets-bootstrap
+  rails-assets-bootstrap-sass-official
   rails-assets-jquery-file-upload
   rails-assets-lodash
   rails-assets-moment
   sass-rails (~> 4.0)
   sdoc
+  settingslogic
   slim-rails
   therubyracer
   turbolinks

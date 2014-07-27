@@ -38,6 +38,9 @@ gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
+gem 'settingslogic'
+
+gem 'gon'
 gem 'rabl-rails'
 gem 'oj'
 
@@ -55,7 +58,7 @@ gem 'rails-assets-angular'
 gem 'rails-assets-angular-animate'
 gem 'rails-assets-angular-resource'
 gem 'rails-assets-angular-sanitize'
-gem 'rails-assets-bootstrap'
+gem 'rails-assets-bootstrap-sass-official'
 gem 'rails-assets-jquery-file-upload'
 gem 'rails-assets-moment'
 gem 'rails-assets-angular-moment'

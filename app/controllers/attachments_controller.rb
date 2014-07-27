@@ -1,7 +1,6 @@
 class AttachmentsController < ApplicationController
 
-  inherit_resources
-
   respond_to :html, :json
+  inherit_resources
 
 end

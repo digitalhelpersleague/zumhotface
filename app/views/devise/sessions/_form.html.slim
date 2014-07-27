@@ -1,0 +1,13 @@
+form action="#{ user_session_path }" method='POST'
+  input name="authenticity_token" value="#{ form_authenticity_token }" type='hidden'
+  h3.lead Welcome back!
+  .form-group
+    input.form-control type='text' name='user[email]' autofocus='true' placeholder='Email'
+  .form-group
+    input.form-control type='password' name='user[password]' placeholder='Password'
+  .form-group
+    label for='remember_me'
+      input#remember_me type='checkbox' name='user[remember_me]'
+      |  Remember me
+  .form-group
+    button.btn.btn-primary name='commit' type='submit' Sign in
