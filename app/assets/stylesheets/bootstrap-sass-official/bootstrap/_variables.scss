@@ -34,9 +34,9 @@ $body-bg:               rgba(125, 108, 11, 0.6) !default;
 $text-color:            $gray-light !default;
 
 //** Global textual link color.
-$link-color:            #1c4485 !default;
+$link-color:            #3E8DEC !default;
 //** Link hover color set via `darken()` function.
-$link-hover-color:      darken($link-color, 15%) !default;
+$link-hover-color:      darken($link-color, 10%) !default;
 
 
 //== Typography

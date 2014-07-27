@@ -12,6 +12,11 @@ Zumhotface::Application.routes.draw do
   root 'pages#welcome'
 
   resources :attachments
+  # do
+    #member do
+      #get 'attach' => 
+    #end
+  #end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
