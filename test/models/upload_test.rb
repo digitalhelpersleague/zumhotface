@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Attachment::FileTest < ActiveSupport::TestCase
+class UploadTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

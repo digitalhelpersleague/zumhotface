@@ -1,10 +1,12 @@
-@zum.controller "zum.AttachmentsCtrl", ["$scope", "Attachment", ($scope, Attachment) ->
+@zum.controller "zum.UploadsCtrl", ["$scope", "Upload", ($scope, Upload) ->
+
+  $scope.uploads = Upload.all
 
   $scope.upload = ->
     if _.any $scope.files
       _.each $scope.files, (file) ->
-        upload = new Attachment()
-        upload.type = 'Attachment::File'
+        upload = new Upload()
+        upload.type = 'Upload::File'
         upload.file = file
         upload.$save().then ->
           console.log upload

@@ -12,7 +12,7 @@ header.navbar.navbar-inverted.navbar-static-top role="navigation"
     ul.header-nav.nav.navbar-nav
       li : a href='/about' ABOUT
       li : a href='/privacy' PRIVACY
-      li class=header_active?('attachments') : a href='#' UPLOADS
+      li class=header_active?('uploads') : a href='#' UPLOADS
     ul.nav.user-nav.navbar-right
       - if current_user.member?
         li = current_user.email

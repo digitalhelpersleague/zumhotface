@@ -1,0 +1,25 @@
+div ng-controller='zum.UploadsCtrl'
+  table.table
+    /.table-striped
+    tr
+      th
+      th Name
+      th Size
+      th Protected
+      th Encrypted
+      th Downloads
+      th Link
+      th Uploaded on
+      th
+    tr ng-repeat='upload in uploads'
+      td : span.upload-icon.glyphicon class='glyphicon-{{ upload.icon }}' ng-show='upload.icon'
+      td = "{{ upload.file_file_name | truncate }}"
+      td = "{{ upload.file_file_size | humanizeSize }}"
+      td
+      td : span.glyphicon.glyphicon-lock ng-show="{{ upload.protected }}"
+      td = "{{ upload.downloads || 0 }}"
+      td : a href='{{ upload.url }}' = '{{ upload.url.replace("http://", "") }}'
+      td : span am-time-ago="upload.created_at" = "{{ upload.created_at }}"
+      td.actions : a.btn.btn-danger.btn-xs href='javascript:;' DESTROY
+
+  = link_to 'NEW UPLOAD', new_upload_path, class: 'btn btn-success'

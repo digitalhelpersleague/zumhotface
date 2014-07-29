@@ -1,0 +1,36 @@
+div ng-controller='zum.UploadsCtrl'
+  ul.upload-tabs ng-init='new_upload = "file"'
+    li : button.btn.btn-transparent.btn-lg href="#file" role="tab" ng-class='{ active: new_upload == "file", "btn-default": new_upload != "file" }' ng-click='new_upload="file"' Upload file
+    li : button.btn.btn-transparent.btn-lg href="#link" role="tab" ng-class='{ active: new_upload == "link", "btn-default": new_upload != "link" }' ng-click='new_upload="link"' Attach link
+    li : button.btn.btn-transparent.btn-lg href="#code" role="tab" ng-class='{ active: new_upload == "code", "btn-default": new_upload != "code" }' ng-click='new_upload="code"' Paste code
+
+  div.upload-forms
+    .upload-form.animate-switch ng-show='new_upload == "file"'
+      .form-group.fileupload-buttonbar
+        span.btn.btn-success.btn-lg.fileinput-button ng-class="{disabled: disabled}"
+          span Browse
+          input type="file" name="files[]" multiple='' ng-disabled="disabled" fileread='files'
+      table.table ng-show='files.length'
+        tr
+          th
+          th Name
+          th Size
+          th Link
+          th
+        tr ng-repeat='file in files'
+          td
+          td = '{{ file.name }}'
+          td = '{{ file.size | humanizeSize }}'
+          td = '{{ file.link }}'
+          td
+            span.glyphicon.glyphicon-ok ng-show='file.uploaded'
+
+      = render partial: 'shared_form'
+    .upload-form.animate-switch ng-show='new_upload == "link"'
+      .form-group
+        input.form-control placeholder="http://" type="text" ng-model='link' ng-pattern='/^https?\:\/\/.+/'
+      = render partial: 'shared_form'
+    .upload-form.animate-switch ng-show='new_upload == "code"'
+      .form-group
+        textarea.form-control placeholder='echo "Hello world!"' type="text" ng-model='code' cols='70' rows='5'
+      = render partial: 'shared_form'

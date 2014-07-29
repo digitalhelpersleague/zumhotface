@@ -1,5 +1,6 @@
-@zum.factory "Attachment", ["$resource", ($resource) ->
-  Attachment = $resource("/attachments/:id.json", { id: "@id" },
+@zum.factory "Upload", ["$resource", "data", ($resource, data) ->
+
+  Upload = $resource("/uploads/:id.json", { id: "@id" },
     update: {method: 'PUT'}
     save:
       method: 'POST'
@@ -17,10 +18,26 @@
                 fd.append "#{key}[#{index}]#{file}"
                 return
           else
-            fd.append "attachment[#{key}]", value
+            fd.append "upload[#{key}]", value
           return
         fd
   )
 
-  Attachment
+  Upload::init = ->
+    if @created_at
+      @created_at = new Date(@created_at)
+    @
+
+  cache = do ->
+    if data.uploads?
+      _.map(data.uploads, (params) ->
+        upload = new Upload(params)
+        upload.init()
+      )
+    else
+      Upload.query()
+
+  Upload.all = cache
+
+  Upload
 ]

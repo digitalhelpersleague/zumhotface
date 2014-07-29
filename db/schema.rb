@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20140729080145) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "attachments", id: false, force: true do |t|
+  create_table "uploads", force: true do |t|
     t.string   "sid",               limit: 12
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -27,10 +27,10 @@ ActiveRecord::Schema.define(version: 20140729080145) do
     t.string   "type"
     t.string   "encryption_type"
     t.integer  "user_id"
-    t.integer  "downloads"
+    t.integer  "downloads",                    default: 0, null: false
   end
 
-  add_index "attachments", ["user_id"], name: "index_attachments_on_user_id", using: :btree
+  add_index "uploads", ["user_id"], name: "index_uploads_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

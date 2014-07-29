@@ -1,18 +1,18 @@
-class Attachment < ActiveRecord::Base
+class Upload < ActiveRecord::Base
 
   SAFE_CHARS = (('A'..'Z').to_a + ('a'..'z').to_a + ('0'..'9').to_a + %w(- _ ~)).freeze
 
   belongs_to :user
 
   has_attached_file :file,
-      hash_secret: Settings.attachments.secret_key,
-      path: ":rails_root/public/system/attachments/:id_partition/:hash.:extension"
-      #path: "/attachments/:id_partition/:hash.:extension"
+      hash_secret: Settings.uploads.secret_key,
+      path: ":rails_root/public/system/uploads/:id_partition/:hash.:extension"
+      #path: "/uploads/:id_partition/:hash.:extension"
   #,
       #url: ":s3_domain_url",
       #storage: :s3,
-      #s3_credentials: Settings.attachments.aws_s3.s3_credentials,
-      #bucket: Settings.attachments.aws_s3.bucket
+      #s3_credentials: Settings.uploads.aws_s3.s3_credentials,
+      #bucket: Settings.uploads.aws_s3.bucket
 
   # skip content type validation
   validates_attachment_content_type :file, content_type: /.*/
@@ -24,11 +24,17 @@ class Attachment < ActiveRecord::Base
   #def encrypt(passphrase)
   #end
 
+  def self.upload_type
+    nil
+  end
+
 private
   def set_unique_identifier
-    begin
-        self.sid = generate_identifier
-    end while self.class.exists?(sid: self.sid)
+    unless self.sid
+      begin
+          self.sid = generate_identifier
+      end while self.class.exists?(sid: self.sid)
+    end
   end
 
   def generate_identifier

@@ -12,9 +12,9 @@ Zumhotface::Application.routes.draw do
 
   root 'pages#welcome'
 
-  resources :attachments
+  resources :uploads
 
-  get '/:sid' => 'attachments#show'
+  get '/:sid' => 'uploads#show'
 
   # do
     #member do

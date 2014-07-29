@@ -2,13 +2,13 @@ defaults: &defaults
   host: 'zhf.io'
   mail:
     from: robot@localhost
-  attachments:
+  uploads:
     secret_key: put_very_long_random_string_here
     aws_s3:
       s3_credentials:
         access_key_id: AWS_ACCESS_KEY_ID
         secret_access_key: AWS_SECRET_ACCESS_KEY
-      path: "attachments"
+      path: "uploads"
       bucket: zumhotface
 
 development:

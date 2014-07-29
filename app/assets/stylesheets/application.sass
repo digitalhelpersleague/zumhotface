@@ -17,7 +17,7 @@ body
   background-image: image-url('noise.png')
   text-shadow: 0 1px 3px rgba(0,0,0,.7)
 
-ul.attachment-tabs
+ul.upload-tabs
   padding: 0px
   margin-bottom: 30px
   > li
@@ -28,7 +28,7 @@ ul.attachment-tabs
 .navbar-header
   float: none
 
-.attachment-form
+.upload-form
   width: 400px
   left: 50%
   margin-left: -200px
@@ -163,7 +163,6 @@ header
 
 table.table
   white-space: nowrap
-  vertical-align: middle !important
   font-family: 'Roboto Slab', serif
   color: $gray-darker
   text-shadow: none
@@ -189,8 +188,10 @@ table.table
   .btn
     font-family: $font-family-base
     //font-size: 12px
-  & > tr > td
+  & > tbody > tr > td
     vertical-align: middle !important
+    span.upload-icon
+      margin-left: 5px
 
 .zhf-description
   background: image-url('angry-steve-logo.png') no-repeat

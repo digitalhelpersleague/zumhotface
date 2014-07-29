@@ -1,2 +1,2 @@
-object :@attachment
+object :upload
 attributes :sid, :type, :encryption_type, :file_file_name, :file_file_size

@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :lockable
 
-  has_many :attachments
+  has_many :uploads
 
   def has_invites?
     invitation_limit and invitation_limit > 0
