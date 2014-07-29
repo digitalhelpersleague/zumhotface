@@ -9,22 +9,28 @@ html
     meta name="viewport" content="width=device-width, initial-scale=1.0"
     meta name="title" content="#{ yield(:title).presence || Rails.application.class.parent_name }"
 
-    link rel="shortcut icon" href="/favicon.ico"
-    link rel="apple-touch-icon" href="/favicon.png"
+    link rel="icon" type="image/png" sizes="16x16" href="/favicon_16.png"
+    /link rel="icon" type="image/png" sizes="32x32" href="/favicon_32.png"
+    /link rel="icon" type="image/png" sizes="64x64" href="/favicon_64.png"
+    link rel="apple-touch-icon" href="/favicon_64.png"
+
 
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = include_gon watch: true
     = csrf_meta_tags
 
-  body ng-app='zum' class="#{controller_name}" ng-controller='zum.MainCtrl'
-    .wrapper
+  body ng-app='zum' class="#{controller_name}"
+    .wrapper ng-controller='zum.MainCtrl'
       .wrapper-inner
         .content-container
           = render partial: 'layouts/header'
           .content-inner
             = render partial: 'shared/sign_in'
-            - if controller_name != 'pages'
+            - if controller_name == 'pages'
+              div style="display: none"
+                = render_flash_messages
+            - else
               = render_flash_messages
             == yield
         = render partial: 'layouts/footer'

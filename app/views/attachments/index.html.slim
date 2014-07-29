@@ -10,47 +10,53 @@ table.table
     th Link
     th Uploaded on
     th
-  tr
-    td
-    td http://www.dafont.co...
-    td 2.5 Mb
-    td AES256
-    td Yes
-    td 11
-    td : a http://zhf.io/_sdkop
-    td 26.07.2014
-    td.actions
-      button.btn.btn-success.btn-xs DOWNLOAD
-      button.btn.btn-danger.btn-xs DESTROY
-  tr
-    td
-    td http://www.dafont.co...
-    td 2.5 Mb
-    td AES256
-    td Yes
-    td 11
-    td : a http://zhf.io/_sdkop
-    td 26.07.2014
-    td.actions
-      button.btn.btn-success.btn-xs DOWNLOAD
-      button.btn.btn-danger.btn-xs DESTROY
-  tr
-    td
-    td http://www.dafont.co...
-    td 2.5 Gb
-    td AES256
-    td Yes
-    td 11
-    td : a http://zhf.io/_sdkop
-    td 26.07.2014
-    td.actions
-      button.btn.btn-success.btn-xs DOWNLOAD
-      button.btn.btn-danger.btn-xs DESTROY
+  /tr
+    /td
+    /td http://www.dafont.co...
+    /td 2.5 Mb
+    /td AES256
+    /td Yes
+    /td 11
+    /td : a http://zhf.io/_sdkop
+    /td 26.07.2014
+    /td.actions
+      /button.btn.btn-success.btn-xs DOWNLOAD
+      /button.btn.btn-danger.btn-xs DESTROY
+  /tr
+    /td
+    /td http://www.dafont.co...
+    /td 2.5 Mb
+    /td AES256
+    /td Yes
+    /td 11
+    /td : a http://zhf.io/_sdkop
+    /td 26.07.2014
+    /td.actions
+      /button.btn.btn-success.btn-xs DOWNLOAD
+      /button.btn.btn-danger.btn-xs DESTROY
+  /tr
+    /td
+    /td http://www.dafont.co...
+    /td 2.5 Gb
+    /td AES256
+    /td Yes
+    /td 11
+    /td : a http://zhf.io/_sdkop
+    /td 26.07.2014
+    /td.actions
+      /button.btn.btn-success.btn-xs DOWNLOAD
+      /button.btn.btn-danger.btn-xs DESTROY
 
-  - @attachments.each do |attachment|
-    tr
-      td
-      td = link_to 'Edit', edit_attachment_path(attachment)
-      td = link_to 'Destroy', attachment, data: {:confirm => 'Are you sure?'}, :method => :delete
+  tr ng-repeat='attachment in attachments'
+    td
+    td = attachment.file_file_name
+    td = attachment.file_file_size
+    td
+    td
+    td
+    td = link_to attachment.url, attachment.url
+    td = attachment.created_at
+    td.actions
+      = link_to 'DESTROY', attachment_path(attachment.sid), data: {confirm: 'Are you sure?'}, method: :delete, class: 'btn btn-danger btn-xs'
 
 = link_to 'NEW ATTACHMENT', new_attachment_path, class: 'btn btn-success'

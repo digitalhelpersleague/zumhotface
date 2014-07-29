@@ -1,6 +1,8 @@
 @zum.directive "fileread", ->
-  (scope, element, attributes) ->
+  scope:
+    fileread: '=',
+  link: (scope, element, attributes) ->
     element.bind("change", (changeEvent) ->
       scope.$apply ->
-        scope[attributes.fileread] = changeEvent.target.files
+        scope.fileread = changeEvent.target.files
     )

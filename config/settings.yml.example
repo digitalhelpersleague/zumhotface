@@ -1,4 +1,5 @@
 defaults: &defaults
+  host: 'zhf.io'
   mail:
     from: robot@localhost
   attachments:

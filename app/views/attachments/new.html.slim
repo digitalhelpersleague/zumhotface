@@ -1,25 +1,34 @@
-- unless flash.present?
-  = render_flash_message(text: 'Upload something.')
-
 div ng-controller='zum.AttachmentsCtrl'
   ul.attachment-tabs ng-init='new_attachment = "file"'
     li : button.btn.btn-transparent.btn-lg href="#file" role="tab" ng-class='{ active: new_attachment == "file", "btn-default": new_attachment != "file" }' ng-click='new_attachment="file"' Upload file
     li : button.btn.btn-transparent.btn-lg href="#link" role="tab" ng-class='{ active: new_attachment == "link", "btn-default": new_attachment != "link" }' ng-click='new_attachment="link"' Attach link
     li : button.btn.btn-transparent.btn-lg href="#code" role="tab" ng-class='{ active: new_attachment == "code", "btn-default": new_attachment != "code" }' ng-click='new_attachment="code"' Paste code
 
-  form role="form" enctype="multipart/form-data" action="/attachments"
-    div.attachment-forms ng-switch='' on='new_attachment'
-      .attachment-form.animate-switch ng-switch-when='file'
+  form role="form" enctype="multipart/form-data" action="/attachments" method="POST"
+    input name="authenticity_token" data-authenticity_token='#{ form_authenticity_token }' ng-model='authenticity_token' type='hidden'
+    div.attachment-forms
+      .attachment-form.animate-switch ng-show='new_attachment == "file"'
+        | {{ authenticity_token }}
+        /| {{ $parent.$id }}
+        /| {{ kitties }}
+        /| {{ files }}
+        /input type="text" ng-model='files'
+        /a.btn.btn-primary.btn-lg href="javascript:;" type='submit' ng-click='submitForm()' Upload
+        /input type="text" ng-model='files'
         .form-group.fileupload-buttonbar
           span.btn.btn-success.btn-lg.fileinput-button ng-class="{disabled: disabled}"
             span Browse
             input type="file" name="files[]" multiple='' ng-disabled="disabled" fileread='files'
-
+            /data-files='[]'
+            /ng-model=''
+        /input type="file" name="filsasadasd" ng-model="zfiles"
+        /| FILESDDSFDSFDSFDSF: {{ zfiles }} SADDSADSADSAD
         table.table ng-show='files.length'
           tr
             th
             th Name
             th Size
+            th Link
             th
           tr ng-repeat='file in files'
             td
@@ -28,12 +37,16 @@ div ng-controller='zum.AttachmentsCtrl'
             td
               | {{ file.size | humanizeSize }}
             td
+              | {{ file.link }}
+            td
+              span.glyphicon.glyphicon-ok ng-show='file.uploaded'
+
         = render partial: 'shared_form'
-      .attachment-form.animate-switch ng-switch-when='link'
+      .attachment-form.animate-switch ng-show='new_attachment == "link"'
         .form-group
           input.form-control placeholder="http://" type="text" ng-model='link' ng-pattern='/^https?\:\/\/.+/'
         = render partial: 'shared_form'
-      .attachment-form.animate-switch ng-switch-when='code' 
+      .attachment-form.animate-switch ng-show='new_attachment == "code"' 
         .form-group
           textarea.form-control placeholder='echo "Hello world!"' type="text" ng-model='code' cols='70' rows='5'
         = render partial: 'shared_form'

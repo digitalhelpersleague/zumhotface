@@ -13,6 +13,9 @@ Zumhotface::Application.routes.draw do
   root 'pages#welcome'
 
   resources :attachments
+
+  get '/:sid' => 'attachments#show'
+
   # do
     #member do
       #get 'attach' => 
