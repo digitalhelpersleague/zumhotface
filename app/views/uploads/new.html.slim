@@ -19,9 +19,9 @@ div ng-controller='zum.UploadsCtrl'
           th
         tr ng-repeat='file in files'
           td
-          td = '{{ file.name }}'
+          td = '{{ file.name | truncate }}'
           td = '{{ file.size | humanizeSize }}'
-          td = '{{ file.link }}'
+          td : a ng-show='file.url' href='{{ file.url }}' = '{{ file.url | trimHttp }}'
           td
             span.glyphicon.glyphicon-ok ng-show='file.uploaded'
 

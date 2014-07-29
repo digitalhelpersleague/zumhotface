@@ -1,6 +1,5 @@
 div ng-controller='zum.UploadsCtrl'
-  table.table
-    /.table-striped
+  table.table ng-show='uploads.length'
     tr
       th
       th Name
@@ -9,7 +8,7 @@ div ng-controller='zum.UploadsCtrl'
       th Encrypted
       th Downloads
       th Link
-      th Uploaded on
+      th Uploaded
       th
     tr ng-repeat='upload in uploads'
       td : span.upload-icon.glyphicon class='glyphicon-{{ upload.icon }}' ng-show='upload.icon'
@@ -18,8 +17,8 @@ div ng-controller='zum.UploadsCtrl'
       td
       td : span.glyphicon.glyphicon-lock ng-show="{{ upload.protected }}"
       td = "{{ upload.downloads || 0 }}"
-      td : a href='{{ upload.url }}' = '{{ upload.url.replace("http://", "") }}'
+      td : a target='_blank' href='{{ upload.url }}' = '{{ upload.url | trimHttp }}'
       td : span am-time-ago="upload.created_at" = "{{ upload.created_at }}"
-      td.actions : a.btn.btn-danger.btn-xs href='javascript:;' DESTROY
+      td.actions : a.btn.btn-danger.btn-xs href='javascript:;' ng-really-message='Are you sure?' ng-really-click='destroy(upload)' DESTROY
 
-  = link_to 'NEW UPLOAD', new_upload_path, class: 'btn btn-success'
+  = link_to 'NEW UPLOAD', new_upload_path, class: 'btn btn-success btn-lg'

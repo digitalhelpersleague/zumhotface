@@ -1,5 +1,4 @@
-.upload-actions
-  /ng-show='link || files || code'
+.upload-actions ng-show='!uploaded && (link || code || files)'
   /.form-group
     /label
       /input type='checkbox' name='encryption' ng-model='encryption'

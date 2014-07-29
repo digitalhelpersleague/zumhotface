@@ -1,7 +1,7 @@
 module ApplicationHelper
 
-  def header_active?(page)
-    "active" if page.to_s == params[:controller]
+  def header_active?(controller: '', action: '')
+    "active" if controller.to_s == params[:controller] and action.to_s == params[:action] 
   end
 
   def render_flash_messages

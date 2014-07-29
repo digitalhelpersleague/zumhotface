@@ -5,8 +5,13 @@ class Upload < ActiveRecord::Base
   belongs_to :user
 
   has_attached_file :file,
-      hash_secret: Settings.uploads.secret_key,
-      path: ":rails_root/public/system/uploads/:id_partition/:hash.:extension"
+    hash_secret: Settings.uploads.secret_key,
+    hash_data: "uploads/file/:id/:style/:updated_at",
+    url: "/system/uploads/:id_partition/:hash.:extension",
+    path: ":rails_root/public/system/uploads/:id_partition/:hash.:extension"
+
+
+      #path: ":rails_root/public/system/:class/:id_partition/:hash.:extension"
       #path: "/uploads/:id_partition/:hash.:extension"
   #,
       #url: ":s3_domain_url",
@@ -23,9 +28,27 @@ class Upload < ActiveRecord::Base
 
   #def encrypt(passphrase)
   #end
-
+  
   def self.upload_type
     nil
+  end
+
+  def disposition
+    return 'inline' if image?
+    'attachment'
+  end
+
+  def image?
+    file_content_type.include? "image"
+  end
+
+  def secured?
+    !!password
+  end
+
+  def download!
+    self.downloads += 1
+    save
   end
 
 private

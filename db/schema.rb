@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140729080145) do
+ActiveRecord::Schema.define(version: 20140729195938) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,8 +28,11 @@ ActiveRecord::Schema.define(version: 20140729080145) do
     t.string   "encryption_type"
     t.integer  "user_id"
     t.integer  "downloads",                    default: 0, null: false
+    t.string   "password"
+    t.string   "digest"
   end
 
+  add_index "uploads", ["type"], name: "index_uploads_on_type", using: :btree
   add_index "uploads", ["user_id"], name: "index_uploads_on_user_id", using: :btree
 
   create_table "users", force: true do |t|

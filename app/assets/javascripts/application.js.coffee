@@ -23,3 +23,6 @@
 
 @zum = angular.module 'zum', ['ngResource', 'ng-rails-csrf', 'ngSanitize', 'angularMoment', 'ngAnimate']
 @zum.value 'data', window.gon
+
+$ ->
+  $('[role="alert"]').delay(5000).fadeOut('slow')

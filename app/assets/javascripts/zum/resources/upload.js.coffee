@@ -1,6 +1,6 @@
 @zum.factory "Upload", ["$resource", "data", ($resource, data) ->
 
-  Upload = $resource("/uploads/:id.json", { id: "@id" },
+  Upload = $resource("/uploads/:sid.json", { sid: "@sid" },
     update: {method: 'PUT'}
     save:
       method: 'POST'

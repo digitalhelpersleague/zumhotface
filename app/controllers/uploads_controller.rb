@@ -8,35 +8,48 @@ class UploadsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @upload = current_user.uploads
+    #@uploads = current_user.uploads
     gon.rabl template: "app/views/uploads/index.json.rabl", as: :uploads
     index!
   end
 
   def show
     if upload.secured?
-      if params[:password]
-        
-      else
+      if !params[:password].present?
+        render 'uploads/password_promt' and return
+      elsif upload.password != params[:password]
         render 'uploads/password_promt' and return
       end
-    else
-      send_data File.read(upload.file.path), filename: upload.file_file_name , type: upload.file_file_content_type, length: upload.file_file_size, disposition: 'upload'
     end
+    upload.download!
+    send_data File.read(upload.file.path), filename: upload.file_file_name , type: upload.file_content_type, length: upload.file_file_size, disposition: upload.disposition
   end
 
   def create
     @upload = Upload.new()
     # params[:upload])
     @upload.user = current_user
-    @upload.file = params[:upload][:file] if params[:upload][:file]
+    if params[:upload][:file]
+      @upload.type = 'Upload::File'
+      @upload.file = params[:upload][:file] 
+    end
     create! do |format|
       format.json { render 'uploads/show' }
     end
   end
 
+  def destroy
+    @upload = current_user.uploads.find_by_sid!(params[:sid])
+    @upload.destroy
+    destroy!
+  end
+
+  def collection
+    @uploads ||= current_user.uploads.order(:id)
+  end
+
   def resource
-    @upload ||= end_of_association_chain.find_by_sid!(params[:sid])
+    @upload ||= current_user.uploads.find_by_sid!(params[:sid])
   end
 
   protected

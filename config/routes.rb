@@ -12,9 +12,9 @@ Zumhotface::Application.routes.draw do
 
   root 'pages#welcome'
 
-  resources :uploads
-
-  get '/:sid' => 'uploads#show'
+  resources :uploads, only: [:index, :create, :new]
+  delete '/uploads/:sid' => 'uploads#destroy'
+  get '/:sid' => 'uploads#show', as: :upload
 
   # do
     #member do
