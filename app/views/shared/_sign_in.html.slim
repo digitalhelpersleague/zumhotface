@@ -7,8 +7,8 @@
         /span aria-hidden="true" &times;
         /span.sr-only Close
       .modal-body
-        .animate-switch ng-switch-when='signup'
-          = render partial: 'devise/registrations/form'
+        /.animate-switch ng-switch-when='signup'
+          /= render partial: 'devise/registrations/form'
 
         .animate-switch ng-switch-when='signin'
           = render partial: 'devise/sessions/form'
@@ -18,8 +18,8 @@
 
       .modal-footer
         ul.list-inline
-          li : a href='javascript:;' ng-click="signin_modal = 'signup';"
-            | Sign up
+          /li : a href='javascript:;' ng-click="signin_modal = 'signup';"
+            /| Sign up
           li.divider
           li : a href='javascript:;' ng-click="signin_modal = 'signin';"
             | Sign in
