@@ -65,10 +65,16 @@ gem 'rails-assets-angular-moment'
 
 gem 'ng-rails-csrf'
 
-gem 'puma'
+group :production do
+  gem 'unicorn'
+end
 
 group :development do
+  gem 'puma'
   gem 'capistrano'
+  gem 'capistrano-rvm'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'rack-mini-profiler'
