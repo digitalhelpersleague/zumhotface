@@ -1,4 +1,5 @@
 @zum.filter 'humanizeSize', -> (size, precision) ->
+  return if size == null
   if !precision? or precision == 0 or precision == null
     precision = 1
 

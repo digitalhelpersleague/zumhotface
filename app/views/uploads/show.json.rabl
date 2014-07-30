@@ -1,2 +1,2 @@
 object :upload
-attributes :sid, :upload_type, :encryption_type, :file_file_name, :file_file_size, :created_at, :downloads, :url, :icon
+attributes :name, :sid, :upload_type, :encryption_type, :size, :created_at, :downloads, :url, :icon

@@ -28,6 +28,10 @@ class Upload < ActiveRecord::Base
 
   #def encrypt(passphrase)
   #end
+
+  %w(file link code).each do |type|
+    define_method("#{type}?"){ self.class.to_s == "Upload::#{type.camelize}" }
+  end
   
   def self.upload_type
     nil

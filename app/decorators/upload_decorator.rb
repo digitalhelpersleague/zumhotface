@@ -18,6 +18,14 @@ class UploadDecorator < ApplicationDecorator
     object.class.upload_type
   end
 
+  def name
+    file_file_name || link || text
+  end
+
+  def size
+    file_file_size
+  end
+
   def url
     h.url_for controller: 'uploads', action: 'show', sid: object.sid, host: Settings.host
   end

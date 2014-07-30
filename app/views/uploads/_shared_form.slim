@@ -1,4 +1,5 @@
-.upload-actions ng-show='!uploaded && (link || code || files)'
+.upload-actions ng-hide='!link && !code && !files'
+  / ng-show='!uploaded && (link || code || files)'
   /.form-group
     /label
       /input type='checkbox' name='encryption' ng-model='encryption'
@@ -20,4 +21,4 @@
     /select name='gpg_key'
       /option Alice
       /option Bob
-  a.btn.btn-primary.btn-lg href="javascript:;" type='submit' ng-click='upload()' Upload
+  button.btn.btn-primary.btn-lg type='button' ng-click='upload()' Upload
