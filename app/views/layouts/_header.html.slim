@@ -12,8 +12,9 @@ header.navbar.navbar-inverted.navbar-static-top role="navigation"
     ul.header-nav.nav.navbar-nav
       li : a href='/about' ABOUT
       li : a href='/privacy' PRIVACY
-      li class=header_active?(controller: 'uploads', action: 'new') = link_to 'NEW UPLOAD', new_upload_path
-      li class=header_active?(controller: 'uploads', action: 'index') = link_to 'MY UPLOADS', uploads_path
+      - if current_user.member?
+        li class=header_active?(controller: 'uploads', action: 'new') = link_to 'NEW UPLOAD', new_upload_path
+        li class=header_active?(controller: 'uploads', action: 'index') = link_to 'MY UPLOADS', uploads_path
     ul.nav.user-nav.navbar-right
       - if current_user.member?
         li = current_user.email
