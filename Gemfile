@@ -71,10 +71,9 @@ end
 
 group :development do
   gem 'puma'
-  gem 'capistrano'
-  gem 'capistrano-rvm'
-  gem 'capistrano-bundler'
-  gem 'capistrano-rails'
+  gem 'capistrano', '~> 2.0'
+  gem 'capistrano-unicorn', require: false
+  gem 'rvm-capistrano', require: false
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'rack-mini-profiler'
