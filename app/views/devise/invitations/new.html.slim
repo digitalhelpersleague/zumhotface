@@ -1,0 +1,13 @@
+- unless flash.present?
+  = render_flash_message(text: t("devise.invitations.new.header"), message_type: 'info', closeable: false)
+
+#send-invitation
+  = form_for resource, as: resource_name, url: invitation_path(resource_name), html: {method: :post} do |f|
+    = devise_error_messages!
+
+    - resource.class.invite_key_fields.each do |field|
+      .form-group
+        = f.text_field field, placeholder: field.capitalize, class: 'form-control'
+
+      .form-group
+        = f.submit 'SEND AN INVITATION', class: 'btn btn-primary'

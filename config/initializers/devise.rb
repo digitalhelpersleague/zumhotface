@@ -4,13 +4,13 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  # config.secret_key = '7dbf79b833da573f0788fe9fe28b004c6627996dcf4b52e00cb4c62bda092eb36e5b5b7ebbe17dfda9628e3ff5e6bc1d24197f2ba61d104beb5f2e54001b0fc0'
+  config.secret_key = 'put_very_long_string_here'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = 'robot@zhf.io'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -103,7 +103,7 @@ Devise.setup do |config|
   # The period the generated invitation token is valid, after
   # this period, the invited resource won't be able to accept the invitation.
   # When invite_for is 0 (the default), the invitation won't expire.
-  # config.invite_for = 2.weeks
+  config.invite_for = 2.weeks
 
   # Number of invitations users can send.
   # - If invitation_limit is nil, there is no limit for invitations, users can
@@ -113,7 +113,7 @@ Devise.setup do |config|
   # You can change invitation_limit column for some users so they can send more
   # or less invitations, even with global invitation_limit = 0
   # Default: nil
-  # config.invitation_limit = 5
+  config.invitation_limit = 0
 
   # The key to be used to check existing users when sending an invitation
   # and the regexp used to test it when validate_on_invite is not set.
@@ -131,12 +131,12 @@ Devise.setup do |config|
   # The class name of the inviting model. If this is nil,
   # the #invited_by association is declared to be polymorphic.
   # Default: nil
-  # config.invited_by_class_name = 'User'
+  config.invited_by_class_name = 'User'
 
   # The column name used for counter_cache column. If this is nil,
   # the #invited_by association is declared without counter_cache.
   # Default: nil
-  # config.invited_by_counter_cache = :invitations_count
+  config.invited_by_counter_cache = :invitations_count
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
@@ -165,7 +165,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :rememberable
   # The time the user will be remembered without asking for credentials again.
-  # config.remember_for = 2.weeks
+  config.remember_for = 1.week
 
   # If true, extends the user's remember period when remembered via cookie.
   # config.extend_remember_period = false
@@ -195,27 +195,27 @@ Devise.setup do |config|
   # Defines which strategy will be used to lock an account.
   # :failed_attempts = Locks an account after a number of failed attempts to sign in.
   # :none            = No lock strategy. You should handle locking by yourself.
-  # config.lock_strategy = :failed_attempts
+  config.lock_strategy = :failed_attempts
 
   # Defines which key will be used when locking and unlocking an account
-  # config.unlock_keys = [ :email ]
+  config.unlock_keys = [ :email ]
 
   # Defines which strategy will be used to unlock an account.
   # :email = Sends an unlock link to the user email
   # :time  = Re-enables login after a certain amount of time (see :unlock_in below)
   # :both  = Enables both strategies
   # :none  = No unlock strategy. You should handle unlocking by yourself.
-  # config.unlock_strategy = :both
+  config.unlock_strategy = :both
 
   # Number of authentication tries before locking an account if lock_strategy
   # is failed attempts.
-  # config.maximum_attempts = 20
+  config.maximum_attempts = 5
 
   # Time interval to unlock the account if :time is enabled as unlock_strategy.
-  # config.unlock_in = 1.hour
+  config.unlock_in = 1.hour
 
   # Warn on the last attempt before the account is locked.
-  # config.last_attempt_warning = false
+  config.last_attempt_warning = true
 
   # ==> Configuration for :recoverable
   #

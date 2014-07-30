@@ -21,12 +21,14 @@ class UploadsController < ApplicationController
         render 'uploads/password_promt' and return
       end
     end
+
     upload.download!
 
     if upload.file?
-      send_data File.read(upload.file.path), filename: upload.file.name , type: upload.file.content_type, length: upload.file.size, disposition: upload.disposition
+      return send_data File.read(upload.file.path), filename: upload.file.name , type: upload.file.content_type, length: upload.file.size, disposition: upload.disposition
     elsif upload.link?
       redirect_to upload.link and return
+
     elsif upload.code?
       render 'uploads/preview' and return
     end

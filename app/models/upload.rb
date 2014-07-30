@@ -10,10 +10,8 @@ class Upload < ActiveRecord::Base
     url: "/system/uploads/:id_partition/:hash.:extension",
     path: ":rails_root/public/system/uploads/:id_partition/:hash.:extension"
 
-
-      #path: ":rails_root/public/system/:class/:id_partition/:hash.:extension"
-      #path: "/uploads/:id_partition/:hash.:extension"
-  #,
+    #TODO: move to s3
+      #path: "/uploads/:id_partition/:hash.:extension",
       #url: ":s3_domain_url",
       #storage: :s3,
       #s3_credentials: Settings.uploads.aws_s3.s3_credentials,
@@ -26,6 +24,7 @@ class Upload < ActiveRecord::Base
 
   #after_create :move_to_s3
 
+  #TODO: encrypt with AES128/256
   #def encrypt(passphrase)
   #end
 

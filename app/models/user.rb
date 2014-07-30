@@ -27,7 +27,6 @@ class User < ActiveRecord::Base
     member? ? super : 0
   end
 
-private
   def give_invites(n=3)
     self.invitation_limit = n
   end

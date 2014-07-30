@@ -73,6 +73,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'rack-mini-profiler'
   gem 'quiet_assets'
+  gem 'letter_opener'
 end
 
 # Use debugger
