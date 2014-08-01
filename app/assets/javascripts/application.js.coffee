@@ -25,4 +25,4 @@
 @zum.value 'data', window.gon
 
 $ ->
-  $('.alert-dismissible[role="alert"]').delay(5000).fadeOut('slow')
+  $('.alert-dismissible[role="alert"]').delay(10000).fadeOut('slow')

@@ -14,11 +14,13 @@ div ng-controller='zum.UploadsCtrl'
       td : span.upload-icon.glyphicon class='glyphicon-{{ upload.icon }}' ng-show='upload.icon'
       td = "{{ upload.name | trimHttp | truncate }}"
       td = "{{ upload.size | humanizeSize }}"
-      td
-      td : span.glyphicon.glyphicon-lock ng-show="{{ upload.protected }}"
+      td : span.glyphicon.glyphicon-lock ng-show="{{ upload.is_secured }}"
+      td : span.glyphicon.glyphicon-ok ng-show="{{ upload.is_encrypted }}"
       td = "{{ upload.downloads || 0 }}"
       td : a target='_blank' href='{{ upload.url }}' = '{{ upload.url | trimHttp }}'
       td : span am-time-ago="upload.created_at" = "{{ upload.created_at }}"
-      td.actions : a.btn.btn-danger.btn-xs href='javascript:;' ng-really-message='Are you sure?' ng-really-click='destroy(upload)' DESTROY
+      td.actions
+        a.btn.btn-success.btn-xs href='/download/{{ upload.sid }}' DOWNLOAD
+        a.btn.btn-danger.btn-xs href='javascript:;' ng-really-message='Are you sure?' ng-really-click='destroy(upload)' DESTROY
 
   = link_to 'NEW UPLOAD', new_upload_path, class: 'btn btn-success btn-lg'

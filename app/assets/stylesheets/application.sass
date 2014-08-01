@@ -111,8 +111,8 @@ footer
     //color: #2AA61D
   &.alert-warning
     background: image-url('embarassed-steve.png') no-repeat
-  //&.alert-danger
-    //color: #2AA61D
+  &.alert-danger
+    background: image-url('angry-steve.png') no-repeat
   &.alert-info
     background: image-url('pocker-steve.png') no-repeat
     //background-position: top center
@@ -148,10 +148,10 @@ a.navbar-brand
   text-align: center
   padding: 30px
   vertical-align: middle
-  margin-top: 50px
+  margin-top: 60px
 
 header
-  position: fixed !important
+  position: absolute !important
   top: 0 !important
   width: 100%
   text-align: center
@@ -182,13 +182,14 @@ table.table
     button + button
       margin-left: 5px
   td.actions
+    .btn + .btn
+      margin-left: 5px
     text-align: center
   .btn
     font-family: $font-family-base
-    //font-size: 12px
   & > tbody > tr > td
     vertical-align: middle !important
-    span.upload-icon
+    span.glyphicon
       margin-left: 5px
 
 .zhf-description
@@ -263,3 +264,20 @@ h3.minified-url
   margin-bottom: 25px
   a
     color: #E82727
+
+.ssl-is-off
+  position: absolute
+  top: 0
+  left: 0
+  background: image-url('ssl-is-off.png') no-repeat
+  width: 131px
+  height: 140px
+
+.form-group
+  .btn + .btn
+    margin-left: 10px
+
+form
+  max-width: 300px
+  margin-left: auto
+  margin-right: auto

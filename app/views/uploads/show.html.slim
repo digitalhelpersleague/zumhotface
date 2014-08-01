@@ -1,0 +1,15 @@
+div ng-controller='zum.UploadsCtrl'
+  form action="#{download_upload_path(upload.sid)}"
+    #download-form
+      - if !upload.secured?
+        h3.upload-name
+          /span.glyphicon class="glyphicon-#{upload.icon}"
+          = upload.name
+
+      - if upload.secured?
+        h4 The file you are trying to access is protected with password
+        .form-group
+          input.form-control type='password' name='password' placeholder='Password' ng-model='password'
+
+      .form-group ng-show="#{upload.secured? ? '!!password' : 'true'}"
+        = submit_tag "DOWNLOAD", class: 'btn btn-lg btn-success'

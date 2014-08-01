@@ -27,6 +27,8 @@ class Upload < ActiveRecord::Base
   #TODO: encrypt with AES128/256
   #def encrypt(passphrase)
   #end
+  #
+  #TODO: compress links and texts with gzip
 
   %w(file link code).each do |type|
     define_method("#{type}?"){ self.class.to_s == "Upload::#{type.camelize}" }
@@ -49,6 +51,18 @@ class Upload < ActiveRecord::Base
     !!password
   end
 
+  def encrypted?
+    false
+  end
+
+  def validate_access with_password: nil
+    return with_password.to_s == password if secured?
+    true
+  end
+
+  #def encrypt
+  #end
+
   def download!
     self.downloads += 1
     save
@@ -64,9 +78,9 @@ private
   end
 
   def generate_identifier
-    #TODO: limit to 17850625 unique combinations
+    # limit to 75418890625 unique combinations
     # so we should increase chars count later
-    Array.new(4){ SAFE_CHARS.sample }.join
+    Array.new(6){ SAFE_CHARS.sample }.join
   end
 
 end

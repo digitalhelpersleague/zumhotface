@@ -1,7 +1,10 @@
 class UploadsController < ApplicationController
 
-  respond_to :html, :json
+  respond_to :html
+  respond_to :json, except: :show
   inherit_resources
+
+  custom_actions resource: [:download] 
 
   helper_method :upload, :uploads
 
@@ -14,25 +17,35 @@ class UploadsController < ApplicationController
 
   def show
     @upload ||= end_of_association_chain.find_by_sid!(params[:sid])
-    if upload.secured?
-      if !params[:password].present?
-        render 'uploads/password_promt' and return
-      elsif upload.password != params[:password]
-        render 'uploads/password_promt' and return
+    show! do |format|
+      format.html do
+        if !upload.secured?
+          redirect_to upload.link and return if upload.link?
+          render 'uploads/preview' and return if upload.code?
+        end
+        render 'uploads/show'
       end
+    end
+
+  end
+
+  def download
+    @upload ||= end_of_association_chain.find_by_sid!(params[:sid])
+
+    if upload.secured? and !upload.validate_access(with_password: params[:password])
+      flash[:error] = "Bad password"
+      redirect_to action: :show and return
     end
 
     upload.download!
 
     if upload.file?
-      return send_data File.read(upload.file.path), filename: upload.file.name , type: upload.file.content_type, length: upload.file.size, disposition: upload.disposition
+      return send_data File.read(upload.file.path), filename: upload.file_file_name , type: upload.file.content_type, length: upload.file.size, disposition: 'attachment'
     elsif upload.link?
       redirect_to upload.link and return
-
     elsif upload.code?
       render 'uploads/preview' and return
     end
-    render 404
   end
 
   def create

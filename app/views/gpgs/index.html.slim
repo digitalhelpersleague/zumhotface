@@ -1,0 +1,48 @@
+
+div ng-show='!generate_gpg_form && !new_gpg_form'
+
+  table.table ng-show='gpgs.length'
+    thead
+      tr
+        th
+        th Name
+        th Type
+        th Created at
+        th
+
+    tbody
+      tr ng-repeat='gpg in gpgs track by gpg.id'
+        td
+        td
+        td
+        td
+        td
+
+  a.btn.btn-success.btn-lg href='javascript:;' ng-click='generate_gpg_form = true' GENERATE PAIR
+  '  OR
+  a.btn.btn-primary.btn-lg href='javascript:;' ng-click='new_gpg_form = true' ADD EXISTING KEY
+
+div ng-show='generate_gpg_form'
+  form action=''
+    .form-group
+      input.form-control type='text' name='name' placeholder='Name'
+    .form-group
+      button.btn.btn-primary.btn-lg GENERATE
+      button.btn.btn-lg.btn-default.btn-transparent href='javascript:;' ng-click='generate_gpg_form = !generate_gpg_form' CANCEL
+
+div ng-show='new_gpg_form'
+  form
+    .form-group
+      select.form-control name='gpg_type'
+        option Type...
+        option value='1' Public
+        option value='2' Private
+    .form-group
+      input.form-control type='text' name='name' placeholder='Name'
+    .form-group
+      textarea.form-control name='body' placeholder='Key'
+
+    .form-group
+      button.btn.btn-primary.btn-lg ADD KEY
+      button.btn.btn-lg.btn-default.btn-transparent href='javascript:;' ng-click='new_gpg_form = !new_gpg_form' CANCEL
+

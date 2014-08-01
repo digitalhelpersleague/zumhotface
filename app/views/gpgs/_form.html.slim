@@ -1,0 +1,9 @@
+= form_for @gpg do |f|
+  - if @gpg.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@gpg.errors.count, "error")} prohibited this gpg from being saved:"
+      ul
+        - @gpg.errors.full_messages.each do |message|
+          li = message
+
+  .actions = f.submit 'Save'
