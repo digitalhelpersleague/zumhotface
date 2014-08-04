@@ -1,5 +1,5 @@
 div ng-controller='zum.UploadsCtrl'
-  ul.upload-tabs ng-init='new_upload = "file"' ng-click='uploaded=false; link=null; code=null; file=null; url=null'
+  ul.upload-tabs ng-init='new_upload = "file"' ng-click='uploaded=false; link=null; code=null; files=null; url=null'
     li : button.btn.btn-transparent.btn-lg href="#file" role="tab" ng-class='{ active: new_upload == "file", "btn-default": new_upload != "file" }' ng-click='new_upload="file"' Upload file
     li : button.btn.btn-transparent.btn-lg href="#link" role="tab" ng-class='{ active: new_upload == "link", "btn-default": new_upload != "link" }' ng-click='new_upload="link"' Attach link
     li : button.btn.btn-transparent.btn-lg href="#code" role="tab" ng-class='{ active: new_upload == "code", "btn-default": new_upload != "code" }' ng-click='new_upload="code"' Paste code
