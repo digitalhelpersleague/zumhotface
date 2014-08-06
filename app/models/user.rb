@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
          # :registerable,
 
   has_many :uploads
-  has_many :gpg_keys
+  has_many :keys
 
   SAFE_CHARS = (('A'..'Z').to_a + ('a'..'z').to_a + ('0'..'9').to_a).freeze
 

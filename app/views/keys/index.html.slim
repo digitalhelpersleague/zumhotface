@@ -1,0 +1,57 @@
+div ng-controller='zum.KeysCtrl'
+  div ng-show='!generate_key_form && !new_key_form'
+
+    table.table ng-show='keys.length'
+      tr
+        th
+        th Name
+        th Provider
+        th Type
+        th Created at
+        th Sibling
+        th
+
+      tr ng-repeat='key in keys'
+        td
+        td 
+          | {{ key.name }}
+        td
+          | {{ key.provider }}
+        td
+          span ng-show='key.is_public'
+            | public
+          span ng-show='!key.is_public'
+            | private
+        td : span am-time-ago="key.created_at" = "{{ key.created_at }}"
+        td
+          | {{ sibling(key.sibling_id) }}
+        td
+
+    a.btn.btn-success.btn-lg href='javascript:;' ng-click='generate_key_form = true' GENERATE PAIR
+    '  OR
+    a.btn.btn-primary.btn-lg href='javascript:;' ng-click='new_key_form = true' ADD EXISTING KEY
+
+  div ng-show='generate_key_form'
+    form action=''
+      .form-group
+        input.form-control type='text' name='name' placeholder='Name'
+      .form-group
+        button.btn.btn-primary.btn-lg GENERATE
+        button.btn.btn-lg.btn-default.btn-transparent href='javascript:;' ng-click='generate_key_form = !generate_key_form' CANCEL
+
+  div ng-show='new_key_form'
+    form
+      .form-group
+        select.form-control name='key_type'
+          option Type...
+          option value='1' Public
+          option value='2' Private
+      .form-group
+        input.form-control type='text' name='name' placeholder='Name'
+      .form-group
+        textarea.form-control name='body' placeholder='Key'
+
+      .form-group
+        button.btn.btn-primary.btn-lg ADD KEY
+        button.btn.btn-lg.btn-default.btn-transparent href='javascript:;' ng-click='new_key_form = !new_key_form' CANCEL
+

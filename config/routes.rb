@@ -8,7 +8,7 @@ Zumhotface::Application.routes.draw do
 
   devise_for :users
 
-  resources :gpgs, only: [:index, :create, :show, :destroy]
+  resources :keys, only: [:index, :create, :show, :destroy]
 
   resources :uploads, only: [:index, :create, :new]
   delete '/uploads/:sid' => 'uploads#destroy'

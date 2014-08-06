@@ -18,25 +18,50 @@ div ng-show='!generate_gpg_form && !new_gpg_form'
         td
         td
 
-  a.btn.btn-success.btn-lg href='javascript:;' ng-click='generate_gpg_form = true' GENERATE PAIR
+  a.btn.btn-success.btn-lg href='javascript:;' ng-click='generate_gpg_form = true' GENERATE
   '  OR
   a.btn.btn-primary.btn-lg href='javascript:;' ng-click='new_gpg_form = true' ADD EXISTING KEY
 
 div ng-show='generate_gpg_form'
   form action=''
     .form-group
-      input.form-control type='text' name='name' placeholder='Name'
+      .row
+        .col-sm-6
+          label
+            ' GPG
+            input type='radio' name='key[type]' value='GPG' ng-model='key.type'
+        .col-sm-6
+          label
+            ' OpenSSL
+            input type='radio' name='key[type]' value='OpenSSL' ng-model='key.type'
+    .form-group ng-show='key.type'
+      input.form-control type='text' name='key[name]' placeholder='Name' ng-model='key.name'
     .form-group
-      button.btn.btn-primary.btn-lg GENERATE
+      button.btn.btn-primary.btn-lg ng-disabled='!key.name' GENERATE
       button.btn.btn-lg.btn-default.btn-transparent href='javascript:;' ng-click='generate_gpg_form = !generate_gpg_form' CANCEL
 
 div ng-show='new_gpg_form'
   form
     .form-group
-      select.form-control name='gpg_type'
-        option Type...
-        option value='1' Public
-        option value='2' Private
+      .row
+        .col-sm-6
+          label
+            ' GPG
+            input type='radio' name='key[type]' value='GPG' ng-model='key.type'
+        .col-sm-6
+          label
+            ' OpenSSL
+            input type='radio' name='key[type]' value='OpenSSL' ng-model='key.type'
+    .form-group
+      .row
+        .col-sm-6
+          label
+            ' GPG
+            input type='radio' name='key_type' value='GPG' ng-model='key.type'
+        .col-sm-6
+          label
+            ' OpenSSL
+            input type='radio' name='key_type' value='OpenSSL' ng-model='key.type'
     .form-group
       input.form-control type='text' name='name' placeholder='Name'
     .form-group
