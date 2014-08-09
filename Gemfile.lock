@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/tobmatth/rack-ssl-enforcer.git
+  revision: 4e5bdac7af35e1e91f3b62d373b2105236301043
+  specs:
+    rack-ssl-enforcer (0.2.8)
+
 GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
@@ -288,6 +294,7 @@ DEPENDENCIES
   quiet_assets
   rabl-rails
   rack-mini-profiler
+  rack-ssl-enforcer!
   rails (~> 4.0)
   rails-assets-angular
   rails-assets-angular-animate
