@@ -79,4 +79,6 @@ Zumhotface::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   config.action_mailer.default_url_options = { host: 'zhf.io' }
+
+  config.middleware.use Rack::SslEnforcer, ignore: '/assets'
 end
