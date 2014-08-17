@@ -72,7 +72,7 @@ group :production do
 end
 
 group :development do
-  gem 'puma'
+  gem 'thin'
   gem 'capistrano', '~> 2.0'
   gem 'capistrano-unicorn', require: false
   gem 'rvm-capistrano', require: false
