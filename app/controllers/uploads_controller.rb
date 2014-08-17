@@ -20,8 +20,8 @@ class UploadsController < ApplicationController
     show! do |format|
       format.html do
         if !upload.secured?
+          upload.download!
           redirect_to upload.link and return if upload.link?
-          render 'uploads/preview' and return if upload.code?
         end
         render 'uploads/show'
       end
@@ -41,10 +41,8 @@ class UploadsController < ApplicationController
 
     if upload.file?
       return send_data File.read(upload.file.path), filename: upload.file_file_name , type: upload.file.content_type, length: upload.file.size, disposition: 'attachment'
-    elsif upload.link?
-      redirect_to upload.link and return
     elsif upload.code?
-      render 'uploads/preview' and return
+      render text: upload.text and return
     end
   end
 
@@ -63,7 +61,10 @@ class UploadsController < ApplicationController
       @upload.text = params[:upload][:code]
     end
     create! do |format|
-      format.json { render 'uploads/show' }
+      format.json {
+        render json: {error: @upload.errors.messages.map{|k,v| "#{k} #{v.join(', ')}" }.join('; ')}, status: 403 and return if @upload.errors.any?
+        render 'uploads/show'
+      }
     end
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140731181125) do
+ActiveRecord::Schema.define(version: 20140806131224) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,12 +20,14 @@ ActiveRecord::Schema.define(version: 20140731181125) do
     t.string   "name"
     t.integer  "user_id"
     t.string   "type"
-    t.boolean  "is_public",  default: false, null: false
+    t.boolean  "is_public",       default: false, null: false
     t.integer  "sibling_id"
     t.text     "body"
-    t.boolean  "default",    default: false, null: false
+    t.boolean  "default",         default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "encryption_type"
+    t.integer  "size"
   end
 
   add_index "keys", ["sibling_id"], name: "index_keys_on_sibling_id", using: :btree

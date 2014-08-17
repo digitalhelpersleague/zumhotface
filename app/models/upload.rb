@@ -38,13 +38,8 @@ class Upload < ActiveRecord::Base
     nil
   end
 
-  def disposition
-    return 'inline' if image?
-    'attachment'
-  end
-
   def image?
-    file_content_type.include? "image"
+    file? && file.content_type.include?("image")
   end
 
   def secured?
@@ -53,6 +48,12 @@ class Upload < ActiveRecord::Base
 
   def encrypted?
     false
+  end
+
+  def size
+    return file.size if file?
+    return text.bytesize if code?
+    return link.bytesize if link?
   end
 
   def validate_access with_password: nil

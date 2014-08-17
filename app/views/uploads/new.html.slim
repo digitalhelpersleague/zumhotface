@@ -1,5 +1,5 @@
 div ng-controller='zum.UploadsCtrl'
-  ul.upload-tabs ng-init='new_upload = "file"' ng-click='uploaded=false; link=null; code=null; file=null; url=null'
+  ul.upload-tabs ng-init='new_upload = "file"' ng-click='uploaded=false; link=null; code=null; files=null; url=null'
     li : button.btn.btn-transparent.btn-lg href="#file" role="tab" ng-class='{ active: new_upload == "file", "btn-default": new_upload != "file" }' ng-click='new_upload="file"' Upload file
     li : button.btn.btn-transparent.btn-lg href="#link" role="tab" ng-class='{ active: new_upload == "link", "btn-default": new_upload != "link" }' ng-click='new_upload="link"' Attach link
     li : button.btn.btn-transparent.btn-lg href="#code" role="tab" ng-class='{ active: new_upload == "code", "btn-default": new_upload != "code" }' ng-click='new_upload="code"' Paste code
@@ -17,9 +17,13 @@ div ng-controller='zum.UploadsCtrl'
           td
           td = '{{ file.name | truncate }}'
           td = '{{ file.size | humanizeSize }}'
-          td : a ng-show='file.url' href='{{ file.url }}' = '{{ file.url | trimHttp }}'
+          td : input.result-url.form-control ng-show='file.url' type='text' value='{{ file.url }}' onclick='$(this).focus(); $(this).select();'
           td
-            span.glyphicon.glyphicon-ok ng-show='file.url'
+            span.upload-status.icon-progress ng-show='!file.url && !file.error'
+            span.upload-status.icon-success.glyphicon.glyphicon-ok ng-show='file.url'
+            span.upload-status.icon-error.glyphicon.glyphicon-ban-circle ng-show='file.error'
+            span.upload-error
+              |  {{ file.error }}
 
       div ng-show='!uploaded'
         .form-group
@@ -29,20 +33,19 @@ div ng-controller='zum.UploadsCtrl'
 
         = render partial: 'shared_form'
     .upload-form.animate-switch ng-show='new_upload == "link"'
-      h3.minified-url ng-show='url'
-        small
-          ' Done. Here's your link:
-        p : a href='{{ url }}' = '{{ url | trimHttp }}'
+      div ng-show='url'
+        h3.minified-url Done. Here's your link:
+        input.form-control type='text' value='{{ url }}' onclick='$(this).focus(); $(this).select();'
 
       div ng-show='!uploaded'
         .form-group
           input.form-control placeholder="http://" type="text" ng-model='link' ng-pattern='/^https?\:\/\/.+/'
         = render partial: 'shared_form'
     .upload-form.animate-switch ng-show='new_upload == "code"'
-      h3.minified-url ng-show='url'
-        small
-          ' Done. Here's your link:
-        p : a href='{{ url }}' = '{{ url | trimHttp }}'
+      div ng-show='url'
+        h3.minified-url Done. Here's your link:
+        input.form-control type='text' value='{{ url }}' onclick='$(this).focus(); $(this).select();'
+
       div ng-show='!uploaded'
         .form-group
           textarea.form-control placeholder='echo "Hello world!"' type="text" ng-model='code' cols='70' rows='5'

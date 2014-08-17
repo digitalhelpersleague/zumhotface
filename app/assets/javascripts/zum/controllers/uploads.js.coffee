@@ -13,8 +13,12 @@
         upload = new Upload()
         upload.file = file
         upload.$save().then ->
+          # success callback
           file.url = upload.url
           $scope.uploaded = true
+        , (error) ->
+          # error callback
+          file.error = error.data.error
       return
 
     if !!$scope.link
@@ -27,7 +31,10 @@
 
     if upload
       upload.$save().then ->
+        # success callback
         $scope.url = upload.url
         $scope.uploaded = true
-
+      , (error) ->
+        # error callback
+        upload.error = error.data.error
 ]
