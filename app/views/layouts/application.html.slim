@@ -22,18 +22,20 @@ html
 
   body ng-app='zum' class="#{controller_name}"
     .wrapper ng-controller='zum.MainCtrl'
-      .wrapper-inner
-        .content-container
-          - if !request.ssl?
-            .ssl-is-off
-          = render partial: 'layouts/header'
-          .content-inner
-            = render partial: 'shared/sign_in'
-            - if controller_name == 'pages'
-              div style="display: none"
-                = render_flash_messages
-            - else
+      /.wrapper-inner
+      .content-container
+        - if !request.ssl?
+          .ssl-is-off
+        = render partial: 'layouts/header'
+        .content-inner
+          = render partial: 'shared/sign_in'
+          - if controller_name == 'pages'
+            div style="display: none"
               = render_flash_messages
-            == yield
-        = render partial: 'layouts/footer'
+          - else
+            = render_flash_messages
+          == yield
+      div style='clear: both;'
+      .push
+    = render partial: 'layouts/footer'
 

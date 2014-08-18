@@ -1,21 +1,26 @@
 div ng-controller='zum.UploadsCtrl'
   - if !upload.secured?
+    - if upload.file?
+      table.table.upload-info
+        tbody
+          tr
+            td.upload-name = upload.name
+            td.upload-content-type = upload.file.content_type
+            td.upload-size = upload.size.to_s(:human_size)
+            td.actions = link_to "DOWNLOAD", download_upload_path(upload.sid), class: 'btn btn-success'
     - if upload.image?
-      img src='#{upload.file.url}' alt='#{upload.file_file_name}'
+      img.preview src='#{upload.file.url}' alt='#{upload.file_file_name}'
     - if upload.code?
       pre.code-preview
         = upload.text
-    - if upload.file?
-      h3.upload-name
-        = upload.name
 
       /span.glyphicon class="glyphicon-#{upload.icon}"
-  form action="#{download_upload_path(upload.sid)}"
-    #download-form
-      - if upload.secured?
-        h4 The file you are trying to access is protected with password
-        .form-group
-          input.form-control type='password' name='password' placeholder='Password' ng-model='password'
+  - if upload.secured?
+    /form action="#{download_upload_path(upload.sid)}"
+      /#download-form
+          /h4 The file you are trying to access is protected with password
+          /.form-group
+            /input.form-control type='password' name='password' placeholder='Password' ng-model='password'
 
-      .form-group ng-show="#{upload.secured? ? '!!password' : 'true'}"
-        = submit_tag "DOWNLOAD", class: 'btn btn-lg btn-success'
+          /.form-group ng-show="#{upload.secured? ? '!!password' : 'true'}"
+            /= submit_tag "DOWNLOAD", class: 'btn btn-lg btn-success'

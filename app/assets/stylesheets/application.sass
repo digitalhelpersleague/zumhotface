@@ -7,6 +7,8 @@
 @import "fileupload"
 @import "sign_in"
 
+$footer-height: 30px
+
 html, body
   height: 100%
 
@@ -31,14 +33,14 @@ ul.upload-tabs
   margin-left: -200px
 
 .wrapper
-  display: table
+  //display: table
   background: rgba(1, 113, 163, 0.4)
-  //rgba(74, 73, 41, 0.6)
   width: 100%
-  height: 100%
+  height: auto !important
   min-height: 100%
   -webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.7)
   box-shadow: inset 0 0 100px rgba(0,0,0,.7)
+  margin: 0 auto ($footer-height * -1)
 
 label
   font-weight: 300
@@ -47,9 +49,12 @@ footer
   font-weight: 300
   font-size: 16px
   width: 100%
-  position: fixed
-  bottom: 0
+  height: $footer-height
+  line-height: $footer-height
+  padding-left: 10px
   text-align: center
+  p
+    margin: 0 !important
 
 .header-nav
   padding-top: 4px
@@ -133,9 +138,9 @@ footer
 a.navbar-brand
   padding: 3px 10px !important
 
-.wrapper-inner
-  display: table-cell
-  vertical-align: top
+//.wrapper-inner
+  //display: table-cell
+  //vertical-align: top
 
 .content-container
   margin-right: auto
@@ -147,8 +152,8 @@ a.navbar-brand
 .content-inner
   text-align: center
   padding: 30px
-  vertical-align: middle
-  margin-top: 60px
+  //vertical-align: middle
+  padding-top: 90px
 
 header
   position: absolute !important
@@ -166,31 +171,46 @@ table.table
   text-shadow: none
   font-size: 14px
   //font-weight: 300
-  tr:nth-child(even)
-    background-color: rgba(255,255,255,0.5)
-  tr:nth-child(odd)
-    background-color: rgba(255,255,255,0.7)
-  tr:first-child
+  &.upload-info
+    width: 300px
+    margin-left: auto
+    margin-right: auto
+  & > thead > tr
     font-family: $font-family-base
     font-size: $font-size-base
     color: $gray-lighter
     background-color: transparent
-    th
+    & > th
       font-weight: 400
-  td
-    text-align: left
-    button + button
-      margin-left: 5px
-  td.actions
-    .btn + .btn
-      margin-left: 5px
-    text-align: center
-  .btn
-    font-family: $font-family-base
-  & > tbody > tr > td
-    vertical-align: middle !important
-    span.glyphicon
-      margin-left: 5px
+
+  & > tbody > tr 
+    &:nth-child(even)
+      background-color: rgba(255,255,255,0.5)
+    &:nth-child(odd)
+      background-color: rgba(255,255,255,0.7)
+    & > td
+      text-align: left
+      vertical-align: middle !important
+      &.actions
+        text-align: center
+        .btn
+          font-family: $font-family-base
+        .btn + .btn
+          margin-left: 5px
+      button + button
+        margin-left: 5px
+      span.glyphicon
+        margin-left: 5px
+      &.upload-name
+        font-weight: 400
+      &.upload-size
+        font-weight: 300
+      &.upload-content-type
+        font-weight: 300
+      &.upload-downloads
+        font-weight: 300
+      &.upload-date
+        font-weight: 300
 
 .zhf-description
   background: image-url('angry-steve-logo.png') no-repeat
@@ -300,3 +320,6 @@ input.form-control.result-url
 
 .upload-error
   color: $brand-danger
+
+.push
+  height: $footer-height

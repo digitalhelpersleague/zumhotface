@@ -1,5 +1,5 @@
 div ng-controller='zum.UploadsCtrl'
-  ul.upload-tabs ng-init='new_upload = "file"' ng-click='uploaded=false; link=null; code=null; files=null; url=null'
+  ul.upload-tabs ng-init='new_upload = "file"' ng-click='uploaded=false; disabled=false; link=null; code=null; files=null; url=null'
     li : button.btn.btn-transparent.btn-lg href="#file" role="tab" ng-class='{ active: new_upload == "file", "btn-default": new_upload != "file" }' ng-click='new_upload="file"' Upload file
     li : button.btn.btn-transparent.btn-lg href="#link" role="tab" ng-class='{ active: new_upload == "link", "btn-default": new_upload != "link" }' ng-click='new_upload="link"' Attach link
     li : button.btn.btn-transparent.btn-lg href="#code" role="tab" ng-class='{ active: new_upload == "code", "btn-default": new_upload != "code" }' ng-click='new_upload="code"' Paste code
@@ -27,9 +27,9 @@ div ng-controller='zum.UploadsCtrl'
 
       div ng-show='!uploaded'
         .form-group
-          span.btn.btn-success.btn-lg.fileinput-button ng-class="{disabled: disabled}"
+          span.btn.btn-success.btn-lg.fileinput-button
             span Browse
-            input type="file" name="files[]" multiple='' ng-disabled="disabled" fileread='files'
+            input type="file" name="files[]" multiple='' fileread='files' ng-click='disabled=false'
 
         = render partial: 'shared_form'
     .upload-form.animate-switch ng-show='new_upload == "link"'

@@ -1,29 +1,31 @@
 div ng-controller='zum.UploadsCtrl'
   table.table ng-show='uploads.length'
-    tr
-      th
-      th Name
-      th Size
-      th Protected
-      th Encrypted
-      th Downloads
-      th Link
-      th Uploaded
-      th
-    tr ng-repeat='upload in uploads track by upload.sid'
-      td : span.upload-icon.glyphicon class='glyphicon-{{ upload.icon }}' ng-show='upload.icon'
-      td : a href='{{ upload.url }}' 
-        = "{{ upload.name | trimHttp | truncate }}"
-      td = "{{ upload.size | humanizeSize }}"
-      td : span.glyphicon.glyphicon-lock ng-show="{{ upload.is_secured }}"
-      td : span.glyphicon.glyphicon-ok ng-show="{{ upload.is_encrypted }}"
-      td = "{{ upload.downloads || 0 }}"
-      td : input.result-url.form-control type='text' value='{{ upload.url }}' onclick='$(this).focus(); $(this).select();'
-      td : span am-time-ago="upload.created_at" = "{{ upload.created_at }}"
-      td.actions
-        a.btn.btn-success.btn-xs target='_blank' href='/download/{{ upload.sid }}' ng-show='upload.upload_type == "file"' DOWNLOAD
-        a.btn.btn-success.btn-xs target='_blank' href='/{{ upload.sid }}' ng-show='upload.upload_type == "link"' GO
-        a.btn.btn-success.btn-xs target='_blank' href='/download/{{ upload.sid }}' ng-show='upload.upload_type == "code"' RAW
-        a.btn.btn-danger.btn-xs href='javascript:;' ng-really-message='Are you sure?' ng-really-click='destroy(upload)' DESTROY
+    thead
+      tr
+        th
+        th Name
+        th Size
+        th Protected
+        th Encrypted
+        th Downloads
+        th Link
+        th Uploaded
+        th
+    tbody
+      tr ng-repeat='upload in uploads track by upload.sid'
+        td : span.upload-icon.glyphicon class='glyphicon-{{ upload.icon }}' ng-show='upload.icon'
+        td.upload-name : a href='{{ upload.url }}' 
+          = "{{ upload.name | trimHttp | truncate }}"
+        td.upload-size = "{{ upload.size | humanizeSize }}"
+        td : span.glyphicon.glyphicon-lock ng-show="{{ upload.is_secured }}"
+        td : span.glyphicon.glyphicon-ok ng-show="{{ upload.is_encrypted }}"
+        td.upload-downloads = "{{ upload.downloads || 0 }}"
+        td : input.result-url.form-control type='text' value='{{ upload.url }}' onclick='$(this).focus(); $(this).select();'
+        td.upload-date : span am-time-ago="upload.created_at" = "{{ upload.created_at }}"
+        td.actions
+          a.btn.btn-success.btn-xs target='_blank' href='/download/{{ upload.sid }}' ng-show='upload.upload_type == "file"' DOWNLOAD
+          a.btn.btn-success.btn-xs target='_blank' href='/{{ upload.sid }}' ng-show='upload.upload_type == "link"' GO
+          a.btn.btn-success.btn-xs target='_blank' href='/download/{{ upload.sid }}' ng-show='upload.upload_type == "code"' RAW
+          a.btn.btn-danger.btn-xs href='javascript:;' ng-really-message='Are you sure?' ng-really-click='destroy(upload)' DESTROY
 
   = link_to 'NEW UPLOAD', new_upload_path, class: 'btn btn-success btn-lg'
