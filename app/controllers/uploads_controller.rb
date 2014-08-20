@@ -40,7 +40,7 @@ class UploadsController < ApplicationController
     upload.download!
 
     if upload.file?
-      return send_data File.read(upload.file.path), filename: upload.file_file_name , type: upload.file.content_type, length: upload.file.size, disposition: 'attachment'
+      return send_file upload.file.path, x_sendfile: true, filename: upload.file_file_name, type: upload.file.content_type
     elsif upload.code?
       render text: upload.text and return
     end
