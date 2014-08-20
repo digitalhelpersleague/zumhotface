@@ -81,4 +81,12 @@ Zumhotface::Application.configure do
   config.action_mailer.default_url_options = { host: 'zhf.io' }
 
   config.middleware.use Rack::SslEnforcer, ignore: '/assets'
+
+  # Unicorn self-process killer
+  require 'unicorn/worker_killer'
+  # Max requests per worker
+  config.middleware.use Unicorn::WorkerKiller::MaxRequests, 3072, 4096
+  # Max memory size (RSS) per worker
+  config.middleware.use Unicorn::WorkerKiller::Oom, (128*(1024**2)), (256*(1024**2))
+
 end

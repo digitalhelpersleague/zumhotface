@@ -14,6 +14,8 @@ gem 'inherited_resources'
 gem 'paperclip'
 gem 'aws-sdk'
 
+gem 'resque'
+
 gem 'devise'
 gem 'devise_invitable'
 gem 'draper'
@@ -31,6 +33,7 @@ gem 'coffee-rails', '~> 4.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
+# gem 'execjs', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -69,18 +72,22 @@ gem 'ng-rails-csrf'
 
 group :production do
   gem 'unicorn'
+  gem 'unicorn-worker-killer'
 end
 
 group :development do
   gem 'thin'
   gem 'capistrano', '~> 2.0'
   gem 'capistrano-unicorn', require: false
+  gem 'capistrano-rbenv', require: false
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'rack-mini-profiler'
   gem 'quiet_assets'
   gem 'letter_opener'
 end
+
+gem 'github-linguist', require: false
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
