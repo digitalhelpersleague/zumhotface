@@ -82,11 +82,13 @@ Zumhotface::Application.configure do
 
   config.middleware.use Rack::SslEnforcer, ignore: '/assets'
 
-  # Unicorn self-process killer
-  require 'unicorn/worker_killer'
-  # Max requests per worker
-  config.middleware.use Unicorn::WorkerKiller::MaxRequests, 3072, 4096
-  # Max memory size (RSS) per worker
-  config.middleware.use Unicorn::WorkerKiller::Oom, (128*(1024**2)), (256*(1024**2))
+  config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # let nginx deliver our files through x-accel
+
+  ## Unicorn self-process killer
+  #require 'unicorn/worker_killer'
+  ## Max requests per worker
+  #config.middleware.use Unicorn::WorkerKiller::MaxRequests, 3072, 4096
+  ## Max memory size (RSS) per worker
+  #config.middleware.use Unicorn::WorkerKiller::Oom, (128*(1024**2)), (256*(1024**2))
 
 end

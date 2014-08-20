@@ -25,7 +25,5 @@ module Zumhotface
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
 
     config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
-
-    ActionController::Streaming::X_SENDFILE_HEADER = 'X-Accel-Redirect' # let nginx deliver our files through x-accel
   end
 end
