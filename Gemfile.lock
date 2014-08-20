@@ -72,7 +72,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.1)
-    commonjs (0.2.7)
     daemons (1.1.9)
     debug_inspector (0.0.2)
     devise (3.3.0)
@@ -120,8 +119,6 @@ GEM
     kgio (2.9.2)
     launchy (2.4.2)
       addressable (~> 2.3)
-    less (2.6.0)
-      commonjs (~> 0.2.7)
     letter_opener (1.2.0)
       launchy (~> 2.2)
     mail (2.5.4)
@@ -302,7 +299,6 @@ DEPENDENCIES
   gon
   inherited_resources
   jquery-rails
-  less
   letter_opener
   ng-rails-csrf
   oj
