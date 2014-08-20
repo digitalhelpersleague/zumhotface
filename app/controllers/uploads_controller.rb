@@ -8,7 +8,7 @@ class UploadsController < ApplicationController
 
   helper_method :upload, :uploads
 
-  before_action :authenticate_user!, except: [:show]
+  before_action :authenticate_user!, except: [:show, :download]
 
   def index
     gon.rabl template: "app/views/uploads/index.json.rabl", as: :uploads
