@@ -7,23 +7,25 @@ div ng-controller='zum.UploadsCtrl'
   div.upload-forms
     .upload-form.animate-switch ng-show='new_upload == "file"'
       table.table ng-show='files.length'
-        tr
-          th
-          th Name
-          th Size
-          th Link
-          th
-        tr ng-repeat='file in files'
-          td
-          td = '{{ file.name | truncate }}'
-          td = '{{ file.size | humanizeSize }}'
-          td : input.result-url.form-control ng-show='file.url' type='text' value='{{ file.url }}' onclick='$(this).focus(); $(this).select();'
-          td
-            span.upload-status.icon-progress ng-show='!file.url && !file.error'
-            span.upload-status.icon-success.glyphicon.glyphicon-ok ng-show='file.url'
-            span.upload-status.icon-error.glyphicon.glyphicon-ban-circle ng-show='file.error'
-            span.upload-error
-              |  {{ file.error }}
+        thead
+          tr
+            th
+            th Name
+            th Size
+            th Link
+            th
+        tbody
+          tr ng-repeat='file in files'
+            td
+            td.upload-name = '{{ file.name | truncate }}'
+            td.upload-size = '{{ file.size | humanizeSize }}'
+            td : input.result-url.form-control ng-show='file.url' type='text' value='{{ file.url }}' onclick='$(this).focus(); $(this).select();'
+            td.actions
+              span.upload-status.icon-progress ng-show='!file.url && !file.error'
+              span.upload-status.icon-success.glyphicon.glyphicon-ok ng-show='file.url'
+              span.upload-status.icon-error.glyphicon.glyphicon-ban-circle ng-show='file.error'
+              span.upload-error
+                |  {{ file.error }}
 
       div ng-show='!uploaded'
         .form-group
