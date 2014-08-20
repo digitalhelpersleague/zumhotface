@@ -1,5 +1,6 @@
 div ng-controller='zum.UploadsCtrl'
   - if !upload.secured?
+    = render_flash_message text: "You've got stuff to download", message_type: 'notice', closeable: true
     - if upload.file?
       table.table.upload-info
         tbody
@@ -7,10 +8,16 @@ div ng-controller='zum.UploadsCtrl'
             td.upload-name = upload.name
             td.upload-content-type = upload.file.content_type
             td.upload-size = upload.size.to_s(:human_size)
-            td.actions = link_to "DOWNLOAD", download_upload_path(upload.sid), class: 'btn btn-success'
+            td.actions = link_to "DOWNLOAD", download_upload_path(upload.sid), class: 'btn btn-success btn-xs'
     - if upload.image?
       img.preview src='#{upload.file.url}' alt='#{upload.file_file_name}'
     - if upload.code?
+      table.table.upload-info
+        tbody
+          tr
+            td.upload-content-type = upload.content_type
+            td.upload-size = upload.size.to_s(:human_size)
+            td.actions = link_to "RAW", download_upload_path(upload.sid), class: 'btn btn-success btn-xs'
       pre.code-preview
         = upload.text
 
