@@ -1,4 +1,11 @@
+require 'resque/server'
+
 Zumhotface::Application.routes.draw do
+
+  get 'settings' => 'settings#index', as: :settings_path
+  put 'settings' => 'settings#update'
+
+  mount Resque::Server.new, at: "/resque"
 
   root 'pages#welcome'
 
@@ -11,8 +18,8 @@ Zumhotface::Application.routes.draw do
   #resources :keys, only: [:index, :create, :show, :destroy]
 
   resources :uploads, only: [:index, :create, :new]
-  delete '/uploads/:sid' => 'uploads#destroy'
   get '/:sid' => 'uploads#show', as: :upload
   get '/download/:sid' => 'uploads#download', as: :download_upload
+  delete '/uploads/:sid' => 'uploads#destroy'
 
 end
