@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140806131224) do
+ActiveRecord::Schema.define(version: 20140820063529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20140806131224) do
     t.string   "digest"
     t.text     "link"
     t.text     "text"
+    t.string   "lang"
   end
 
   add_index "uploads", ["type"], name: "index_uploads_on_type", using: :btree

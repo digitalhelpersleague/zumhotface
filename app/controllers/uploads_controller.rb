@@ -40,7 +40,9 @@ class UploadsController < ApplicationController
     upload.download!
 
     if upload.file?
-      return send_file upload.file.path, x_sendfile: true, filename: upload.file_file_name, type: upload.file.content_type
+      options = { x_sendfile: true, filename: upload.file_file_name, type: upload.file.content_type }
+      options.merge!({ disposition: 'inline', type: 'text/plain' }) if params[:raw]
+      return send_file upload.file.path, options
     elsif upload.code?
       render text: upload.text and return
     end

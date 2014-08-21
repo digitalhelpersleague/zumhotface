@@ -14,7 +14,7 @@ header.navbar.navbar-inverted.navbar-static-top role="navigation"
       - if current_user.member?
         li class=header_active?(controller: 'uploads', action: 'new') = link_to 'NEW UPLOAD', new_upload_path
         li class=header_active?(controller: 'uploads', action: 'index') = link_to 'MY UPLOADS', uploads_path
-        li = link_to "SETTINGS", "#"
+        li class=header_active?(controller: 'settings', action: 'index') = link_to "SETTINGS", settings_path
         /li class=header_active?(controller: 'keys', action: 'index') = link_to 'MY KEYS', keys_path
     ul.nav.user-nav.navbar-right
       - if current_user.member?

@@ -5,6 +5,7 @@ div ng-controller='zum.UploadsCtrl'
         th
         th Name
         th Size
+        th Lang
         th Protected
         th Encrypted
         th Downloads
@@ -17,15 +18,17 @@ div ng-controller='zum.UploadsCtrl'
         td.upload-name : a href='{{ upload.url }}' 
           = "{{ upload.name | trimHttp | truncate }}"
         td.upload-size = "{{ upload.size | humanizeSize }}"
+        td.upload-lang
+          | {{ upload.lang }}
         td : span.glyphicon.glyphicon-lock ng-show="{{ upload.is_secured }}"
         td : span.glyphicon.glyphicon-ok ng-show="{{ upload.is_encrypted }}"
         td.upload-downloads = "{{ upload.downloads || 0 }}"
         td : input.result-url.form-control type='text' value='{{ upload.url }}' onclick='$(this).focus(); $(this).select();'
         td.upload-date : span am-time-ago="upload.created_at" = "{{ upload.created_at }}"
         td.actions
+          a.btn.btn-success.btn-xs target='_blank' href='/download/{{ upload.sid }}?raw=true' ng-show='upload.lang || upload.upload_type == "code"' RAW
           a.btn.btn-success.btn-xs target='_blank' href='/download/{{ upload.sid }}' ng-show='upload.upload_type == "file"' DOWNLOAD
           a.btn.btn-success.btn-xs target='_blank' href='/{{ upload.sid }}' ng-show='upload.upload_type == "link"' GO
-          a.btn.btn-success.btn-xs target='_blank' href='/download/{{ upload.sid }}' ng-show='upload.upload_type == "code"' RAW
           a.btn.btn-danger.btn-xs href='javascript:;' ng-really-message='Are you sure?' ng-really-click='destroy(upload)' DESTROY
 
   = link_to 'NEW UPLOAD', new_upload_path, class: 'btn btn-success btn-lg'

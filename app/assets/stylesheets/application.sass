@@ -6,6 +6,7 @@
 @import "animations"
 @import "fileupload"
 @import "sign_in"
+@import "pygments"
 
 $footer-height: 30px
 
@@ -197,12 +198,14 @@ table.table
           font-family: $font-family-base
         .btn + .btn
           margin-left: 5px
-      button + button
-        margin-left: 5px
+      //button + button
+        //margin-left: 5px
       span.glyphicon
         margin-left: 5px
       &.upload-name
         font-weight: 400
+      &.upload-lang
+        font-weight: 300
       &.upload-size
         font-weight: 300
       &.upload-content-type
@@ -274,7 +277,7 @@ table.table
     font-size: 12px
     font-family: monospace
 
-pre.code-preview
+.syntax pre
   text-align: left
   font-size: 12px
   text-shadow: none

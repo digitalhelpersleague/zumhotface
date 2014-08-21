@@ -14,6 +14,16 @@ class UploadDecorator < ApplicationDecorator
     end
   end
 
+  def content_type
+    lang || file.try(:content_type)
+  end
+
+  def code_preview
+    if lang and file?
+      return ("<div class='syntax'>"+Linguist::FileBlob.new(file.path).colorize+"</div>").html_safe
+    end
+  end
+
   def upload_type
     object.class.upload_type
   end

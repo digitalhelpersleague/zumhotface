@@ -6,8 +6,9 @@ div ng-controller='zum.UploadsCtrl'
         tbody
           tr
             td.upload-name = upload.name
-            td.upload-content-type = upload.file.content_type
+            td.upload-content-type = upload.content_type
             td.upload-size = upload.size.to_s(:human_size)
+            td.actions = link_to "RAW", download_upload_path(upload.sid, raw: true), class: 'btn btn-success btn-xs'
             td.actions = link_to "DOWNLOAD", download_upload_path(upload.sid), class: 'btn btn-success btn-xs'
     - if upload.image?
       img.preview src='#{upload.file.url}' alt='#{upload.file_file_name}'
@@ -18,8 +19,10 @@ div ng-controller='zum.UploadsCtrl'
             td.upload-content-type = upload.content_type
             td.upload-size = upload.size.to_s(:human_size)
             td.actions = link_to "RAW", download_upload_path(upload.sid), class: 'btn btn-success btn-xs'
-      pre.code-preview
+      .syntax : pre
         = upload.text
+    - if upload.lang
+      = upload.code_preview
 
       /span.glyphicon class="glyphicon-#{upload.icon}"
   - if upload.secured?

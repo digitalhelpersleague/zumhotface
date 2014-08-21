@@ -22,6 +22,8 @@ class Upload < ActiveRecord::Base
 
   before_validation :set_unique_identifier
 
+  after_commit :analyze_language, on: :create
+
   #after_create :move_to_s3
 
   #TODO: encrypt with AES128/256
@@ -67,6 +69,12 @@ class Upload < ActiveRecord::Base
   def download!
     self.downloads += 1
     save
+  end
+
+  def analyze_language
+    if file.try(:path) && !encrypted?
+      resque = Resque.enqueue(Jobs::LanguageDetector, sid)
+    end
   end
 
 private
