@@ -21,9 +21,7 @@ class UploadDecorator < ApplicationDecorator
   end
 
   def code_preview
-    if lang and file?
-      return ("<div class='syntax'>"+Linguist::FileBlob.new(file.path).colorize+"</div>").html_safe
-    end
+    return ("<div class='syntax'>"+Linguist::FileBlob.new(file.path).colorize+"</div>").html_safe if lang and file?
   end
 
   def upload_type

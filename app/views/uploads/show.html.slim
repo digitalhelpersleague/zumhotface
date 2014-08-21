@@ -1,4 +1,4 @@
-div ng-controller='zum.UploadsCtrl'
+div
   - if !upload.secured?
     = render_flash_message text: "You've got stuff to download", message_type: 'notice', closeable: true
     - if upload.file?
@@ -22,7 +22,8 @@ div ng-controller='zum.UploadsCtrl'
       .syntax : pre
         = upload.text
     - if upload.lang
-      = upload.code_preview
+      - cache do
+        = upload.code_preview
 
       /span.glyphicon class="glyphicon-#{upload.icon}"
   - if upload.secured?
