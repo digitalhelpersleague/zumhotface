@@ -1,3 +1,5 @@
+require 'linguist'
+
 class UploadDecorator < ApplicationDecorator
   delegate_all
 
