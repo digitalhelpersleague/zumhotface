@@ -14,6 +14,8 @@ gem 'inherited_resources'
 gem 'paperclip'
 gem 'aws-sdk'
 
+gem 'pry-rails'
+
 gem 'redis'
 gem 'redis-namespace'
 gem 'redis-rails'
