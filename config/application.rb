@@ -26,7 +26,6 @@ module Zumhotface
 
     config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
     
-    config.action_controller.perform_caching = true
     config.cache_store = :redis_store, { namespace: 'zhf:cache', expires_in: 90.minutes }
   end
 end
