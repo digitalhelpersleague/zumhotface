@@ -10,7 +10,8 @@ class ApplicationController < ActionController::Base
 private
   def include_current_user
     if request.format.html?
-      gon.rabl template: "app/views/users/show.rabl", as: :current_user
+      @user = UserDecorator.decorate(current_user)
+      gon.rabl template: "app/views/users/show.json.rabl", as: :current_user
     end
   end
 

@@ -20,4 +20,6 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  current_password: Current password
+  password: Password
+  password_confirmation: Password confirmation 

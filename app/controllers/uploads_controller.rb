@@ -11,6 +11,7 @@ class UploadsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :download]
 
   def index
+    @uploads ||= current_user.uploads.order('id DESC')
     gon.rabl template: "app/views/uploads/index.json.rabl", as: :uploads
     index!
   end

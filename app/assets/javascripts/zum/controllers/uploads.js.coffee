@@ -2,6 +2,12 @@
 
   $scope.uploads = Upload.all
 
+  $scope.total_size = (files) ->
+    sum = 0
+    _.each files, (file) ->
+      sum += file.size
+    sum
+
   $scope.destroy = (upload) ->
     upload.$delete()
     index = $scope.uploads.indexOf upload

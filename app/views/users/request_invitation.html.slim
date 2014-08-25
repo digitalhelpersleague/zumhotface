@@ -1,0 +1,10 @@
+
+form action="#{}" method='POST'
+  input name="authenticity_token" value="#{ form_authenticity_token }" type='hidden'
+  h3 Request invitation
+  .form-group
+    input.form-control type='text' name='user[email]' autofocus='true' placeholder='Email'
+  .form-group
+    textarea.form-control name='user[comment]' placeholder='About you'
+  .form-group
+    button.btn.btn-primary.btn-lg name='commit' type='submit' SEND

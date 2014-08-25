@@ -1,0 +1,35 @@
+
+/p password change form
+/ check password score, alert user he has weak password
+/ checkbox to encrypt all data by default with key from list
+/ free storage space info, manage invitations
+
+div ng-controller='zum.AccountCtrl'
+  ul.zhf-tabs ng-init='setting = "overview"' ng-click=''
+    li : button.btn.btn-transparent.btn-lg href="#overview" role="tab" ng-class='{ active: setting == "overview", "btn-default": setting != "overview" }' ng-click='setting="overview"' Overview
+    li : button.btn.btn-transparent.btn-lg href="#account" role="tab" ng-class='{ active: setting == "account", "btn-default": setting != "account" }' ng-click='setting="account"' Account
+    /li : button.btn.btn-transparent.btn-lg href="#invitations" role="tab" ng-class='{ active: setting == "invitations", "btn-default": setting != "invitations" }' ng-click='setting="invitations"' Invitations
+
+  .tab-content ng-show='setting == "overview"'
+    .storage
+      h3 Storage
+      .progress
+        .progress-bar.progress-bar-info role="progressbar" aria-valuenow="{{ current_user.storage_percent_used }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ current_user.storage_percent_used }}%;"
+          | {{ current_user.storage_percent_used }}%
+      | Used {{ current_user.storage_used  | humanizeSize }} of {{ current_user.storage_total  | humanizeSize }} total.
+  .tab-content ng-show='setting == "account"'
+    h4 Change your password
+    = form_tag update_account_path, method: "patch"
+    .form-group
+      input.form-control type='password' name='user[current_password]' placeholder='Current password' autocomplete="off"
+
+    .form-group
+      input.form-control type='password' name='user[password]' autofocus='true' placeholder='New password' autocomplete="off"
+    .form-group
+      input.form-control type='password' name='user[password_confirmation]' placeholder='Confirm new password' autocomplete="off"
+
+    .form-group
+      button.btn.btn-primary.btn-lg name='commit' type='submit' CHANGE MY PASSWORD
+
+  /.tab-content ng-show='setting == "invitations"'
+    /p invitations list, new invitation

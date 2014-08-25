@@ -2,8 +2,8 @@ require 'resque/server'
 
 Zumhotface::Application.routes.draw do
 
-  get 'settings' => 'settings#index', as: :settings_path
-  put 'settings' => 'settings#update'
+  get 'account' => 'account#index', as: :account
+  patch 'account' => 'account#update', as: :update_account
 
   mount Resque::Server.new, at: "/resque"
 
@@ -12,6 +12,9 @@ Zumhotface::Application.routes.draw do
   get '/welcome' => 'pages#welcome'
   get '/about' => 'pages#about'
   get '/privacy' => 'pages#privacy'
+
+  get '/request_invitation' => 'users#request_invitation'
+  post '/request_invitation' => 'users#request_invitation'
 
   devise_for :users
 
