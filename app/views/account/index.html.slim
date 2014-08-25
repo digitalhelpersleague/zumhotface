@@ -12,7 +12,7 @@ div ng-controller='zum.AccountCtrl'
 
   .tab-content ng-show='setting == "overview"'
     .storage
-      h3 Storage
+      h4 Storage
       .progress
         .progress-bar.progress-bar-info role="progressbar" aria-valuenow="{{ current_user.storage_percent_used }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ current_user.storage_percent_used }}%;"
           | {{ current_user.storage_percent_used }}%
