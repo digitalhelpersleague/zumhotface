@@ -348,3 +348,31 @@ table
   tr.total-row
     color: $gray-lighter
     background-color: transparent !important
+
+.password-score-bar
+  height: 4px
+  margin-top: 5px
+  margin-bottom: 0
+  &.password-score_0, &.password-score_1
+    & > .progress-bar
+      background-color: rgb(255, 84, 84)
+  &.password-score_2
+    & > .progress-bar
+      background-color: rgb(255, 170, 0)
+  &.password-score_3
+    & > .progress-bar
+      background-color: #B3BE14
+  &.password-score_4
+    & > .progress-bar
+      background-color: #50BA23
+
+input[type='password']
+  &.password-confirmation-error
+    border: 2px solid rgb(255, 84, 84)
+  &.password-confirmation-success
+    border: 2px solid #50BA23
+
+.password-crack-time
+  &.tooltip
+    position: relative
+    opacity: 1
