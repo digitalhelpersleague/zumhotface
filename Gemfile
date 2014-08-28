@@ -28,6 +28,8 @@ gem 'devise'
 gem 'devise_invitable'
 gem 'draper'
 
+gem 'premailer-rails'
+
 gem 'autoprefixer-rails'
 
 # Use SCSS for stylesheets
