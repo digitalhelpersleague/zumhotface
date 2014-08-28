@@ -6,8 +6,20 @@
     = devise_error_messages!
     = f.hidden_field :invitation_token
     .form-group
-      = f.password_field :password, placeholder: 'Password', class: 'form-control'
+      = f.password_field :password, placeholder: 'Password', class: 'form-control', autofocus: true, zxcvbn: 'zxcvbn', :'ng-model' => 'password'
+
+      .progress.password-score-bar ng-show='zxcvbn' class="password-score_{{ zxcvbn.score }}"
+        .progress-bar role="progressbar" aria-valuenow="{{ zxcvbn.score + 1 }}" aria-valuemin="0" aria-valuemax="5" style="width: {{ (zxcvbn.score + 1) / 5 * 100 }}%;"
+
+      .password-crack-time.tooltip.bottom role="tooltip" ng-show='zxcvbn'
+        .tooltip-arrow
+        .tooltip-inner
+          | Estimated crack time: {{ zxcvbn.crack_time_display }}
+
     .form-group
-      = f.password_field :password_confirmation, placeholder: 'Password confirmation', class: 'form-control'
+      = f.password_field :password_confirmation, placeholder: 'Password confirmation', class: 'form-control', :'ng-class' => '{ "password-confirmation-error": password_confirmation && password != password_confirmation, "password-confirmation-success": password_confirmation && password == password_confirmation }', :'ng-model' => 'password_confirmation'
+
     .form-group
-      = f.submit t("devise.invitations.edit.submit_button").upcase, class: 'btn btn-primary btn-large'
+      = f.submit t("devise.invitations.edit.submit_button").upcase, class: 'btn btn-primary btn-lg', :'ng-disabled' => '!password || !password_confirmation || (password != password_confirmation)'
+
+script type="text/javascript" src="/js/zxcvbn-async.js"
