@@ -6,3 +6,4 @@ require File.expand_path('../config/application', __FILE__)
 Zumhotface::Application.load_tasks
 
 require 'resque/tasks'
+require 'autoprefixer-rails'

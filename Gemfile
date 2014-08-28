@@ -16,6 +16,8 @@ gem 'aws-sdk'
 
 gem 'pry-rails'
 
+gem 'grape'
+
 gem 'redis'
 gem 'redis-namespace'
 gem 'redis-rails'
@@ -25,6 +27,8 @@ gem 'resque'
 gem 'devise'
 gem 'devise_invitable'
 gem 'draper'
+
+gem 'autoprefixer-rails'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0'
