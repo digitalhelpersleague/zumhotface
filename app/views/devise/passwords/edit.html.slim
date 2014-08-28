@@ -1,0 +1,24 @@
+h4 Change your password
+= form_tag password_path(resource_name), method: :put
+input type='hidden' name='user[reset_password_token]' value='#{params[:reset_password_token]}'
+= devise_error_messages!
+.form-group
+  input.form-control type='password' name='user[password]' autofocus='true' placeholder='New password' autocomplete="off" zxcvbn="zxcvbn" class='password-score_{{ zxcvbn.score }}' ng-model='password'
+
+  .progress.password-score-bar ng-show='zxcvbn' class="password-score_{{ zxcvbn.score }}"
+    .progress-bar role="progressbar" aria-valuenow="{{ zxcvbn.score + 1 }}" aria-valuemin="0" aria-valuemax="5" style="width: {{ (zxcvbn.score + 1) / 5 * 100 }}%;"
+
+  .password-crack-time.tooltip.bottom role="tooltip" ng-show='zxcvbn'
+    .tooltip-arrow
+    .tooltip-inner
+      | Estimated crack time: {{ zxcvbn.crack_time_display }}
+
+.form-group
+  input.form-control type='password' name='user[password_confirmation]' placeholder='Confirm new password' autocomplete="off" ng-model='password_confirmation' ng-class='{ "password-confirmation-error": password_confirmation && password != password_confirmation, "password-confirmation-success": password_confirmation && password == password_confirmation }'
+
+.form-group
+  button.btn.btn-primary.btn-lg name='commit' type='submit' ng-disabled='!password || !password_confirmation || (password != password_confirmation)' CHANGE MY PASSWORD
+
+= render "devise/shared/links"
+
+script type="text/javascript" src="/js/zxcvbn-async.js"

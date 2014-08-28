@@ -1,0 +1,53 @@
+html lang="en"
+  head
+    title
+      == yield(:title)
+    meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+    meta name="viewport" content="initial-scale=1.0"
+    meta name="format-detection" content="telephone=no"
+    sass:
+      *
+        font-family: arial, Arial, sans-serif
+      body
+        margin: 20px
+        padding: 20px
+        text-shadow: 0 1px 3px rgba(0,0,0,.7)
+        background-repeat: repeat
+        background-position: top left
+        font-family: "Yanone Kaffeesatz", "Helvetica Neue", Helvetica, Arial, sans-serif
+        font-size: 18px
+        line-height: 1.42857
+        color: #c4c4c4
+      table
+        border-spacing: 0
+        margin-left: auto
+        margin-right: auto
+        td
+          margin: 0
+          padding: 0
+          border-collapse:collapse
+          padding-top: 20px
+          padding-bottom: 20px
+      a
+        color: #03799b
+        text-decoration: none
+        background: transparent
+      .wrapper
+        box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.7)
+    body style="background-image: url(#{image_url('/i/noise.png')})"
+      .wrapper
+        table cellpadding="0" cellspacing="0" border="0" width="400"
+          tr
+            td.logo
+              a href='https://zhf.io'
+                img src="#{image_url('/i/logo.png')}"
+            td
+          tr
+            td.content
+              = yield(:body)
+          tr
+            td.footer
+              p Sincerely yours,
+              p 
+                a href='https://zhf.io' zumhotface
+                |  team
