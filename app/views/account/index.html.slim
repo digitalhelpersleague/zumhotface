@@ -12,6 +12,13 @@ div ng-controller='zum.AccountCtrl'
           | {{ current_user.storage_percent_used }}%
       | Used {{ current_user.storage_used  | humanizeSize }} of {{ current_user.storage_total  | humanizeSize }} total.
   .tab-content ng-show='setting == "account"'
+    h4 API Key
+    .form-group ng-show='!!current_user.api_key'
+      input.form-control type='text' value='{{ current_user.api_key }}' placeholder='none' onclick='$(this).focus(); $(this).select();'
+    .form-group
+      button.btn.btn-primary.btn-lg ng-click='generate_api_key()' GENERATE
+      button.btn.btn-danger.btn-lg ng-click='destroy_api_key()' ng-show='current_user.api_key' DESTROY
+
     h4 Change your password
     = form_tag update_account_path, method: "patch"
     .form-group

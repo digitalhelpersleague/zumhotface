@@ -15,6 +15,8 @@ Zumhotface::Application.routes.draw do
 
   get '/request_invitation' => 'users#request_invitation'
   post '/request_invitation' => 'users#request_invitation'
+  put '/users/generate_api_key' => 'users#generate_api_key'
+  delete '/users/destroy_api_key' => 'users#destroy_api_key'
 
   devise_for :users
 
