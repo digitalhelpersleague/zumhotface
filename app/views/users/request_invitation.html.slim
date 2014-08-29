@@ -1,10 +1,9 @@
-
-form action="#{}" method='POST'
+form action="#{request_invitation_path}" method='POST'
   input name="authenticity_token" value="#{ form_authenticity_token }" type='hidden'
   h3 Request invitation
   .form-group
-    input.form-control type='text' name='user[email]' autofocus='true' placeholder='Email'
+    input.form-control type='text' name='email' autofocus='true' placeholder='Your email' ng-model='email'
   .form-group
-    textarea.form-control name='user[comment]' placeholder='About you'
+    textarea.form-control name='about' placeholder='About you' ng-model='about'
   .form-group
-    button.btn.btn-primary.btn-lg name='commit' type='submit' SEND
+    button.btn.btn-primary.btn-lg name='commit' type='submit' ng-disabled='!email || !about' SEND

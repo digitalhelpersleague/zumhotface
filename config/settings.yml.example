@@ -2,6 +2,7 @@ defaults: &defaults
   host: 'zhf.io'
   mail:
     from: robot@localhost
+    admin: root@localhost
   uploads:
     secret_key: put_very_long_random_string_here
     aws_s3:

@@ -1,0 +1,10 @@
+- content_for :body do
+  p Greetings, Master!
+  p Some person wants to join us.
+  p Introducing, #{@email}!
+  p= @body
+  p
+    = link_to 'Grant invitation', new_user_invitation_url(email: @email)
+    |  or ignore worthless scum
+
+= render 'mailer/main'
