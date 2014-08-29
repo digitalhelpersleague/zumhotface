@@ -1,13 +1,11 @@
 class UsersController < ApplicationController
 
   respond_to :html, :json
-  inherit_resources
 
   def request_invitation
     if request.post?
       ApplicationMailer.request_invitation(params[:email], params[:about]).deliver
-      flash[:success] = 'ok'
-      redirect_to root_path
+      flash[:notice] = 'Your request was sent to zumhotface team'
     end
   end
 

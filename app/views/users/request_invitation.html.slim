@@ -1,9 +1,12 @@
-form action="#{request_invitation_path}" method='POST'
-  input name="authenticity_token" value="#{ form_authenticity_token }" type='hidden'
-  h3 Request invitation
-  .form-group
-    input.form-control type='text' name='email' autofocus='true' placeholder='Your email' ng-model='email'
-  .form-group
-    textarea.form-control name='about' placeholder='About you' ng-model='about'
-  .form-group
-    button.btn.btn-primary.btn-lg name='commit' type='submit' ng-disabled='!email || !about' SEND
+- if request.get?
+  form action="#{request_invitation_path}" method='POST'
+    input name="authenticity_token" value="#{ form_authenticity_token }" type='hidden'
+    h3 Request invitation
+    .form-group
+      input.form-control type='text' name='email' autofocus='true' placeholder='Your email' ng-model='email'
+    .form-group
+      textarea.form-control name='about' placeholder='About you' ng-model='about'
+    .form-group
+      button.btn.btn-primary.btn-lg name='commit' type='submit' ng-disabled='!email || !about' SEND
+- else
+  a.btn.btn-transparent.btn-lg href="#{root_path}" Go back
