@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: Settings.mail.from
+  default from: "#{Rails.application.class.parent_name} <#{Settings.mail.from}>"
   
   def request_invitation(email, body)
     @email = email
