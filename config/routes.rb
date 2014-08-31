@@ -2,16 +2,17 @@ require 'resque/server'
 
 Zumhotface::Application.routes.draw do
 
-  get 'account' => 'account#index', as: :account
-  patch 'account' => 'account#update', as: :update_account
-
   mount Resque::Server.new, at: "/resque"
+  mount ::API, at: '/api'
 
   root 'pages#welcome'
 
   get '/welcome' => 'pages#welcome'
   get '/about' => 'pages#about'
   get '/privacy' => 'pages#privacy'
+
+  get 'account' => 'account#index', as: :account
+  patch 'account' => 'account#update', as: :update_account
 
   get '/request_invitation' => 'users#request_invitation'
   post '/request_invitation' => 'users#request_invitation'

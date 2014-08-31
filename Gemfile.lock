@@ -116,7 +116,7 @@ GEM
       json
       multi_json
       request_store (>= 1.0.5)
-    grape (0.8.0)
+    grape (0.9.0)
       activesupport
       builder
       hashie (>= 2.1.0)
@@ -129,7 +129,7 @@ GEM
     has_scope (0.6.0.rc)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
-    hashie (3.2.0)
+    hashie (3.3.1)
     highline (1.6.21)
     hike (1.2.3)
     htmlentities (4.3.2)
@@ -153,7 +153,7 @@ GEM
     method_source (0.8.2)
     mime-types (1.25.1)
     mini_portile (0.6.0)
-    minitest (5.4.0)
+    minitest (5.4.1)
     mono_logger (1.1.0)
     multi_json (1.10.1)
     multi_xml (0.5.5)

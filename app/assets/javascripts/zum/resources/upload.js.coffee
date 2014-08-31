@@ -34,8 +34,8 @@
         upload = new Upload(params)
         upload.init()
       )
-    else
-      Upload.query()
+    #else
+      #Upload.query()
 
   Upload.all = cache
 

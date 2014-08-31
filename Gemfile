@@ -54,6 +54,7 @@ gem 'settingslogic'
 
 gem 'gon'
 gem 'rabl-rails'
+#gem 'grape-rabl-rails', github: 'ifad/grape-rabl-rails'
 gem 'oj'
 
 group :doc do
