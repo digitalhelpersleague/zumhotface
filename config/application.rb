@@ -20,10 +20,11 @@ module Zumhotface
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    config.paths.add File.join('app', 'api'), eager_load: true
-    config.paths.add File.join('lib'), eager_load: true
-    config.autoload_paths += Dir[Rails.root.join('lib', '**')]
-    config.autoload_paths += Dir[Rails.root.join('app', 'api', '**')]
+    #config.autoload_paths += Dir[Rails.root.join('lib')]
+    #config.autoload_paths += Dir[Rails.root.join('app', 'api')]
+
+    config.eager_load_paths += Dir[Rails.root.join('lib')]
+    config.eager_load_paths += Dir[Rails.root.join('app', 'api')]
 
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
 
