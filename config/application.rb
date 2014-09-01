@@ -21,6 +21,7 @@ module Zumhotface
     # config.i18n.default_locale = :de
 
     config.paths.add File.join('app', 'api'), eager_load: true
+    config.paths.add File.join('lib'), eager_load: true
     config.autoload_paths += Dir[Rails.root.join('lib', '**')]
     config.autoload_paths += Dir[Rails.root.join('app', 'api', '**')]
 

@@ -75,7 +75,7 @@ class Upload < ActiveRecord::Base
   end
 
   def analyze_language
-    if file.try(:path) && !encrypted?
+    if !!file.try(:path) && !encrypted?
       resque = Resque.enqueue(Jobs::LanguageDetector, sid)
     end
   end
