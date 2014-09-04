@@ -43,24 +43,27 @@ class APIv1 < Grape::API
       authenticate!
     end
 
-    #get '' do
-      #def uploads
-        #@uploads ||= current_user.uploads
-        #UploadDecorator.decorate_collection(@uploads)
-      #end
-
+    get '' do
+      {uploads: []}
       #JSON.parse ::RablRails.render(uploads, 'uploads/index')
-    #end
+    end
 
     desc 'New upload'
     params do
-      requires :file, type: Rack::Multipart::UploadedFile
+      optional :file, type: Rack::Multipart::UploadedFile
+      optional :link, type: String
+      optional :code, type: String
     end
-    post :file do
-      file = ActionDispatch::Http::UploadedFile.new(params[:file])
+    post '' do
       @upload = Upload.new(user: current_user)
-      @upload.type = 'Upload::File'
-      @upload.file = file
+      if params[:file]
+        @upload.file = ActionDispatch::Http::UploadedFile.new(params[:file])
+      elsif params[:link]
+        @upload.link = params[:link]
+      elsif params[:code]
+        @upload.text = params[:code]
+      end
+
       if @upload.save
         {status: 'OK', url: UploadDecorator.decorate(@upload).url}
       else

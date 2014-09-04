@@ -52,15 +52,12 @@ class UploadsController < ApplicationController
   def create
     @upload = Upload.new(user: current_user)
     if params[:upload][:file]
-      @upload.type = 'Upload::File'
       @upload.file = params[:upload][:file]
     end
     if params[:upload][:link]
-      @upload.type = 'Upload::Link'
       @upload.link = params[:upload][:link]
     end
     if params[:upload][:code]
-      @upload.type = 'Upload::Code'
       @upload.text = params[:upload][:code]
     end
     create! do |format|

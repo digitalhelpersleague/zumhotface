@@ -22,6 +22,7 @@ class Upload < ActiveRecord::Base
 
   validate :must_have_free_storage_space
 
+  before_validation :get_proper_type
   before_validation :set_unique_identifier
 
   after_commit :analyze_language, on: :create
@@ -87,6 +88,12 @@ class Upload < ActiveRecord::Base
   end
 
 private
+
+  def get_proper_type
+    self.type ||= 'Upload::Code' if !!text
+    self.type ||= 'Upload::Link' if !!link
+    self.type ||= 'Upload::File' if !!file
+  end
 
   def increment_total_weight
     user.increment_total_weight(size)
