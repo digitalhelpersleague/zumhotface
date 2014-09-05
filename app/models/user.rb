@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
     Storage.new total: read_attribute(:storage), used: uploads_total_weight
   end
 
-  def increment_total_weight(size)
+  def update_total_weight(size)
     update_attribute :uploads_total_weight, uploads_total_weight+size
   end
 

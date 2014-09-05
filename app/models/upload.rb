@@ -4,6 +4,8 @@ class Upload < ActiveRecord::Base
 
   belongs_to :user
 
+  before_destroy :decrement_total_weight
+
   has_attached_file :file,
     hash_secret: Settings.uploads.secret_key,
     hash_data: "uploads/file/:id/:style/:updated_at",
@@ -57,9 +59,14 @@ class Upload < ActiveRecord::Base
   end
 
   def size
-    return file.size if file.try(:path)
-    return text.bytesize if code?
-    return link.bytesize if link?
+    size = if code? 
+      text.bytesize
+    elsif link?
+      link.bytesize
+    else
+      file_file_size
+    end
+    size.to_i
   end
 
   def validate_access with_password: nil
@@ -82,9 +89,7 @@ class Upload < ActiveRecord::Base
   end
 
   def must_have_free_storage_space
-    if size && size > user.storage.free
-      errors.add(:file, "no space left")
-    end
+    errors.add(:file, "no space left") if size.to_i > user.storage.free
   end
 
 private
@@ -96,7 +101,11 @@ private
   end
 
   def increment_total_weight
-    user.increment_total_weight(size)
+    user.update_total_weight(size)
+  end
+
+  def decrement_total_weight
+    user.update_total_weight(-size)
   end
 
   def set_unique_identifier
