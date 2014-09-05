@@ -39,7 +39,7 @@ class Upload < ActiveRecord::Base
   #TODO: compress links and texts with gzip
 
   %w(file link code).each do |type|
-    define_method("#{type}?"){ self.class.to_s == "Upload::#{type.camelize}" }
+    define_method("#{type}?"){ self.type == "Upload::#{type.camelize}" }
   end
   
   def self.upload_type
