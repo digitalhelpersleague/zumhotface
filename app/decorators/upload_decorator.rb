@@ -21,7 +21,10 @@ class UploadDecorator < ApplicationDecorator
   end
 
   def code_preview
-    return ("<div class='syntax'>"+Linguist::FileBlob.new(file.path).colorize+"</div>").html_safe if lang and file?
+    if lang
+      return ("<div class='syntax'>"+Linguist::FileBlob.new(file.path).colorize+"</div>").html_safe if file?
+      return ("<div class='syntax'>"+Linguist::Language.new(name: lang).colorize(code)+"</div>").html_safe if code?
+    end
   end
 
   def upload_type
@@ -29,7 +32,7 @@ class UploadDecorator < ApplicationDecorator
   end
 
   def name
-    file_file_name || link || text
+    file_file_name || link || code
   end
 
   def url

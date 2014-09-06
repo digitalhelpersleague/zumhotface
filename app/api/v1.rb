@@ -61,7 +61,7 @@ class APIv1 < Grape::API
       elsif params[:link]
         @upload.link = params[:link]
       elsif params[:code]
-        @upload.text = params[:code]
+        @upload.code = params[:code]
       end
 
       if @upload.save

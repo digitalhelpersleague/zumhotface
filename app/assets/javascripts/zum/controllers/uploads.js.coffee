@@ -34,6 +34,8 @@
     if !!$scope.code
       upload = new Upload()
       upload.code = $scope.code
+      if $scope.lang
+        upload.lang = $scope.lang
 
     if upload
       upload.$save().then ->

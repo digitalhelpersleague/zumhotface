@@ -45,7 +45,7 @@ class UploadsController < ApplicationController
       options.merge!({ disposition: 'inline', type: 'text/plain' }) if params[:raw]
       return send_file upload.file.path, options
     elsif upload.code?
-      render text: upload.text and return
+      render text: upload.code and return
     end
   end
 
@@ -53,12 +53,11 @@ class UploadsController < ApplicationController
     @upload = Upload.new(user: current_user)
     if params[:upload][:file]
       @upload.file = params[:upload][:file]
-    end
-    if params[:upload][:link]
+    elsif params[:upload][:link]
       @upload.link = params[:upload][:link]
-    end
-    if params[:upload][:code]
-      @upload.text = params[:upload][:code]
+    elsif params[:upload][:code]
+      @upload.code = params[:upload][:code]
+      @upload.lang = params[:upload][:lang] if params[:upload][:lang]
     end
     create! do |format|
       format.json {
@@ -87,7 +86,7 @@ class UploadsController < ApplicationController
 
   private
     def permitted_params
-      params.permit(upload: [:encryption_type, :file, :files])
+      params.permit(upload: [:encryption_type, :file, :link, :code, :lang])
     end
 
 end

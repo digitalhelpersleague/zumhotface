@@ -56,5 +56,11 @@ div ng-controller='zum.UploadsCtrl'
       div ng-show='!uploaded'
         .form-group
           textarea.form-control placeholder='echo "Hello world!"' type="text" ng-model='code' cols='70' rows='5'
+        .form-group
+          select.form-control ng-model='lang'
+            option value="" Select a language...
+            - Linguist::Language.popular.each do |language|
+              option value="#{language.name}" = language.name
+
 
         = render partial: 'shared_form'

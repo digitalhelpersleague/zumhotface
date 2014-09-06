@@ -36,7 +36,7 @@ class Upload < ActiveRecord::Base
   #def encrypt(passphrase)
   #end
   #
-  #TODO: compress links and texts with gzip
+  #TODO: compress links and code with gzip
 
   %w(file link code).each do |type|
     define_method("#{type}?"){ self.type == "Upload::#{type.camelize}" }
@@ -59,8 +59,8 @@ class Upload < ActiveRecord::Base
   end
 
   def size
-    size = if code? 
-      text.bytesize
+    size = if code?
+      code.bytesize
     elsif link?
       link.bytesize
     else
@@ -95,7 +95,7 @@ class Upload < ActiveRecord::Base
 private
 
   def get_proper_type
-    self.type ||= 'Upload::Code' if !!text
+    self.type ||= 'Upload::Code' if !!code
     self.type ||= 'Upload::Link' if !!link
     self.type ||= 'Upload::File' if !!file
   end
