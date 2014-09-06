@@ -1,5 +1,4 @@
 class PagesController < ApplicationController
-
   def welcome
   end
 
@@ -8,5 +7,4 @@ class PagesController < ApplicationController
 
   def privacy
   end
-
 end

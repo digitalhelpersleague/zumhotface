@@ -23,5 +23,4 @@ class UserDecorator < ApplicationDecorator
   def storage_total
     object.storage.total
   end
-
 end

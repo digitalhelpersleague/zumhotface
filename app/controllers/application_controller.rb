@@ -7,15 +7,16 @@ class ApplicationController < ActionController::Base
 
   before_action :include_current_user
 
-private
+  private
+
   def include_current_user
-    if request.format.html?
-      @user = UserDecorator.decorate(current_user)
-      gon.rabl template: "app/views/users/show.json.rabl", as: :current_user
-    end
+    return unless request.format.html?
+    @user = UserDecorator.decorate(current_user)
+    gon.rabl template: 'app/views/users/show.json.rabl', as: :current_user
   end
 
-protected
+  protected
+
   def current_user
     super || User.new
   end

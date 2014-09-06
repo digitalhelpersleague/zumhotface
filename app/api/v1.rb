@@ -2,9 +2,7 @@ require 'json'
 
 class APIv1 < Grape::API
   version 'v1', using: :path
-  #content_type :json, "text/javascript"
   format :json
-  #formatter :json, Grape::Formatter::RablRails.new(views: "#{Rails.root}/app/views/api")
 
   helpers do
     def logger
@@ -30,13 +28,12 @@ class APIv1 < Grape::API
     before do
       authenticate!
     end
-  
+
     desc 'Account status'
     get :status do
       JSON.parse(::RablRails.render current_user, 'users/show')
     end
   end
-
 
   resource :uploads do
     before do
@@ -44,8 +41,8 @@ class APIv1 < Grape::API
     end
 
     get '' do
-      {uploads: []}
-      #JSON.parse ::RablRails.render(uploads, 'uploads/index')
+      { uploads: [] }
+      # JSON.parse ::RablRails.render(uploads, 'uploads/index')
     end
 
     desc 'New upload'
@@ -65,7 +62,7 @@ class APIv1 < Grape::API
       end
 
       if @upload.save
-        {status: 'OK', url: UploadDecorator.decorate(@upload).url}
+        { status: 'OK', url: UploadDecorator.decorate(@upload).url }
       else
         error! @upload.errors
       end

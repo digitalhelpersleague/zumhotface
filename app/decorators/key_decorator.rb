@@ -6,5 +6,4 @@ class KeyDecorator < ApplicationDecorator
   def provider
     object.class.provider
   end
-
 end

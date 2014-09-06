@@ -1,5 +1,4 @@
 class Storage
-
   attr_accessor :total
   attr_accessor :free
   attr_accessor :used
@@ -14,5 +13,4 @@ class Storage
       @free = @total - @used
     end
   end
-
 end

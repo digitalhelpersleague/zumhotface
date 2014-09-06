@@ -1,10 +1,9 @@
 class UploadsController < ApplicationController
-
   respond_to :html
   respond_to :json, except: :show
   inherit_resources
 
-  custom_actions resource: [:download] 
+  custom_actions resource: [:download]
 
   helper_method :upload, :uploads
 
@@ -12,7 +11,7 @@ class UploadsController < ApplicationController
 
   def index
     @uploads ||= current_user.uploads.order('id DESC')
-    gon.rabl template: "app/views/uploads/index.json.rabl", as: :uploads
+    gon.rabl template: 'app/views/uploads/index.json.rabl', as: :uploads
     index!
   end
 
@@ -20,32 +19,31 @@ class UploadsController < ApplicationController
     @upload ||= end_of_association_chain.find_by_sid!(params[:sid])
     show! do |format|
       format.html do
-        if !upload.secured?
+        unless upload.secured?
           upload.download!
-          redirect_to upload.link and return if upload.link?
+          redirect_to(upload.link) && return if upload.link?
         end
         render 'uploads/show'
       end
     end
-
   end
 
   def download
     @upload ||= end_of_association_chain.find_by_sid!(params[:sid])
 
-    if upload.secured? and !upload.validate_access(with_password: params[:password])
-      flash[:error] = "Bad password"
-      redirect_to action: :show and return
+    if upload.secured? && !upload.validate_access(with_password: params[:password])
+      flash[:error] = 'Bad password'
+      redirect_to(action: :show) && return
     end
 
     upload.download!
 
     if upload.file?
       options = { x_sendfile: true, filename: upload.file_file_name, type: upload.file.content_type }
-      options.merge!({ disposition: 'inline', type: 'text/plain' }) if params[:raw]
+      options.merge!(disposition: 'inline', type: 'text/plain') if params[:raw]
       return send_file upload.file.path, options
     elsif upload.code?
-      render text: upload.code and return
+      render(text: upload.code) && return
     end
   end
 
@@ -60,10 +58,10 @@ class UploadsController < ApplicationController
       @upload.lang = params[:upload][:lang] if params[:upload][:lang]
     end
     create! do |format|
-      format.json {
-        render json: {error: @upload.errors.messages.map{|k,v| "#{k} #{v.join(', ')}" }.join('; ')}, status: 403 and return if @upload.errors.any?
+      format.json do
+        render(json: { error: @upload.errors.messages.map { |k, v| "#{k} #{v.join(', ')}" }.join('; ') }, status: 403) && return if @upload.errors.any?
         render 'uploads/show'
-      }
+      end
     end
   end
 
@@ -76,17 +74,18 @@ class UploadsController < ApplicationController
   end
 
   protected
-    def upload
-      UploadDecorator.decorate resource
-    end
 
-    def uploads
-      UploadDecorator.decorate_collection collection
-    end
+  def upload
+    UploadDecorator.decorate resource
+  end
+
+  def uploads
+    UploadDecorator.decorate_collection collection
+  end
 
   private
-    def permitted_params
-      params.permit(upload: [:encryption_type, :file, :link, :code, :lang])
-    end
 
+  def permitted_params
+    params.permit(upload: [:encryption_type, :file, :link, :code, :lang])
+  end
 end

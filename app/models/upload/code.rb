@@ -1,7 +1,5 @@
 class Upload::Code < Upload
-
   def self.upload_type
-    "code"
+    'code'
   end
-
 end
