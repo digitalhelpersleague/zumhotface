@@ -14,7 +14,6 @@
     $scope.uploads.splice index, 1
 
   get_upload_progress = (progress_token, object) ->
-    console.log object
     $http.get('/progress', { headers: { 'X-Progress-ID': progress_token } }).then (response) ->
       object.progress ||= {}
       object.progress.state = response.data.state
