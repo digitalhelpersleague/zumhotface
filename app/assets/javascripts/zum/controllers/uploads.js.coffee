@@ -33,7 +33,7 @@
 
       $timeout (->
         get_upload_progress(progress_token, object)
-      ), 800
+      ), 500
 
   $scope.upload = ->
     if _.any $scope.files
