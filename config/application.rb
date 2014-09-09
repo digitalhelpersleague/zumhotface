@@ -28,5 +28,7 @@ module Zumhotface
     config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
     
     config.cache_store = :redis_store, { namespace: 'zhf:cache', expires_in: 90.minutes }
+
+    config.middleware.use Rack::ContentLength
   end
 end

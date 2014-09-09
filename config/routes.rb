@@ -5,6 +5,8 @@ Zumhotface::Application.routes.draw do
   mount Resque::Server.new, at: "/resque"
   mount ::API, at: '/api'
 
+  get '/progress', to: proc { [404, {}, ["You should configure nginx-upload-progress to serve /progress route"]] }
+
   root 'pages#welcome'
 
   get '/welcome' => 'pages#welcome'

@@ -19,6 +19,7 @@ div
             td.upload-content-type = upload.content_type
             td.upload-size = upload.size.to_s(:human_size)
             td.actions = link_to "RAW", download_upload_path(upload.sid), class: 'btn btn-success btn-xs'
+
     - if upload.lang
       - cache do
         = upload.code_preview

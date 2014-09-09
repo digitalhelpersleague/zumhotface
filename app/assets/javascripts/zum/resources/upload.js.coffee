@@ -1,8 +1,10 @@
 @zum.factory "Upload", ["$resource", "data", ($resource, data) ->
 
   Upload = $resource("/uploads/:sid.json", { sid: "@sid" },
-    update: {method: 'PUT'}
+    update: { method: 'PUT' }
     save:
+      params:
+        'X-Progress-ID': "@progress_token"
       method: 'POST'
       transformRequest: (data, getHeaders) ->
         headers = getHeaders()
@@ -22,6 +24,15 @@
           return
         fd
   )
+
+  Upload::generate_progress_token = ->
+    if not @progress_token
+      @progress_token = ""
+      i = 0
+      while i < 64
+        @progress_token += Math.floor(Math.random() * 16).toString(16)
+        i++
+      @progress_token
 
   Upload::init = ->
     if @created_at
