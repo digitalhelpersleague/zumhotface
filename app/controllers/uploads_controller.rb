@@ -1,3 +1,5 @@
+require 'linguist'
+
 class UploadsController < ApplicationController
   respond_to :html
   respond_to :json, except: :show
@@ -39,7 +41,7 @@ class UploadsController < ApplicationController
     upload.download!
 
     if upload.file?
-      options = { x_sendfile: true, filename: upload.file_file_name, type: upload.file.content_type }
+      options = { x_sendfile: true, filename: upload.file_file_name, type: upload.file.content_type, size: upload.size }
       options.merge!(disposition: 'inline', type: 'text/plain') if params[:raw]
       return send_file upload.file.path, options
     elsif upload.code?
