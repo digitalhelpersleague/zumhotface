@@ -15,8 +15,7 @@ div
             - if upload.file?
               = link_to "DOWNLOAD", download_upload_path(upload.sid), class: 'btn btn-success btn-xs'
     - if upload.image?
-      a href="javascript:;" onclick="$(this).children('img').attr('style', '')" style='cursor: -webkit-zoom-in;  cursor: zoom-in;'
-        img.preview src='#{upload.file.url}' alt='#{upload.file_file_name}' style="width: 80%;"
+      img.preview.preview-fit src='#{upload.file.url}' alt='#{upload.file_file_name}' ng-zoom-preview=true
 
     - if upload.raw_viewable?
       - cache do
