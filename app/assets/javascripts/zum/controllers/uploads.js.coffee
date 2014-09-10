@@ -17,21 +17,24 @@
     #TODO: smooth progress raising
     # get real progress every second
     # count current progress based on avg speed
-
+    
     object.progress ||= {}
 
     if object.progress.synced_at
       delta = new Date() - object.progress.synced_at
 
       if object.progress.speed
-        object.progress.value += delta * object.progress.speed
+        object.progress.value += Math.min(delta * object.progress.speed, 100)
 
       if delta < 1000
+        console.log object.progress
         return $timeout (->
           get_upload_progress(progress_token, object)
         ), 50
 
     $http.get('/progress', { headers: { 'X-Progress-ID': progress_token } }).then (response) ->
+      
+      console.log "get"
 
       object.progress.state = response.data.state
       object.progress.requests ||= 0
@@ -49,11 +52,14 @@
       else if response.data.state == "done"
         object.progress.value = 100
 
-
       if response.data.state == "done" or response.data.state == "error"
+        console.log object.progress
         return
       if object.progress.requests > 5 and !object.progress.value
+        console.log object.progress
         return
+
+      console.log object.progress
 
       $timeout (->
         get_upload_progress(progress_token, object)
