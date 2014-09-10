@@ -24,8 +24,8 @@
       delta = new Date() - object.progress.synced_at
       console.log delta
 
-      if object.progress.speed
-        object.progress.value += Math.min(delta * object.progress.speed, 100)
+      if object.progress.speed and object.progress.total
+        object.progress.value += Math.min((object.progress.received + delta * object.progress.speed) / object.progress.total, 100)
 
       if delta < 1000
         console.log object.progress
@@ -44,6 +44,7 @@
       object.progress.synced_at = new Date()
 
       if response.data.size and response.data.received
+        object.progress.total ||= response.data.size
         if delta
           object.progress.speed = (response.data.received - object.progress.received) / delta
         object.progress.received = response.data.received
