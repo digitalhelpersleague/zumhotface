@@ -1,34 +1,27 @@
 div
   - if !upload.secured?
-    = render_flash_message text: "You've got stuff to download", message_type: 'notice', closeable: true
-    - if upload.file?
-      table.table.upload-info
-        tbody
-          tr
+    table.table.upload-info
+      tbody
+        tr
+          - if upload.file?
             td.upload-name = upload.name
-            td.upload-content-type = upload.content_type
-            td.upload-size = upload.size.to_s(:human_size)
-            td.actions = link_to "RAW", download_upload_path(upload.sid, raw: true), class: 'btn btn-success btn-xs'
-            td.actions = link_to "DOWNLOAD", download_upload_path(upload.sid), class: 'btn btn-success btn-xs'
+          td.upload-content-type = upload.content_type
+          td.upload-size = upload.size.to_s(:human_size)
+          td.actions 
+            - if upload.raw_viewable?
+              = link_to "RAW", raw_upload_path(upload.sid), class: 'btn btn-success btn-xs'
+            - if upload.image?
+              = link_to "VIEW", raw_upload_path(upload.sid), class: 'btn btn-success btn-xs'
+            - if upload.file?
+              = link_to "DOWNLOAD", download_upload_path(upload.sid), class: 'btn btn-success btn-xs'
     - if upload.image?
-      img.preview src='#{upload.file.url}' alt='#{upload.file_file_name}'
-    - if upload.code?
-      table.table.upload-info
-        tbody
-          tr
-            td.upload-content-type = upload.content_type
-            td.upload-size = upload.size.to_s(:human_size)
-            td.actions = link_to "RAW", download_upload_path(upload.sid), class: 'btn btn-success btn-xs'
+      a href="javascript:;" onclick="$(this).children('img').attr('style', '')" style='cursor: -webkit-zoom-in;  cursor: zoom-in;'
+        img.preview src='#{upload.file.url}' alt='#{upload.file_file_name}' style="width: 80%;"
 
-    - if upload.lang
+    - if upload.raw_viewable?
       - cache do
-        = upload.code_preview
-    - else
-      .syntax : pre
-        = upload.code
+        = upload.raw_preview
 
-
-      /span.glyphicon class="glyphicon-#{upload.icon}"
   - if upload.secured?
     /form action="#{download_upload_path(upload.sid)}"
       /#download-form

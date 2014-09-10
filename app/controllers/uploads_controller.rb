@@ -31,18 +31,17 @@ class UploadsController < ApplicationController
   end
 
   def download
-    @upload ||= end_of_association_chain.find_by_sid!(params[:sid])
+    @upload = Upload.find_by_sid!(params[:sid])
 
-    if upload.secured? && !upload.validate_access(with_password: params[:password])
-      flash[:error] = 'Bad password'
-      redirect_to(action: :show) && return
-    end
+    validate_access
 
     upload.download!
 
     if upload.file?
       options = { x_sendfile: true, filename: upload.file_file_name, type: upload.file.content_type }
-      options.merge!(disposition: 'inline', type: 'text/plain') if params[:raw]
+      if params[:raw]
+        options.merge!(disposition: 'inline', type: upload.image? ? upload.content_type : 'text/plain')
+      end
       send_file upload.file.path, options
       headers['Content-Length'] = upload.size.to_s
       return
@@ -88,6 +87,13 @@ class UploadsController < ApplicationController
   end
 
   private
+
+  def validate_access
+    if upload.secured? && !upload.validate_access(with_password: params[:password])
+      flash[:error] = 'Bad password'
+      redirect_to(action: :show) && return
+    end
+  end
 
   def permitted_params
     params.permit(upload: [:encryption_type, :file, :link, :code, :lang])

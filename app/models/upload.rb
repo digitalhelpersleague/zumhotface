@@ -75,6 +75,10 @@ class Upload < ActiveRecord::Base
     size.to_i
   end
 
+  def raw_viewable?
+    code? || lang
+  end
+
   def validate_access(with_password: nil)
     return with_password.to_s == password if secured?
     true

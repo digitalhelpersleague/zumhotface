@@ -28,6 +28,7 @@ Zumhotface::Application.routes.draw do
   resources :uploads, only: [:index, :create, :new]
   get '/:sid' => 'uploads#show', as: :upload
   get '/download/:sid' => 'uploads#download', as: :download_upload
+  get '/raw/:sid' => 'uploads#download', as: :raw_upload, raw: true
   delete '/uploads/:sid' => 'uploads#destroy'
 
 end

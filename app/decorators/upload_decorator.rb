@@ -20,10 +20,16 @@ class UploadDecorator < ApplicationDecorator
     lang || file.try(:content_type)
   end
 
-  def code_preview
-    return unless lang
-    return ("<div class='syntax'>" + Linguist::FileBlob.new(file.path).colorize + '</div>').html_safe if file?
-    return ("<div class='syntax'>" + Linguist::Language.new(name: lang).colorize(code) + '</div>').html_safe if code?
+  def raw_preview
+    if lang
+      return ("<div class='syntax'>" + Linguist::FileBlob.new(file.path).colorize + '</div>').html_safe if object.file?
+      return (
+              "<div class='syntax'>" +
+                Linguist::Language.new(name: lang).colorize(code) +
+              '</div>'
+             ).html_safe if object.code
+    end
+    return ("<div class='syntax'><pre>" + code + '</pre></div>').html_safe if object.code?
   end
 
   def upload_type
