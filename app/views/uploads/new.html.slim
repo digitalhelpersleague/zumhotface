@@ -23,7 +23,6 @@ div ng-controller='zum.UploadsCtrl'
               input.result-url.form-control ng-show='file.url' type='text' value='{{ file.url }}' onclick='$(this).focus(); $(this).select();'
               .progress.upload-progress ng-show='!file.url && file.progress'
                 .progress-bar role="progressbar" aria-valuenow="{{ file.progress.value }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ file.progress.value }}%;"
-                  | {{ file.progress.value }}%
               /span.upload-status.icon-error.glyphicon.glyphicon-ban-circle ng-show='file.error'
               /span.upload-error
                 /|  {{ file.error }}
