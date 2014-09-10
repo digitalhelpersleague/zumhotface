@@ -5,6 +5,13 @@ class Upload < ActiveRecord::Base
 
   before_destroy :decrement_total_weight
 
+  before_validation on: :create do
+    if file_content_type == 'application/octet-stream'
+      mime_type = MIME::Types.type_for(file_file_name)
+      self.file_content_type = mime_type.first.content_type if mime_type.first
+    end
+  end
+
   has_attached_file :file,
                     hash_secret: Settings.uploads.secret_key,
                     hash_data: 'uploads/file/:id/:style/:updated_at',
