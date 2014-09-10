@@ -14,21 +14,20 @@
     $scope.uploads.splice index, 1
 
   get_upload_progress = (progress_token, object) ->
-    #TODO: smooth progress raising
-    # get real progress every second
-    # count current progress based on avg speed
-    
     object.progress ||= {}
 
     if object.progress.synced_at
       time_passed = new Date() - object.progress.synced_at
-      console.log time_passed
 
       if object.progress.speed and object.progress.total
-        object.progress.value = Math.min((object.progress.uploaded + time_passed * object.progress.speed) / object.progress.total, 100)
+        object.progress.value =
+          Math.min(
+            Math.round(
+              (object.progress.uploaded + (time_passed * object.progress.speed)) / object.progress.total * 1000
+            ) / 10
+          , 100)
 
       if time_passed < 1000
-        console.log object.progress
         $timeout (->
           get_upload_progress(progress_token, object)
         ), 50
@@ -36,9 +35,6 @@
 
     $http.get('/progress', { headers: { 'X-Progress-ID': progress_token } }).then (response) ->
       
-      console.log "get"
-      #console.log response
-
       object.progress.state = response.data.state
       object.progress.requests ||= 0
       object.progress.requests += 1
@@ -57,13 +53,9 @@
         object.progress.value = 100
 
       if response.data.state == "done" or response.data.state == "error"
-        console.log object.progress
         return
       if object.progress.requests > 5 and !object.progress.value
-        console.log object.progress
         return
-
-      console.log object.progress
 
       $timeout (->
         get_upload_progress(progress_token, object)
