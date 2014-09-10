@@ -22,6 +22,7 @@
 
     if object.progress.synced_at
       delta = new Date() - object.progress.synced_at
+      console.log delta
 
       if object.progress.speed
         object.progress.value += Math.min(delta * object.progress.speed, 100)
@@ -43,9 +44,9 @@
       object.progress.synced_at = new Date()
 
       if response.data.size and response.data.received
-        object.progress.received = response.data.received
         if delta
           object.progress.speed = (response.data.received - object.progress.received) / delta
+        object.progress.received = response.data.received
         progress = Math.round(response.data.received / response.data.size * 1000)/10
         if !object.progress.value or progress > object.progress.value
           object.progress.value = progress
