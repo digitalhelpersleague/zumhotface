@@ -21,21 +21,23 @@
     object.progress ||= {}
 
     if object.progress.synced_at
-      delta = new Date() - object.progress.synced_at
-      console.log delta
+      time_passed = new Date() - object.progress.synced_at
+      console.log time_passed
 
       if object.progress.speed and object.progress.total
-        object.progress.value += Math.min((object.progress.received + delta * object.progress.speed) / object.progress.total, 100)
+        object.progress.value = Math.min((object.progress.uploaded + time_passed * object.progress.speed) / object.progress.total, 100)
 
-      if delta < 1000
+      if time_passed < 1000
         console.log object.progress
-        return $timeout (->
+        $timeout (->
           get_upload_progress(progress_token, object)
         ), 50
+        return
 
     $http.get('/progress', { headers: { 'X-Progress-ID': progress_token } }).then (response) ->
       
       console.log "get"
+      #console.log response
 
       object.progress.state = response.data.state
       object.progress.requests ||= 0
@@ -45,10 +47,10 @@
 
       if response.data.size and response.data.received
         object.progress.total ||= response.data.size
-        if delta
-          object.progress.speed = (response.data.received - object.progress.received) / delta
-        object.progress.received = response.data.received
-        progress = Math.round(response.data.received / response.data.size * 1000)/10
+        if time_passed
+          object.progress.speed = (response.data.received - object.progress.uploaded) / time_passed
+        object.progress.uploaded = response.data.received
+        progress = Math.round(response.data.received / response.data.size * 1000) / 10
         if !object.progress.value or progress > object.progress.value
           object.progress.value = progress
       else if response.data.state == "done"
