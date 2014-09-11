@@ -1,64 +1,44 @@
 source 'https://rubygems.org'
 source 'https://rails-assets.org'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.0'
-
-# Use postgresql as the database for Active Record
 gem 'pg'
-
-gem 'slim-rails'
-
 gem 'inherited_resources'
-
 gem 'paperclip'
 gem 'aws-sdk'
-
 gem 'pry-rails'
-
 gem 'grape'
-
 gem 'redis'
 gem 'redis-namespace'
 gem 'redis-rails'
-
 gem 'resque'
-
 gem 'devise'
 gem 'devise_invitable'
 gem 'draper'
 
 gem 'premailer-rails'
-
 gem 'autoprefixer-rails'
 
-# Use SCSS for stylesheets
+gem 'bourbon'
+
+gem 'slim-rails'
 gem 'sass-rails', '~> 4.0'
-
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
-
-# Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0'
+gem 'rabl-rails'
 
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-gem 'execjs', platforms: :ruby
+group :assets do
+  gem 'execjs', platforms: :ruby
+  gem 'uglifier', '>= 1.3.0'
+end
 
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
-
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+#gem 'turbolinks'
 
 gem 'settingslogic'
 
 gem 'gon'
-gem 'rabl-rails'
-#gem 'grape-rabl-rails', github: 'ifad/grape-rabl-rails'
 gem 'oj'
 
 group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
 
@@ -68,13 +48,13 @@ end
 gem 'rack-ssl-enforcer', github: 'tobmatth/rack-ssl-enforcer'
 
 # Assets
+gem 'rails-assets-jquery'
 gem 'rails-assets-lodash'
 gem 'rails-assets-angular'
 gem 'rails-assets-angular-animate'
 gem 'rails-assets-angular-resource'
 gem 'rails-assets-angular-sanitize'
 gem 'rails-assets-bootstrap-sass-official'
-gem 'rails-assets-jquery-file-upload'
 gem 'rails-assets-moment'
 gem 'rails-assets-angular-moment'
 
