@@ -1,12 +1,12 @@
-div ng-controller='zum.UploadsCtrl'
-  ul.zhf-tabs ng-init='new_upload = "file"' ng-click='uploaded=false; disabled=false; link=null; code=null; files=null; url=null'
-    li : button.btn.btn-transparent.btn-lg href="#file" role="tab" ng-class='{ active: new_upload == "file", "btn-default": new_upload != "file" }' ng-click='new_upload="file"' Upload file
-    li : button.btn.btn-transparent.btn-lg href="#link" role="tab" ng-class='{ active: new_upload == "link", "btn-default": new_upload != "link" }' ng-click='new_upload="link"' Attach link
-    li : button.btn.btn-transparent.btn-lg href="#code" role="tab" ng-class='{ active: new_upload == "code", "btn-default": new_upload != "code" }' ng-click='new_upload="code"' Paste code
+div ng-controller='zum.UploadsNewCtrl'
+  ul.zhf-tabs ng-init='tab = "file"' ng-click='uploads=null; upload=null; link=null; code=null; url=null'
+    li : button.btn.btn-transparent.btn-lg href="#file" role="tab" ng-class='{ active: tab == "file", "btn-default": tab != "file" }' ng-click='tab="file"' Upload file
+    li : button.btn.btn-transparent.btn-lg href="#link" role="tab" ng-class='{ active: tab == "link", "btn-default": tab != "link" }' ng-click='tab="link"' Attach link
+    li : button.btn.btn-transparent.btn-lg href="#code" role="tab" ng-class='{ active: tab == "code", "btn-default": tab != "code" }' ng-click='tab="code"' Paste code
 
   div.upload-forms
-    .upload-form.animate-switch ng-show='new_upload == "file"'
-      table.table ng-show='files.length'
+    .upload-form
+      table.table.new-uploads ng-show='uploads.length'
         thead
           tr
             th
@@ -15,48 +15,59 @@ div ng-controller='zum.UploadsCtrl'
             th Link
             th
         tbody
-          tr ng-repeat='file in files'
+          tr ng-repeat='upload in uploads'
             td
-            td.upload-name = '{{ file.name | truncate }}'
-            td.upload-size = '{{ file.size | humanizeSize }}'
+            td.upload-name = '{{ upload.name | truncate }}'
+            td.upload-size = '{{ upload.size | humanizeSize }}'
+            td ng-if='upload.url'
+              input.result-url.form-control type='text' value='{{ upload.url }}' onclick='$(this).focus(); $(this).select();'
+            td ng-if='!upload.url'
+              .spinner ng-show='upload.uploading && !upload.progress.value && !upload.error'
+
+              .progress.upload-progress ng-show='upload.progress.value'
+                .progress-bar role="progressbar" aria-valuenow="{{ upload.progress.value }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ upload.progress.value }}%;"
+                  | {{ upload.progress.value }}%
+
+              .error ng-show="upload.error"
+                span.upload-status.icon-error.glyphicon.glyphicon-ban-circle
+                span.upload-error
+                  |  {{ upload.error }}
+
+            td.actions
+              a href="javascript:;" ng-click="remove_upload(upload)"
+                span.glyphicon.glyphicon-remove
+          tr.total-row ng-show='uploads.length > 1'
             td
-              input.result-url.form-control ng-show='file.url' type='text' value='{{ file.url }}' onclick='$(this).focus(); $(this).select();'
-              .progress.upload-progress ng-show='!file.url && file.progress.value'
-                .progress-bar role="progressbar" aria-valuenow="{{ file.progress.value }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ file.progress.value }}%;"
-                  | {{ file.progress.value }}%
-              /span.upload-status.icon-error.glyphicon.glyphicon-ban-circle ng-show='file.error'
-              /span.upload-error
-                /|  {{ file.error }}
-          tr.total-row ng-show='files.length > 1'
             td
+            td.total-upload-size colspan='2' = '{{ total_size(uploads) | humanizeSize }}'
             td
-            td.total-upload-size colspan='2' = '{{ total_size(files) | humanizeSize }}'
             td
 
-      div ng-show='!uploaded'
-        .form-group
-          span.btn.btn-success.btn-lg.fileinput-button
-            span Browse
-            input type="file" name="files[]" multiple='' fileread='files' ng-click='disabled=false'
+      .upload-form ng-show='tab == "file"'
+        div
+          .form-group
+            span.btn.btn-success.btn-lg.fileinput-button
+              span Browse
+              input type="file" name="files[]" multiple='' ng-fileread='upload'
 
         = render partial: 'shared_form'
-    .upload-form.animate-switch ng-show='new_upload == "link"'
+    .upload-form ng-show='tab == "link"'
       div ng-show='url'
         h3.minified-url Done. Here's your link:
         input.form-control type='text' value='{{ url }}' onclick='$(this).focus(); $(this).select();'
 
       div ng-show='!uploaded'
         .form-group
-          input.form-control placeholder="http://" type="text" ng-model='link' ng-pattern='/^https?\:\/\/.+/'
+          input.form-control placeholder="http://" type="text" ng-model='upload.link' ng-pattern='/^https?\:\/\/.+/'
         = render partial: 'shared_form'
-    .upload-form.animate-switch ng-show='new_upload == "code"'
+    .upload-form ng-show='tab == "code"'
       div ng-show='url'
         h3.minified-url Done. Here's your link:
         input.form-control type='text' value='{{ url }}' onclick='$(this).focus(); $(this).select();'
 
       div ng-show='!uploaded'
         .form-group
-          textarea.form-control placeholder='echo "Hello world!"' type="text" ng-model='code' cols='70' rows='5'
+          textarea.form-control placeholder='echo "Hello world!"' type="text" ng-model='upload.code' cols='70' rows='5'
         .form-group
           select.form-control ng-model='lang'
             option value="" Select a language...

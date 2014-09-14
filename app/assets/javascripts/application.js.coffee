@@ -1,6 +1,4 @@
 #= require jquery
-#= require jquery_ujs
-#####=#  require turbolinks
 #
 #= require bootstrap-sass-official/transition
 #= require bootstrap-sass-official/alert

@@ -1,12 +1,10 @@
-//=/// require "bootstrap_variables"
+@import 'bootstrap_and_overrides'
 
-@import "bootstrap_and_overrides"
-
-@import "fonts"
-@import "animations"
-@import "fileupload"
-@import "sign_in"
-@import "pygments"
+@import 'fileupload'
+@import 'fonts'
+@import 'animations'
+@import 'sign_in'
+@import 'pygments'
 
 $footer-height: 30px
 
@@ -31,8 +29,8 @@ ul.zhf-tabs
 
 .upload-form
   width: 400px
-  left: 50%
-  margin-left: -200px
+  margin-left: auto
+  margin-right: auto
 
 .wrapper
   width: 100%
@@ -397,3 +395,12 @@ img.preview
     max-width: 80%
     cursor: -webkit-zoom-in
     cursor: zoom-in
+
+.spinner
+  background: image-url('spinner.gif') no-repeat
+  background-size: cover
+  width: 20px
+  height: 20px
+
+table.new-uploads
+  width: 400px

@@ -28,7 +28,8 @@ html
           .ssl-is-off
         = render partial: 'layouts/header'
         .content-inner
-          = render partial: 'shared/sign_in'
+          - unless current_user.member?
+            = render partial: 'shared/sign_in'
           - if controller_name == 'pages'
             div style="display: none"
               = render_flash_messages

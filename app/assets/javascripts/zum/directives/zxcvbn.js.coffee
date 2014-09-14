@@ -1,4 +1,5 @@
 @zum.directive "zxcvbn", ->
+  restrict: "A"
   scope:
     zxcvbn: '=',
   link: (scope, element, attributes) ->

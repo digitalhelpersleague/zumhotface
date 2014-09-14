@@ -21,4 +21,4 @@
     /select name='key'
       /option Alice
       /option Bob
-  button.btn.btn-primary.btn-lg ng-disabled='disabled || (!link && !code && !files)' type='button' ng-click='upload(); disabled=true' Upload
+  button.btn.btn-primary.btn-lg ng-disabled='!uploads && !upload' type='button' ng-click='submit_uploads();' Upload

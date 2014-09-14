@@ -1,8 +1,9 @@
-@zum.directive "fileread", ->
+@zum.directive "ngFileread", ->
+  restrict: "A"
   scope:
-    fileread: '=',
+    ngFileread: '=',
   link: (scope, element, attributes) ->
     element.bind("change", (changeEvent) ->
       scope.$apply ->
-        scope.fileread = changeEvent.target.files
+        scope.ngFileread = changeEvent.target.files
     )

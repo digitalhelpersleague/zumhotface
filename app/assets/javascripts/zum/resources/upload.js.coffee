@@ -37,6 +37,9 @@
   Upload::init = ->
     if @created_at
       @created_at = new Date(@created_at)
+    if @file?
+      @size = @file.size unless @size?
+      @name = @file.name unless @name?
     @
 
   cache = do ->
@@ -45,10 +48,9 @@
         upload = new Upload(params)
         upload.init()
       )
-    #else
-      #Upload.query()
 
-  Upload.all = cache
+  Upload.all = ->
+    cache || Upload.query()
 
   Upload
 ]
