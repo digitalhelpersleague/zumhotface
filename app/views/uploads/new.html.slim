@@ -69,7 +69,7 @@ div ng-controller='zum.UploadsNewCtrl'
         .form-group
           textarea.form-control placeholder='echo "Hello world!"' type="text" ng-model='upload.code' cols='70' rows='5'
         .form-group
-          select.form-control ng-model='lang'
+          select.form-control ng-model='upload.lang'
             option value="" Select a language...
             - Linguist::Language.popular.each do |language|
               option value="#{language.name}" = language.name
