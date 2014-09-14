@@ -48,7 +48,7 @@ div ng-controller='zum.UploadsNewCtrl'
           .form-group
             span.btn.btn-success.btn-lg.fileinput-button
               span Browse
-              input type="file" name="files[]" multiple='' ng-fileread='upload'
+              input type="file" name="files[]" multiple='' ng-fileread='files'
 
         = render partial: 'shared_form'
     .upload-form ng-show='tab == "link"'
