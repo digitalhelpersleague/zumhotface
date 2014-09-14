@@ -1,24 +1,25 @@
-header.navbar.navbar-inverted.navbar-static-top role="navigation"
-  /.container
-  .navbar-header
-    /button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-collapse"
-      /span.sr-only Toggle navigation
-      /span.icon-bar
-      /span.icon-bar
-      /span.icon-bar
-    a.navbar-brand href='/' title="#{Rails.application.class.parent_name}"
-      = image_tag 'zumhotface.png'
-    ul.header-nav.nav.navbar-nav
-      li : a href='/about' ABOUT
-      li : a href='/privacy' PRIVACY
-      - if current_user.member?
-        li class=header_active?(controller: 'uploads', action: 'new') = link_to 'NEW UPLOAD', new_upload_path
-        li class=header_active?(controller: 'uploads', action: 'index') = link_to 'MY UPLOADS', uploads_path
-        li class=header_active?(controller: 'account', action: 'index') = link_to "ACCOUNT", account_path
-        /li class=header_active?(controller: 'keys', action: 'index') = link_to 'MY KEYS', keys_path
-    ul.nav.user-nav.navbar-right
-      - if current_user.member?
-        li = current_user.email
-        li = link_to "LOG OUT", destroy_user_session_path, method: :delete, class: 'btn btn-default btn-transparent'
-      - elsif controller_name != 'sessions' and action_name != 'new'
-        li : a.btn.btn-default.btn-transparent data-toggle="modal" data-target="#sign-in" LOG IN
+header
+  .navbar.navbar-inverted.navbar-static-top role="navigation"
+    /.container
+    .navbar-header
+      /button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-collapse"
+        /span.sr-only Toggle navigation
+        /span.icon-bar
+        /span.icon-bar
+        /span.icon-bar
+      a.navbar-brand href='/' title="#{Rails.application.class.parent_name}"
+        = image_tag 'zumhotface.png'
+      ul.header-nav.nav.navbar-nav
+        li : a href='/about' ABOUT
+        li : a href='/privacy' PRIVACY
+        - if current_user.member?
+          li class=header_active?(controller: 'uploads', action: 'new') = link_to 'NEW UPLOAD', new_upload_path
+          li class=header_active?(controller: 'uploads', action: 'index') = link_to 'MY UPLOADS', uploads_path
+          li class=header_active?(controller: 'account', action: 'index') = link_to "ACCOUNT", account_path
+          /li class=header_active?(controller: 'keys', action: 'index') = link_to 'MY KEYS', keys_path
+      ul.nav.user-nav.navbar-right
+        - if current_user.member?
+          li = current_user.email
+          li = link_to "LOG OUT", destroy_user_session_path, method: :delete, class: 'btn btn-default btn-transparent'
+        - elsif controller_name != 'sessions' and action_name != 'new'
+          li : a.btn.btn-default.btn-transparent data-toggle="modal" data-target="#sign-in" LOG IN
