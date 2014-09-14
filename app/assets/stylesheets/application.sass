@@ -25,6 +25,7 @@ ul.zhf-tabs
     margin: 5px
 
 .navbar-header
+  padding: 0 20px
   float: none
 
 .upload-form
@@ -154,9 +155,9 @@ a.navbar-brand
   padding-top: 90px
 
 header
-  position: absolute !important
-  top: 0 !important
-  left: 0 !important
+  position: absolute
+  top: 0
+  left: 0
   width: 100%
   text-align: center
   .navbar
@@ -232,8 +233,17 @@ table.table
       font-size: 24px
     p
       font-size: 16px
+  header
+    position: relative
+    .navbar-brand
+      float: none
 
 @media (min-width: 768px)
+  header
+    position: absolute
+    .navbar-brand
+      float: left
+
   .wrapper-inner
     vertical-align: middle
 

@@ -22,7 +22,7 @@ html
     .wrapper ng-controller='zum.MainCtrl'
       /.wrapper-inner
       .content-container
-        - if !request.ssl?
+        /- if !request.ssl?
           .ssl-is-off
         = render partial: 'layouts/header'
         .content-inner

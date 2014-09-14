@@ -48,7 +48,7 @@ end
 gem 'rack-ssl-enforcer', github: 'tobmatth/rack-ssl-enforcer'
 
 # Assets
-gem 'rails-assets-jquery'
+gem 'jquery-rails'
 gem 'rails-assets-lodash'
 gem 'rails-assets-angular'
 gem 'rails-assets-angular-animate'
