@@ -3,6 +3,7 @@
 #
 #= require bootstrap-sass-official/transition
 #= require bootstrap-sass-official/alert
+#= require bootstrap-sass-official/collapse
 #= require bootstrap-sass-official/button
 #= require bootstrap-sass-official/modal
 #

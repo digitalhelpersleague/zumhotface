@@ -9,14 +9,12 @@ div ng-controller='zum.UploadsNewCtrl'
       table.table.new-uploads ng-show='uploads.length'
         thead
           tr
-            th
             th Name
             th Size
             th Link
             th
         tbody
           tr ng-repeat='upload in uploads'
-            td
             td.upload-name = '{{ upload.name | truncate }}'
             td.upload-size = '{{ upload.size | humanizeSize }}'
             td ng-if='upload.url'
@@ -38,9 +36,7 @@ div ng-controller='zum.UploadsNewCtrl'
                 span.glyphicon.glyphicon-remove
           tr.total-row ng-show='uploads.length > 1'
             td
-            td
             td.total-upload-size colspan='2' = '{{ total_size(uploads) | humanizeSize }}'
-            td
             td
 
       .upload-form ng-show='tab == "file"'

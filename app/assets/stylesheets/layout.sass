@@ -1,0 +1,196 @@
+html, body
+  min-height: 100%
+  height: 100%
+
+body
+  background-color: $body-bg
+  background-image: image-url('noise.png')
+  text-shadow: 0 1px 3px rgba(0,0,0,.7)
+
+.wrapper
+  width: 100%
+  height: auto !important
+  min-height: 100%
+  box-shadow: inset 0 0 100px rgba(0,0,0,.7)
+  margin: 0 auto ($footer-height * -1)
+
+header
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  text-align: center
+  .navbar
+    margin-left: auto
+    margin-right: auto
+
+  .navbar-header
+    padding: 0 20px
+    float: none
+
+  .user-nav, .header-nav
+    text-align: center
+
+  .header-nav
+    padding-top: 4px
+    padding-left: 40px
+
+  .header-nav > li, .user-nav > li
+    display: inline-block
+    & + li
+      margin-left: 30px
+
+  .header-nav > li
+    & > a
+      padding-bottom: 5px
+      padding-right: 0
+      padding-left: 0
+      color: $gray-lighter
+      border-bottom: 3px solid transparent
+      &.active
+        border-bottom-color: $gray-lighter
+      &:hover, &:focus, &:active
+        color: $gray-lighter
+        background-color: transparent
+        border-bottom-color: $gray-lighter
+    &.active > a,
+    &.active > a:hover,
+    &.active > a:focus
+      color: #fff
+      border-bottom-color: #fff
+
+  .user-nav > li
+    padding-top: $navbar-height / 2 - 20px
+
+  a.navbar-brand
+    padding: 3px 10px !important
+
+footer
+  font-weight: 300
+  font-size: 16px
+  width: 100%
+  height: $footer-height
+  line-height: $footer-height
+  text-align: center
+  p
+    margin: 0 !important
+
+.push
+  height: $footer-height
+
+.content-container
+  margin-right: auto
+  margin-left: auto
+
+.content-inner
+  text-align: center
+  padding: 30px
+  padding-top: 90px
+
+body
+  &.pages-welcome
+    .wrapper
+      height: 100% !important
+      min-height: 100% !important
+      display: table
+    .content-container
+      width: 100%
+      height: 100%
+      min-height: 100%
+      display: table-cell
+      vertical-align: middle
+    .content-inner
+      max-width: 1000px
+      margin-left: auto
+      margin-right: auto
+      padding-top: 40px !important
+  &.account-index
+    .tab-content
+      margin-left: auto
+      margin-right: auto
+      width: 300px
+      .storage
+        .progress
+          margin-bottom: 0
+
+.zhf-description
+  min-height: 330px
+  background: image-url('angry-steve-logo.png') no-repeat
+  background-size: 266px
+  background-position: left top
+  padding-left: 310px
+  text-align: left
+  h1
+    color: $gray-lighter
+
+
+@media (min-width: 200px)
+  .zhf-description
+    background-size: 150px
+    padding-left: 170px
+    h1
+      font-size: 24px
+    p
+      font-size: 16px
+  header
+    position: relative
+    .navbar-brand
+      float: none
+  .content-inner
+    padding-top: 30px
+
+@media (min-width: 768px)
+  header
+    position: absolute
+    .navbar-header
+      padding: 0
+    .navbar
+      width: 100%
+    .navbar-brand
+      width: 58px
+      overflow: hidden
+      float: left
+    .header-nav
+      padding-left: 20px
+
+  .wrapper-inner
+    vertical-align: middle
+  .content-inner
+    padding-top: 90px
+  .content-container
+    width: 100%
+
+  .zhf-description
+    background-size: 200px
+    padding-left: 250px
+    h1
+      font-size: 48px
+    p
+      font-size: 24px
+
+@media (min-width: 820px)
+  header
+    .navbar-header
+      padding: 0 20px
+
+@media (min-width: 992px)
+  header
+    .header-nav
+      padding-left: 40px
+    .navbar-brand
+      width: initial
+      overflow: initial
+  .zhf-description
+    background-size: 266px
+    padding-left: 310px
+    h1
+      font-size: 64px
+    p
+      font-size: 28px
+
+@media (min-width: 1200px)
+  .content-container
+    width: 1100px
+  header
+    .navbar
+      width: 1100px

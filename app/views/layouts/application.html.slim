@@ -15,15 +15,14 @@ html
 
     = stylesheet_link_tag    "application", media: "all"
     = include_gon
-    = javascript_include_tag "application"
     = csrf_meta_tags
+    = javascript_include_tag "application"
 
   body ng-app='zum' class="#{controller_name}-#{action_name}"
+    /- if !request.ssl?
+      /.ssl-is-off
     .wrapper ng-controller='zum.MainCtrl'
-      /.wrapper-inner
       .content-container
-        /- if !request.ssl?
-          .ssl-is-off
         = render partial: 'layouts/header'
         .content-inner
           - unless current_user.member?
@@ -37,4 +36,3 @@ html
       div style='clear: both;'
       .push
     = render partial: 'layouts/footer'
-

@@ -1,4 +1,3 @@
-
 RablRails.configure do |config|
   # These are the default
   # config.cache_templates = true

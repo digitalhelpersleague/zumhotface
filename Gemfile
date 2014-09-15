@@ -45,7 +45,7 @@ end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-gem 'rack-ssl-enforcer', github: 'tobmatth/rack-ssl-enforcer'
+gem 'rack-ssl-enforcer'
 
 # Assets
 gem 'jquery-rails'
