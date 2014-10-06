@@ -1,4 +1,4 @@
-zumhotface
+zumhotface [![Dependency Status](https://gemnasium.com/kressh/zumhotface.svg)](https://gemnasium.com/kressh/zumhotface) [![Code Climate](https://codeclimate.com/github/kressh/zumhotface/badges/gpa.svg)](https://codeclimate.com/github/kressh/zumhotface)
 ==========
 
 Simple and secure file/links sharing system written in Rails.
