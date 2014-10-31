@@ -1,42 +1,20 @@
-require 'linguist'
-
 class UploadsController < ApplicationController
-  respond_to :html
-  respond_to :json, except: :show
-  inherit_resources
-
-  custom_actions resource: [:download]
-
   helper_method :upload, :uploads
-
   before_action :authenticate_user!, except: [:show, :download]
 
   def index
-    @uploads ||= current_user.uploads.order('id DESC')
-    gon.rabl template: 'app/views/uploads/index.json.rabl', as: :uploads
-    index!
+    collection_responder
   end
 
   def show
-    @upload ||= end_of_association_chain.find_by_sid!(params[:sid])
-    show! do |format|
-      format.html do
-        unless upload.secured?
-          upload.download!
-          redirect_to(upload.link) && return if upload.link?
-        end
-        render 'uploads/show'
-      end
-    end
+    @upload = Upload.find_by_sid!(params[:sid])
+    resource_responder
   end
 
   def download
     @upload = Upload.find_by_sid!(params[:sid])
-
     validate_access
-
     upload.download!
-
     if upload.file?
       options = { x_sendfile: true, filename: upload.file_file_name, type: upload.file.content_type }
       if params[:raw]
@@ -46,34 +24,24 @@ class UploadsController < ApplicationController
       headers['Content-Length'] = upload.size.to_s
       return
     elsif upload.code?
-      render(text: upload.code) && return
+      render text: upload.code
+    end
+  end
+
+  def destroy
+    @upload = current_user.uploads.find_by_sid!(params[:sid])
+    respond_to do |format|
+      format.json { render nothing: true, status: 204 }
     end
   end
 
   def create
-    @upload = Upload.new(user: current_user)
-    if params[:upload][:file]
-      @upload.file = params[:upload][:file]
-    elsif params[:upload][:link]
-      @upload.link = params[:upload][:link]
-    elsif params[:upload][:code]
-      @upload.code = params[:upload][:code]
-      @upload.lang = params[:upload][:lang] if params[:upload][:lang]
+    @upload = current_user.uploads.new(upload_params)
+    if @upload.save
+      resource_responder
+    else
+      error_responder
     end
-    create! do |format|
-      format.json do
-        render(json: { error: @upload.errors.messages.map { |k, v| "#{k} #{v.join(', ')}" }.join('; ') }, status: 403) && return if @upload.errors.any?
-        render 'uploads/show'
-      end
-    end
-  end
-
-  def collection
-    @uploads ||= current_user.uploads.order(:id)
-  end
-
-  def resource
-    @upload ||= current_user.uploads.find_by_sid!(params[:sid])
   end
 
   protected
@@ -88,14 +56,50 @@ class UploadsController < ApplicationController
 
   private
 
-  def validate_access
-    if upload.secured? && !upload.validate_access(with_password: params[:password])
-      flash[:error] = 'Bad password'
-      redirect_to(action: :show) && return
+  def collection
+    @uploads ||= current_user.uploads.order(:id)
+  end
+
+  def resource
+    @upload ||= current_user.uploads.find_by_sid!(params[:sid])
+  end
+
+  def collection_responder
+    respond_to do |format|
+      format.json
+      format.html do
+        gon.rabl template: 'app/views/uploads/index.rabl', as: :uploads
+      end
     end
   end
 
-  def permitted_params
-    params.permit(upload: [:encryption_type, :file, :link, :code, :lang])
+  def resource_responder
+    respond_to do |format|
+      format.json { render 'uploads/show' }
+      format.html do
+        render 'uploads/show' and return if upload.secured?
+        upload.download!
+        redirect_to(upload.link) and return if upload.link?
+      end
+    end
+  end
+
+  def error_responder
+    respond_to do |format|
+      format.json do
+        render(json: {errors: resource.errors.full_messages.to_json}, status: 422)
+      end
+    end
+  end
+
+  def validate_access
+    if upload.secured? && !upload.validate_access(with_password: params[:password])
+      flash[:error] = 'Bad password'
+      redirect_to(action: :show) and return
+    end
+  end
+
+  def upload_params
+    params.require(:upload).permit(:encryption_type, :file, :link, :code, :lang)
   end
 end

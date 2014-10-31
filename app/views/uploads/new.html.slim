@@ -13,7 +13,7 @@ div ng-controller='zum.UploadsNewCtrl'
             th Size
             th Link
             th
-        tbody
+        tbody ng-cloak=true
           tr ng-repeat='upload in uploads'
             td.upload-name = '{{ upload.name | truncate }}'
             td.upload-size = '{{ upload.size | humanizeSize }}'
