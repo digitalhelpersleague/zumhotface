@@ -5,9 +5,11 @@ class AccountController < ApplicationController
   end
 
   def update
-    if params[:user]
-      current_user.update_with_password(permitted_params[:user])
-      flash[:error] = current_user.errors.messages.map { |k, v| "#{t(k)} #{v.join(', ')}" }.join('<br /> ') if current_user.errors.any?
+    if permitted_params
+      current_user.update_with_password(permitted_params)
+      if current_user.errors.any?
+        flash[:error] = current_user.errors.messages.map { |k, v| "#{t(k)} #{v.join(', ')}" }.join('<br /> ')
+      end
     end
     redirect_to action: :index
   end
@@ -15,6 +17,6 @@ class AccountController < ApplicationController
   private
 
   def permitted_params
-    params.permit(user: [:password, :password_confirmation, :current_password])
+    params.require(:user).permit(:password, :password_confirmation, :current_password)
   end
 end

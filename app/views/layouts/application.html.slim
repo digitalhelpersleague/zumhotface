@@ -16,7 +16,6 @@ html
     = stylesheet_link_tag    "application", media: "all"
     = include_gon
     = csrf_meta_tags
-    = javascript_include_tag "application"
 
   body ng-app='zum' class="#{controller_name}-#{action_name}"
     /- if !request.ssl?
@@ -36,3 +35,4 @@ html
       div style='clear: both;'
       .push
     = render partial: 'layouts/footer'
+    = javascript_include_tag "application"

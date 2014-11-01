@@ -1,5 +1,5 @@
 div ng-controller='zum.UploadsListCtrl'
-  table.table ng-show='uploads.length'
+  table.table ng-show='uploads.length' ng-cloak=true
     thead
       tr
         th
@@ -12,10 +12,10 @@ div ng-controller='zum.UploadsListCtrl'
         th Link
         th Uploaded
         th
-    tbody ng-cloak=true
+    tbody
       tr ng-repeat='upload in uploads track by upload.sid'
         td : span.upload-icon.glyphicon class='glyphicon-{{ upload.icon }}' ng-show='upload.icon'
-        td.upload-name : a href='{{ upload.url }}' 
+        td.upload-name : a href='{{ upload.url }}'
           = "{{ upload.name | trimHttp | truncate }}"
         td.upload-size = "{{ upload.size | humanizeSize }}"
         td.upload-lang

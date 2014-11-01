@@ -4,7 +4,7 @@ div ng-controller='zum.UploadsNewCtrl'
     li : button.btn.btn-transparent.btn-lg href="#link" role="tab" ng-class='{ active: tab == "link", "btn-default": tab != "link" }' ng-click='tab="link"' Attach link
     li : button.btn.btn-transparent.btn-lg href="#code" role="tab" ng-class='{ active: tab == "code", "btn-default": tab != "code" }' ng-click='tab="code"' Paste code
 
-  div.upload-forms
+  div.upload-forms ng-cloak=true
     .upload-form
       table.table.new-uploads ng-show='uploads.length'
         thead
@@ -13,7 +13,7 @@ div ng-controller='zum.UploadsNewCtrl'
             th Size
             th Link
             th
-        tbody ng-cloak=true
+        tbody
           tr ng-repeat='upload in uploads'
             td.upload-name = '{{ upload.name | truncate }}'
             td.upload-size = '{{ upload.size | humanizeSize }}'

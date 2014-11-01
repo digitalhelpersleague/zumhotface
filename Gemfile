@@ -78,6 +78,13 @@ group :development do
   gem 'letter_opener'
 end
 
+group :test do
+  gem 'rspec-rails'
+  gem 'faker'
+  gem 'factory_girl_rails'
+  gem "codeclimate-test-reporter", require: false
+end
+
 gem 'github-linguist', require: false
 
 # Use debugger
