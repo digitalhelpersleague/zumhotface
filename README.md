@@ -1,5 +1,8 @@
-zumhotface [![Dependency Status](https://gemnasium.com/kressh/zumhotface.svg)](https://gemnasium.com/kressh/zumhotface) [![Code Climate](https://codeclimate.com/github/kressh/zumhotface/badges/gpa.svg)](https://codeclimate.com/github/kressh/zumhotface)
+zumhotface
 ==========
+[![Buid status][travis-badge]][travis-url]
+[![Dependency Status][gemnasium-badge]][gemnasium-url]
+[![Code Climate][codeclimate-badge]][codeclimate-url]
 
 Simple and secure file/links sharing system written in Rails.
 
@@ -17,3 +20,10 @@ Simple and secure file/links sharing system written in Rails.
 ##### zhfscreen
   capture and upload screenshot with scrot and zhfup
   https://gist.github.com/kressh/fcbae995db502975d8de
+
+[travis-badge]: https://travis-ci.org/digitalhelpersleague/zumhotface.svg?branch=master
+[travis-url]: https://travis-ci.org/digitalhelpersleague/zumhotface
+[gemnasium-badge]: https://gemnasium.com/digitalhelpersleague/zumhotface.svg
+[gemnasium-url]: https://gemnasium.com/digitalhelpersleague/zumhotface
+[codeclimate-badge]: https://codeclimate.com/github/digitalhelpersleague/zumhotface/badges/gpa.svg
+[codeclimate-url]: https://codeclimate.com/github/digitalhelpersleague/zumhotface
