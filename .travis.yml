@@ -1,0 +1,13 @@
+language: ruby
+rvm:
+  - 2.1.3
+bundler_args: --without development production --quiet
+addons:
+  postgresql: "9.3"
+before_install:
+  - sudo apt-get update -qq
+  - apt-get install libicu-dev
+before_script:
+  - cp config/database.yml.travis config/database.yml
+script:
+  - RAILS_ENV=test bundle exec rake --trace db:create db:migrate spec
