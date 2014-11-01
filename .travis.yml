@@ -6,7 +6,7 @@ addons:
   postgresql: "9.3"
 before_install:
   - sudo apt-get update -qq
-  - apt-get install libicu-dev
+  - sudo apt-get install libicu-dev
 before_script:
   - cp config/database.yml.travis config/database.yml
 script:
