@@ -1,4 +1,4 @@
-attributes :id, :sid, :url, :name, :upload_type, :size, :created_at, :downloads, :icon, :lang
+attributes :sid, :url, :name, :upload_type, :size, :created_at, :downloads, :icon, :lang
 
 node :is_secured do |upload|
   upload.secured?

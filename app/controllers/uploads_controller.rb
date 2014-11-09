@@ -57,7 +57,7 @@ class UploadsController < ApplicationController
   private
 
   def collection
-    @uploads ||= current_user.uploads.order(:id)
+    @uploads ||= current_user.uploads.order(:id).reverse
   end
 
   def resource
@@ -68,7 +68,7 @@ class UploadsController < ApplicationController
     respond_to do |format|
       format.json
       format.html do
-        gon.rabl template: 'app/views/uploads/index.rabl', as: :uploads
+        gon.rabl as: :uploads
       end
     end
   end
