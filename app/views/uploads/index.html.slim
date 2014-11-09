@@ -16,7 +16,7 @@ div ng-controller='zum.UploadsListCtrl'
         th Uploaded
         th
     tbody
-      tr bindonce='upload' ng-repeat='upload in uploads track by upload.sid'
+      tr bindonce='upload' ng-repeat='upload in uploads track by upload.id'
         td : span.upload-icon.glyphicon class='glyphicon-{{ upload.icon }}' bo-show='upload.icon'
         td.upload-name : a bo-href='upload.url'
           span bo-text='upload.name | trimHttp | truncate'
