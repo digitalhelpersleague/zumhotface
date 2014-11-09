@@ -2,5 +2,5 @@
   restrict: "A"
   link: (scope, element, attrs) ->
     element.bind "click", ->
-      $(element).toggleClass('preview-fit')
+      element.toggleClass('preview-fit')
 ]

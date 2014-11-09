@@ -15,13 +15,14 @@
 #= require angular-resource
 #= require angular-sanitize
 #= require angular-moment
+#= require vendor/bindonce
 #
-#= require ng-rails-csrf 
+#= require ng-rails-csrf
 #
 #= require_self
 #= require_tree .
 
-@zum = angular.module 'zum', ['ngResource', 'ng-rails-csrf', 'ngSanitize', 'angularMoment', 'ngAnimate']
+@zum = angular.module 'zum', ['ngResource', 'ng-rails-csrf', 'ngSanitize', 'angularMoment', 'ngAnimate', 'pasvaz.bindonce']
 @zum.value 'data', window.gon
 
 $ ->

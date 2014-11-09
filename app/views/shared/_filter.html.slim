@@ -1,0 +1,9 @@
+= form_tag '', class: 'form-inline filter-form maximize' do
+  .row
+    .col-sm-4.col-sm-offset-8
+      .form-group.has-feedback
+        .input-group
+          .input-group-addon : span.glyphicon.glyphicon-search.no-shadow
+          input.right-radius.form-control type='text' name='q' placeholder='Filter' autofocus='true' autocomplete="on" ng-model='q' ng-change='filter()' ng-submit='filter()'
+            a.form-control-feedback ng-click='q=undefined; filter()' ng-show='q.length'
+              span.glyphicon.glyphicon-remove.no-shadow

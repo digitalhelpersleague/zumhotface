@@ -5,7 +5,19 @@ html, body
 body
   background-color: $body-bg
   background-image: asset-data-url('noise.png')
-  text-shadow: 0 1px 3px rgba(0,0,0,.7)
+  +text-shadow
+
+.shadow
+  +text-shadow
+
+.left-radius
+  +left-radius
+
+.right-radius
+  +right-radius
+
+.no-shadow
+  text-shadow: none
 
 .wrapper
   width: 100%
@@ -194,3 +206,7 @@ body
   header
     .navbar
       width: 1100px
+
+.highlight
+  background: darken($brand-primary, 10%)
+  color: lighten($brand-primary, 10%)

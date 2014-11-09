@@ -1,5 +1,6 @@
 @import 'variables'
 @import 'bootstrap_and_overrides'
+@import 'mixins'
 
 @import 'fileupload'
 @import 'fonts'
@@ -80,6 +81,13 @@ form
   .form-group
     label + label
       margin-left: 15px
+
+  &.maximize
+    max-width: 100%
+
+  &.filter-form
+    .form-group
+      margin-bottom: 15px
 
 .tab-content
   text-align: center

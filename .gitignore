@@ -9,4 +9,4 @@
 *.swo
 /public/system
 /public/assets
-/vendor/bundler
+/vendor/bundle
