@@ -1,0 +1,19 @@
+defaults: &defaults
+  adapter: postgresql
+  encoding: unicode
+  database: <%= ENV['DB_NAME'] || 'zumhotface' %>
+  pool: 5
+  username: <%= ENV['DB_USERNAME'] || 'postgres' %>
+  password: <%= ENV['DB_PASSWORD'] %>
+  host: <%= ENV['DB_HOST'] %>
+  port: <%= ENV['DB_PORT'] %>
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+  database: zumhotface_test
+
+production:
+  <<: *defaults

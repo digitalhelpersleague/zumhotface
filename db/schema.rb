@@ -16,24 +16,6 @@ ActiveRecord::Schema.define(version: 20140905211520) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "keys", force: true do |t|
-    t.string   "name"
-    t.integer  "user_id"
-    t.string   "type"
-    t.boolean  "is_public",       default: false, null: false
-    t.integer  "sibling_id"
-    t.text     "body"
-    t.boolean  "default",         default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "encryption_type"
-    t.integer  "size"
-  end
-
-  add_index "keys", ["sibling_id"], name: "index_keys_on_sibling_id", using: :btree
-  add_index "keys", ["type"], name: "index_keys_on_type", using: :btree
-  add_index "keys", ["user_id"], name: "index_keys_on_user_id", using: :btree
-
   create_table "uploads", force: true do |t|
     t.string   "sid",               limit: 12
     t.datetime "created_at"
