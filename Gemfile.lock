@@ -1,10 +1,3 @@
-PATH
-  remote: ../gon_responder
-  specs:
-    gon_responder (0.0.1)
-      gon (~> 5.0)
-      responders (~> 1.0)
-
 GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
@@ -141,6 +134,9 @@ GEM
       json
       multi_json
       request_store (>= 1.0.5)
+    gon_responder (0.1.1)
+      gon (~> 5.0)
+      responders (>= 1.0)
     grape (0.9.0)
       activesupport
       builder
@@ -406,7 +402,7 @@ DEPENDENCIES
   foreman
   github-linguist
   gon
-  gon_responder!
+  gon_responder
   grape
   grape_documenter
   hashie

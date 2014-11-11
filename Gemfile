@@ -17,7 +17,7 @@ gem 'devise'
 gem 'devise_invitable'
 gem 'draper'
 gem 'responders'
-gem 'gon_responder', path: '../gon_responder'
+gem 'gon_responder'
 
 gem 'premailer-rails'
 gem 'autoprefixer-rails'
