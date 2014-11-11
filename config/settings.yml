@@ -1,0 +1,30 @@
+defaults: &defaults
+  host: <%= ENV['ZHF_HOST'] || 'localhost' %>
+  mail:
+    from: <%= ENV['ZHF_MAIL_FROM'] || 'root@localhost' %>
+    admin: <%= ENV['ZHF_ADMIN_EMAIL'] || 'root' %>
+  uploads:
+    secret_key: <%= ENV['ZHF_SECRET_KEY'] %>
+    aws_s3:
+      bucket: <%= ENV['AWS_BUCKET'] %>
+      s3_credentials:
+        access_key_id: <%= ENV['AWS_ACCESS_KEY_ID'] %>
+        secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
+  devise:
+    secret_key: <%= ENV['ZHF_SECRET_KEY'] %>
+  redis:
+    url: <%= ENV['REDIS_URL'] %>
+  server:
+    host: <%= ENV['ZHF_HOST'] %>
+    port: <%= ENV['ZHF_PORT'] %>
+    pid: <%= ENV['ZHF_PID'] %>
+    log: <%= ENV['ZHF_LOG'] %>
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

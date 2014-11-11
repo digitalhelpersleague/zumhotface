@@ -37,7 +37,7 @@ Zumhotface::Application.configure do
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
-  # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
+  config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
@@ -49,7 +49,9 @@ Zumhotface::Application.configure do
   # config.log_tags = [ :subdomain, :uuid ]
 
   # Use a different logger for distributed setups.
-  # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
+  if ENV['SYSLOG']
+    config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new) #TODO: pass syslog address
+  end
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = "http://assets.example.com"
@@ -75,18 +77,8 @@ Zumhotface::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  config.action_mailer.default_url_options = { host: 'zhf.io' }
-  config.action_mailer.asset_host = 'https://zhf.io'
-
-  config.middleware.use Rack::SslEnforcer, ignore: '/assets'
-
-  config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # let nginx deliver our files through x-accel
-
-  ## Unicorn self-process killer
-  #require 'unicorn/worker_killer'
-  ## Max requests per worker
-  #config.middleware.use Unicorn::WorkerKiller::MaxRequests, 3072, 4096
-  ## Max memory size (RSS) per worker
-  #config.middleware.use Unicorn::WorkerKiller::Oom, (128*(1024**2)), (256*(1024**2))
+  if ENV['ZHF_FORCE_SSL']
+    config.middleware.use Rack::SslEnforcer, ignore: '/assets'
+  end
 
 end

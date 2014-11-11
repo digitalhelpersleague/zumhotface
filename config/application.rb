@@ -26,9 +26,14 @@ module Zumhotface
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
 
     config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
-    
+
     config.cache_store = :redis_store, { namespace: 'zhf:cache', expires_in: 90.minutes }
 
     config.middleware.use Rack::ContentLength
+
+    config.action_mailer.default_url_options = { host: ENV['ZHF_HOST'] || 'localhost' }
+    config.action_mailer.asset_host = "http://#{ENV['ZHF_HOST'] || 'localhost'}"
+
+
   end
 end

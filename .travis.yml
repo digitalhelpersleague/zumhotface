@@ -9,5 +9,6 @@ before_install:
   - sudo apt-get install libicu-dev
 before_script:
   - cp -r config/database.yml.travis config/database.yml
+  - cp -r config/secrets.yml.travis config/secrets.yml
 script:
   - RAILS_ENV=test bundle exec rake --trace db:create db:migrate spec
