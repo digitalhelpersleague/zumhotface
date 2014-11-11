@@ -20,7 +20,7 @@ gem 'draper'
 gem 'premailer-rails'
 gem 'autoprefixer-rails'
 
-gem 'bourbon'
+gem 'hashie'
 
 gem 'slim-rails'
 gem 'sass-rails', '~> 4.0'
@@ -34,8 +34,6 @@ end
 
 #gem 'turbolinks'
 
-gem 'settingslogic'
-
 gem 'gon'
 gem 'oj'
 
@@ -47,6 +45,7 @@ end
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'rack-ssl-enforcer'
+gem 'foreman'
 
 # Assets
 gem 'jquery-rails'
@@ -62,8 +61,8 @@ gem 'rails-assets-angular-moment'
 gem 'ng-rails-csrf'
 
 group :production do
+  gem 'SyslogLogger', '~> 2.0'
   gem 'unicorn'
-  gem 'unicorn-worker-killer'
 end
 
 group :development do
