@@ -7,7 +7,7 @@ class UploadDecorator < ApplicationDecorator
 
   def icon
     case upload_type
-    when 'file'
+    when 'blob'
       'paperclip'
     when 'code'
       'file'
@@ -22,7 +22,7 @@ class UploadDecorator < ApplicationDecorator
 
   def raw_preview
     if lang
-      return ("<div class='syntax'>" + Linguist::FileBlob.new(file.path).colorize + '</div>').html_safe if object.file?
+      return ("<div class='syntax'>" + Linguist::FileBlob.new(file.path).colorize + '</div>').html_safe if object.blob?
       return (
               "<div class='syntax'>" +
                 Linguist::Language.new(name: lang).colorize(code) +

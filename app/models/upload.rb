@@ -30,8 +30,11 @@ class Upload < ActiveRecord::Base
 
   validate :must_have_free_storage_space
 
-  before_validation :set_proper_type
-  before_validation :set_unique_identifier
+  validates :sid, presence: true, uniqueness: true
+  validates :user_id, presence: true
+
+  before_validation :set_proper_type!
+  before_validation :set_unique_identifier!
 
   after_commit :analyze_language, on: :create
   after_commit :increment_total_weight, on: :create
@@ -44,7 +47,7 @@ class Upload < ActiveRecord::Base
   #
   # TODO: compress links and code with gzip
 
-  %w(file link code).each do |type|
+  %w(blob link code).each do |type|
     define_method("#{type}?") { self.type == "Upload::#{type.camelize}" }
   end
 
@@ -102,10 +105,14 @@ class Upload < ActiveRecord::Base
 
   private
 
-  def set_proper_type
-    self.type ||= 'Upload::Code' if code
-    self.type ||= 'Upload::Link' if link
-    self.type ||= 'Upload::File' if file
+  def set_proper_type!
+    if code
+      self.becomes!(Code)
+    elsif link
+      self.becomes!(Link)
+    elsif file
+      self.becomes!(Blob)
+    end
   end
 
   def increment_total_weight
@@ -116,7 +123,7 @@ class Upload < ActiveRecord::Base
     user.update_total_weight(-size)
   end
 
-  def set_unique_identifier
+  def set_unique_identifier!
     return if sid
     loop do
       self.sid = generate_identifier

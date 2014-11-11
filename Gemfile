@@ -16,11 +16,15 @@ gem 'resque'
 gem 'devise'
 gem 'devise_invitable'
 gem 'draper'
+gem 'responders'
+gem 'gon_responder', path: '../gon_responder'
 
 gem 'premailer-rails'
 gem 'autoprefixer-rails'
 
 gem 'hashie'
+
+gem 'github-linguist'
 
 gem 'slim-rails'
 gem 'sass-rails', '~> 4.0'
@@ -46,6 +50,7 @@ end
 
 gem 'rack-ssl-enforcer'
 gem 'foreman'
+gem 'rspec-rails'
 
 # Assets
 gem 'jquery-rails'
@@ -78,13 +83,11 @@ group :development do
 end
 
 group :test do
-  gem 'rspec-rails'
   gem 'faker'
   gem 'factory_girl_rails'
   gem "codeclimate-test-reporter", require: false
+  gem 'database_cleaner', require: false
 end
-
-gem 'github-linguist', require: false
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]

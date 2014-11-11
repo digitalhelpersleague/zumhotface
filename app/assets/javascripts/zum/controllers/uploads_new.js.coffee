@@ -27,13 +27,15 @@
 
   $scope.perform_upload = (upload) ->
     if !upload.uploading and !upload.sid
-      upload.generate_progress_token()
+      if upload.file?
+        upload.generate_progress_token()
       upload.uploading = true
       upload.$save().then ->
         return
       , (error) ->
         upload.error = error.data.error
-      get_upload_progress(upload)
+      if upload.file?
+        get_upload_progress(upload)
 
   append_upload = (new_upload) ->
     $scope.uploads ||= []
