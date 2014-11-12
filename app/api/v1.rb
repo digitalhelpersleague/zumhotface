@@ -59,7 +59,7 @@ class APIv1 < Grape::API
       @upload = current_user.uploads.create(upload_params)
       unless @upload.errors.any?
         status 201
-        n{ url: UploadDecorator.decorate(@upload).url }
+        { url: UploadDecorator.decorate(@upload).url }
       else
         error! @upload.errors, 422
       end
