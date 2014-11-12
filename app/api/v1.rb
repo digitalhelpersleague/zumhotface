@@ -22,6 +22,14 @@ class APIv1 < Grape::API
     def require_api_key!
       error!('401 api_key required', 401) unless params[:api_key]
     end
+
+    def upload_params
+      if params[:file]
+        params[:file] = ActionDispatch::Http::UploadedFile.new(params[:file])
+      end
+      ActionController::Parameters.new(params)
+        .permit(:file, :link, :code, :lang)
+    end
   end
 
   resource :account do
@@ -40,31 +48,20 @@ class APIv1 < Grape::API
       authenticate!
     end
 
-    get '' do
-      { uploads: [] }
-      # JSON.parse ::RablRails.render(uploads, 'uploads/index')
-    end
-
     desc 'New upload'
     params do
       optional :file, type: Rack::Multipart::UploadedFile
       optional :link, type: String
       optional :code, type: String
+      exactly_one_of :file, :link, :code
     end
     post '' do
-      @upload = Upload.new(user: current_user)
-      if params[:file]
-        @upload.file = ActionDispatch::Http::UploadedFile.new(params[:file])
-      elsif params[:link]
-        @upload.link = params[:link]
-      elsif params[:code]
-        @upload.code = params[:code]
-      end
-
-      if @upload.save
-        { status: 'OK', url: UploadDecorator.decorate(@upload).url }
+      @upload = current_user.uploads.create(upload_params)
+      unless @upload.errors.any?
+        status 201
+        n{ url: UploadDecorator.decorate(@upload).url }
       else
-        error! @upload.errors
+        error! @upload.errors, 422
       end
     end
   end
