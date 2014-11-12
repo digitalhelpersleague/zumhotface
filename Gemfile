@@ -16,7 +16,7 @@ gem 'resque'
 gem 'devise'
 gem 'devise_invitable'
 gem 'draper'
-gem 'responders'
+gem 'responders', '~> 1.0'
 gem 'gon_responder'
 
 gem 'premailer-rails'
