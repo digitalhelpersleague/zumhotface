@@ -28,10 +28,9 @@ class Upload < ActiveRecord::Base
   # skip content type validation
   validates_attachment_content_type :file, content_type: /.*/
 
-  validate :must_have_free_storage_space
-
   validates :sid, presence: true, uniqueness: true
   validates :user_id, presence: true
+  validate :must_have_free_storage_space
 
   before_validation :set_proper_type!
   before_validation :set_unique_identifier!
@@ -41,10 +40,6 @@ class Upload < ActiveRecord::Base
 
   # after_create :move_to_s3
 
-  # TODO: encrypt with AES128/256
-  # def encrypt(passphrase)
-  # end
-  #
   # TODO: compress links and code with gzip
 
   %w(blob link code).each do |type|
@@ -83,12 +78,8 @@ class Upload < ActiveRecord::Base
   end
 
   def validate_access(with_password: nil)
-    return with_password.to_s == password if secured?
-    true
+    !secured? || with_password.to_s == password
   end
-
-  # def encrypt
-  # end
 
   def download!
     self.downloads += 1

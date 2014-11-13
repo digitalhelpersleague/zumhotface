@@ -4,6 +4,6 @@ class ApplicationMailer < ActionMailer::Base
   def request_invitation(email, body)
     @email = email
     @body  = body
-    mail to: Settings.mail.admin, subject: '[zhf.io] New invitation request'
+    mail to: Settings.mail.admin, subject: "[zumhotface] New invitation request"
   end
 end

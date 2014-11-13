@@ -8,8 +8,6 @@ class User < ActiveRecord::Base
 
   has_many :uploads
 
-  SAFE_CHARS = (('A'..'Z').to_a + ('a'..'z').to_a + ('0'..'9').to_a).freeze
-
   def has_invites?
     invitation_limit && invitation_limit > 0
   end
