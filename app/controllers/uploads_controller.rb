@@ -11,7 +11,7 @@ class UploadsController < ApplicationController
 
   def show
     @upload = Upload.find_by_sid!(params[:sid])
-    upload.link? && redirect_to(upload.link) && return
+    redirect_to(upload.link, status: 301) and return if upload.link?
     respond_with upload, gon: { rabl: { as: :upload }}
   end
 
