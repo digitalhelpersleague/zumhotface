@@ -16,12 +16,14 @@ gem 'resque'
 gem 'devise'
 gem 'devise_invitable'
 gem 'draper'
+gem 'gon'
 gem 'responders', '~> 1.0'
 gem 'gon_responder'
 
 gem 'premailer-rails'
 gem 'autoprefixer-rails'
 
+gem 'oj'
 gem 'hashie'
 
 gem 'github-linguist'
@@ -31,15 +33,7 @@ gem 'sass-rails', '~> 4.0'
 gem 'coffee-rails', '~> 4.0'
 gem 'rabl-rails'
 
-group :assets do
-  gem 'execjs', platforms: :ruby
-  gem 'uglifier', '>= 1.3.0'
-end
-
-#gem 'turbolinks'
-
-gem 'gon'
-gem 'oj'
+gem 'foreman'
 
 group :doc do
   gem 'sdoc', require: false
@@ -47,10 +41,6 @@ end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
-gem 'rack-ssl-enforcer'
-gem 'foreman'
-gem 'rspec-rails'
 
 # Assets
 gem 'jquery-rails'
@@ -65,16 +55,21 @@ gem 'rails-assets-angular-moment'
 
 gem 'ng-rails-csrf'
 
+gem 'rspec-rails', group: [:development, :test]
+
 group :production do
+  gem 'execjs', platforms: :ruby
+  gem 'uglifier', '>= 1.3.0'
   gem 'SyslogLogger', '~> 2.0'
   gem 'unicorn'
+  gem 'rack-ssl-enforcer'
 end
 
 group :development do
   gem 'thin'
-  gem 'capistrano', '~> 2.0'
-  gem 'capistrano-unicorn', require: false
-  gem 'capistrano-rbenv', require: false
+  #gem 'capistrano', '~> 2.0'
+  #gem 'capistrano-unicorn', require: false
+  #gem 'capistrano-rbenv', require: false
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'rack-mini-profiler'

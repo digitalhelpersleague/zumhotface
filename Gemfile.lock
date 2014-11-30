@@ -51,19 +51,6 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
-    capistrano (2.15.5)
-      highline
-      net-scp (>= 1.0.0)
-      net-sftp (>= 2.0.0)
-      net-ssh (>= 2.0.14)
-      net-ssh-gateway (>= 1.1.0)
-    capistrano-platform-resources (0.1.3)
-      capistrano (< 3)
-    capistrano-rbenv (1.0.5)
-      capistrano (< 3)
-      capistrano-platform-resources (>= 0.1.3)
-    capistrano-unicorn (0.2.0)
-      capistrano (< 3.0)
     charlock_holmes (0.7.3)
     climate_control (0.0.3)
       activesupport (>= 3.0)
@@ -155,7 +142,6 @@ GEM
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
     hashie (3.3.1)
-    highline (1.6.21)
     hike (1.2.3)
     htmlentities (4.3.2)
     i18n (0.6.11)
@@ -183,13 +169,6 @@ GEM
     mono_logger (1.1.0)
     multi_json (1.10.1)
     multi_xml (0.5.5)
-    net-scp (1.2.1)
-      net-ssh (>= 2.6.5)
-    net-sftp (2.1.2)
-      net-ssh (>= 2.6.5)
-    net-ssh (2.9.1)
-    net-ssh-gateway (1.2.0)
-      net-ssh (>= 2.6.5)
     ng-rails-csrf (0.1.0)
     nokogiri (1.6.4.1)
       mini_portile (~> 0.6.0)
@@ -387,9 +366,6 @@ DEPENDENCIES
   aws-sdk
   better_errors
   binding_of_caller
-  capistrano (~> 2.0)
-  capistrano-rbenv
-  capistrano-unicorn
   codeclimate-test-reporter
   coffee-rails (~> 4.0)
   database_cleaner

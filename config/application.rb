@@ -2,6 +2,9 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
+# require Settings
+require './config/initializers/_settings'
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -24,16 +27,13 @@ module Zumhotface
     config.autoload_paths << Rails.root.join('app', 'api')
 
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
-
     config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
-
-    config.cache_store = :redis_store, { namespace: 'zhf:cache', expires_in: 90.minutes }
-
-    config.middleware.use Rack::ContentLength
 
     config.action_mailer.default_url_options = { host: ENV['ZHF_HOST'] || 'localhost' }
     config.action_mailer.asset_host = "http://#{ENV['ZHF_HOST'] || 'localhost'}"
 
+    config.middleware.use Rack::ContentLength
 
+    config.cache_store = :redis_store, { namespace: 'zhf:cache', expires_in: 90.minutes }
   end
 end

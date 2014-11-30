@@ -1,8 +1,8 @@
 defaults: &defaults
-  host: <%= ENV['ZHF_HOST'] || 'localhost' %>
+  host: <%= ENV['ZHF_HOST'] %>
   mail:
-    from: <%= ENV['ZHF_MAIL_FROM'] || 'root@localhost' %>
-    admin: <%= ENV['ZHF_ADMIN_EMAIL'] || 'root' %>
+    from: <%= ENV['ZHF_MAIL_FROM'] %>
+    admin: <%= ENV['ZHF_ADMIN_EMAIL'] %>
   uploads:
     secret_key: <%= ENV['ZHF_SECRET_KEY'] %>
     aws_s3:
