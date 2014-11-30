@@ -13,10 +13,22 @@ class Upload < ActiveRecord::Base
   end
 
   has_attached_file :file,
-                    hash_secret: Settings.uploads.secret_key,
-                    hash_data: 'uploads/file/:id/:style/:updated_at',
-                    url: '/system/uploads/:id_partition/:hash.:extension',
-                    path: ':rails_root/public/system/uploads/:id_partition/:hash.:extension'
+    hash_secret: Settings.uploads.secret_key,
+    hash_data: 'uploads/file/:id/:style/:updated_at',
+    url: '/system/uploads/:id_partition/:hash.:extension',
+    path: ':rails_root/public/system/uploads/:id_partition/:hash.:extension',
+    styles: {
+      icon: "64x64^",
+      thumb: "150x150^" },
+    convert_options: {
+      icon: "-gravity center -extent 64x64",
+      thumb: "-gravity center -extent 150x150" }
+
+  before_post_process :skip_for_non_image
+
+  def skip_for_non_image
+    image?
+  end
 
   # TODO: move to s3
   # path: "/uploads/:id_partition/:hash.:extension",
