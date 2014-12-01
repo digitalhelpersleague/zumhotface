@@ -28,6 +28,7 @@ module Zumhotface
 
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
     config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
+    config.assets.initialize_on_precompile = false
 
     config.action_mailer.default_url_options = { host: ENV['ZHF_HOST'] || 'localhost' }
     config.action_mailer.asset_host = "http://#{ENV['ZHF_HOST'] || 'localhost'}"
