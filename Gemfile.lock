@@ -90,6 +90,8 @@ GEM
     dotenv (0.11.1)
       dotenv-deployment (~> 0.0.2)
     dotenv-deployment (0.0.2)
+    dotenv-rails (0.11.1)
+      dotenv (= 0.11.1)
     draper (1.4.0)
       actionpack (>= 3.0)
       activemodel (>= 3.0)
@@ -371,6 +373,7 @@ DEPENDENCIES
   database_cleaner
   devise
   devise_invitable
+  dotenv-rails
   draper
   execjs
   factory_girl_rails

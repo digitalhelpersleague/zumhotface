@@ -3,7 +3,6 @@ require 'hashie'
 unless defined?(Settings)
 
   app_root = defined?(Rails) && Rails.root ? Rails.root : File.expand_path('../../..', __FILE__)
-  puts app_root
   app_env = defined?(Rails) ? Rails.env : ENV['RAILS_ENV'] || ENV['RACK_ENV']
 
   settings_path = File.join(app_root, 'config', 'settings.yml')

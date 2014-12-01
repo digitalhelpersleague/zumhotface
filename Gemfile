@@ -34,6 +34,7 @@ gem 'coffee-rails', '~> 4.0'
 gem 'rabl-rails'
 
 gem 'foreman'
+gem 'dotenv-rails'
 
 group :doc do
   gem 'sdoc', require: false
