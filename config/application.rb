@@ -2,12 +2,13 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
-# require Settings
-require './config/initializers/_settings'
-
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
+
+# load dotenv and Settings
+Dotenv.load
+require './config/initializers/_settings'
 
 module Zumhotface
   class Application < Rails::Application
