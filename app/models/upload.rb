@@ -24,6 +24,8 @@ class Upload < ActiveRecord::Base
       icon: "-gravity center -extent 64x64",
       thumb: "-gravity center -extent 150x150" }
 
+  process_in_background :file
+
   before_post_process :skip_for_non_image
 
   def skip_for_non_image
