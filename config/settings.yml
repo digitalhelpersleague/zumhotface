@@ -1,5 +1,6 @@
 defaults: &defaults
   host: <%= ENV['ZHF_HOST'] %>
+  force_ssl: <%= ENV['ZHF_FORCE_SSL'] %>
   mail:
     from: <%= ENV['ZHF_MAIL_FROM'] %>
     admin: <%= ENV['ZHF_ADMIN_EMAIL'] %>
@@ -15,8 +16,9 @@ defaults: &defaults
   redis:
     url: <%= ENV['REDIS_URL'] %>
   server:
+    socket: <%= ENV['ZHF_SOCKET'] %>
     host: <%= ENV['ZHF_HOST'] %>
-    port: <%= ENV['ZHF_PORT'] %>
+    port: <%= ENV['ZHF_SOCKET'] ? nil : ENV['ZHF_PORT'] || 3000 %>
     pid: <%= ENV['ZHF_PID'] %>
     log: <%= ENV['ZHF_LOG'] %>
 

@@ -40,7 +40,7 @@ Zumhotface::Application.configure do
   config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  # config.force_ssl = true
+  # TODO: take a look: config.force_ssl = true
 
   # Set to :debug to see everything in the log.
   config.log_level = :info
@@ -77,7 +77,7 @@ Zumhotface::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  if ENV['ZHF_FORCE_SSL']
+  if Settings.force_ssl
     config.middleware.use Rack::SslEnforcer, ignore: '/assets'
   end
 
