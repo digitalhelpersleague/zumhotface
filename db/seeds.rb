@@ -1,5 +1,5 @@
 User.create!(
-  email: ENV['ZHF_ADMIN_EMAIL'],
+  email: Settings.mail.admin,
   password: 'password',
   password_confirmation: 'password'
 ).confirm!

@@ -1,10 +1,16 @@
 defaults: &defaults
   host: <%= ENV['ZHF_HOST'] %>
-  force_ssl: <%= ENV['ZHF_FORCE_SSL'] %>
+  port: <%= ENV['ZHF_PORT'] %>
+  server:
+    host: <%= ENV['ZHF_HOST'] %>
+    pid: <%= ENV['ZHF_PID'] %>
+    log: <%= ENV['ZHF_LOG'] %>
+    workers: <%= ENV['ZHF_UNICORN_WORKERS'] || 4 %>
   mail:
     from: <%= ENV['ZHF_MAIL_FROM'] %>
     admin: <%= ENV['ZHF_ADMIN_EMAIL'] %>
   uploads:
+    directory: <%= ENV['ZHF_DATA_DIRECTORY'] || ':rails_root/public/system' %>
     secret_key: <%= ENV['ZHF_SECRET_KEY'] %>
     aws_s3:
       bucket: <%= ENV['AWS_BUCKET'] %>
@@ -14,13 +20,10 @@ defaults: &defaults
   devise:
     secret_key: <%= ENV['ZHF_SECRET_KEY'] %>
   redis:
-    url: <%= ENV['REDIS_URL'] %>
-  server:
-    socket: <%= ENV['ZHF_SOCKET'] %>
-    host: <%= ENV['ZHF_HOST'] %>
-    port: <%= ENV['ZHF_SOCKET'] ? nil : ENV['ZHF_PORT'] || 3000 %>
-    pid: <%= ENV['ZHF_PID'] %>
-    log: <%= ENV['ZHF_LOG'] %>
+    host: <%= ENV['REDIS_HOST'] %>
+    port: <%= ENV['REDIS_PORT'] %>
+    database: <%= ENV['REDIS_DATABASE'] %>
+    namespace: <%= ENV['REDIS_NAMESPACE'] %>
 
 development:
   <<: *defaults

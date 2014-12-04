@@ -31,11 +31,11 @@ module Zumhotface
     config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
     config.assets.initialize_on_precompile = false
 
-    config.action_mailer.default_url_options = { host: Settings.host }
-    config.action_mailer.asset_host = "http://#{Settings.host}"
+    config.action_mailer.default_url_options = { host: Settings.server.host }
+    config.action_mailer.asset_host = "http://#{Settings.server.host}"
 
     config.middleware.use Rack::ContentLength
 
-    config.cache_store = :redis_store, { namespace: 'zhf:cache', expires_in: 90.minutes }
+    config.cache_store = :redis_store, { namespace: "#{Settings.redis.namespace}:cache", expires_in: 90.minutes }
   end
 end
