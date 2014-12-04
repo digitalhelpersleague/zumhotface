@@ -1,8 +1,7 @@
 defaults: &defaults
-  host: <%= ENV['ZHF_HOST'] %>
-  port: <%= ENV['ZHF_PORT'] %>
   server:
-    host: <%= ENV['ZHF_HOST'] %>
+    host: <%= ENV['ZHF_HOST'] || 'localhost' %>
+    port: <%= ENV['ZHF_PORT'] || 3000 %>
     pid: <%= ENV['ZHF_PID'] %>
     log: <%= ENV['ZHF_LOG'] %>
     workers: <%= ENV['ZHF_UNICORN_WORKERS'] || 4 %>
