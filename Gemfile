@@ -17,7 +17,7 @@ gem 'devise'
 gem 'devise_invitable'
 gem 'draper'
 gem 'gon'
-gem 'responders', '~> 1.0'
+gem 'responders'
 gem 'gon_responder'
 
 gem 'premailer-rails'
@@ -29,8 +29,8 @@ gem 'hashie'
 gem 'github-linguist'
 
 gem 'slim-rails'
-gem 'sass-rails', '~> 4.0'
-gem 'coffee-rails', '~> 4.0'
+gem 'sass-rails'
+gem 'coffee-rails'
 gem 'rabl-rails'
 
 gem 'foreman'
@@ -61,7 +61,7 @@ gem 'rspec-rails', group: [:development, :test]
 group :production do
   gem 'execjs', platforms: :ruby
   gem 'uglifier', '>= 1.3.0'
-  gem 'SyslogLogger', '~> 2.0'
+  gem 'SyslogLogger'
   gem 'unicorn'
   gem 'rack-ssl-enforcer'
 end
