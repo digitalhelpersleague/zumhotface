@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20140905211520) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "uploads", force: true do |t|
+  create_table "uploads", force: :cascade do |t|
     t.string   "sid",               limit: 12
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -35,10 +35,11 @@ ActiveRecord::Schema.define(version: 20140905211520) do
     t.string   "lang"
   end
 
+  add_index "uploads", ["sid"], name: "index_uploads_on_sid", using: :btree
   add_index "uploads", ["type"], name: "index_uploads_on_type", using: :btree
   add_index "uploads", ["user_id"], name: "index_uploads_on_user_id", using: :btree
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: ""
     t.string   "reset_password_token"
