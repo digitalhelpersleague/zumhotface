@@ -148,15 +148,11 @@ GEM
       RedCloth
       activesupport
       grape (>= 0.2.1)
-    has_scope (0.5.1)
     hashie (3.3.2)
     hike (1.2.3)
     htmlentities (4.3.2)
     i18n (0.7.0)
     ice_nine (0.11.1)
-    inherited_resources (1.0.2)
-      has_scope (>= 0.4)
-      responders (>= 0.4.2)
     jquery-rails (4.0.2)
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
@@ -394,7 +390,6 @@ DEPENDENCIES
   grape
   grape_documenter
   hashie
-  inherited_resources
   jquery-rails
   letter_opener
   ng-rails-csrf

@@ -3,7 +3,6 @@ source 'https://rails-assets.org'
 
 gem 'rails', '~> 4.0'
 gem 'pg'
-gem 'inherited_resources'
 gem 'paperclip'
 gem 'aws-sdk'
 gem 'pry-rails'
