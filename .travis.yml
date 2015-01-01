@@ -5,6 +5,7 @@ cache:
 rvm:
   - 2.0.0-p598
   - 2.1.5
+  - 2.2.0
 bundler_args: --without development production --quiet --jobs=3 --retry=3
 addons:
   postgresql: "9.3"
