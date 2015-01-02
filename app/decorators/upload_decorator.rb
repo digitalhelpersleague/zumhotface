@@ -2,7 +2,6 @@ require 'linguist'
 
 class UploadDecorator < ApplicationDecorator
   delegate_all
-
   decorates :upload
 
   def icon

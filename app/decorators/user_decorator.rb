@@ -1,6 +1,5 @@
 class UserDecorator < ApplicationDecorator
   delegate_all
-
   decorates :user
 
   def storage_percent_used

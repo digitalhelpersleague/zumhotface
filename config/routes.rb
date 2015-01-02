@@ -28,4 +28,9 @@ Zumhotface::Application.routes.draw do
   get '/download/:sid', to:'uploads#download', as: :download_upload
   get '/raw/:sid', to:'uploads#download', as: :raw_upload, raw: true
   delete '/uploads/:sid', to:'uploads#destroy', as: :destroy_upload
+
+  get '/error_404', to: 'errors#error_404'
+  get '/error_500', to: 'errors#error_500'
+
+  get '/*q', to: 'errors#error_404'
 end

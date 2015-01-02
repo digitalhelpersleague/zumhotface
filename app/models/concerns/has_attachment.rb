@@ -33,8 +33,9 @@ module HasAttachment
 
     do_not_validate_attachment_file_type :file
 
-    process_in_background :file,
-      processing_image_url: "/i/loader.gif"
+    # TODO: delayed_paperclip
+    #process_in_background :file,
+      #processing_image_url: "/i/loader.gif"
 
     before_post_process :skip_for_non_image
   end

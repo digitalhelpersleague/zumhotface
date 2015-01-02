@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def request_invitation
     return unless request.post?
-    ApplicationMailer.request_invitation(params[:email], params[:about]).deliver
+    ApplicationMailer.request_invitation(params[:email], params[:about]).deliver_later
     flash[:notice] = 'Your request was sent to zumhotface team'
   end
 
@@ -14,6 +14,6 @@ class UsersController < ApplicationController
 
   def destroy_api_key
     current_user.destroy_api_key! &&
-      render nothing: true, status: 204
+      render(nothing: true, status: 204)
   end
 end

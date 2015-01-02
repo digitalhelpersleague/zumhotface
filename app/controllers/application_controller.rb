@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   before_action :include_current_user
 
+  rescue_from ActiveRecord::RecordNotFound, with: :render_404
+
   private
 
   def include_current_user
@@ -16,5 +18,10 @@ class ApplicationController < ActionController::Base
 
   def current_user
     super || User.new
+  end
+
+  def render_404
+    @error_message = 'Page not found'
+    render template: 'errors/error', status: 404
   end
 end
