@@ -11,8 +11,8 @@ class UploadDecorator < ApplicationDecorator
       'paperclip'
     when 'code'
       'file'
-    when 'link'
-      'link'
+    else
+      upload_type
     end
   end
 
@@ -33,7 +33,7 @@ class UploadDecorator < ApplicationDecorator
   end
 
   def upload_type
-    object.class.upload_type
+    object.class.name.demodulize.downcase
   end
 
   def name

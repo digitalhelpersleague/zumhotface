@@ -1,44 +1,22 @@
 class Upload < ActiveRecord::Base
   SAFE_CHARS = (('A'..'Z').to_a + ('a'..'z').to_a + ('0'..'9').to_a + %w(- _ ~)).freeze
 
-  belongs_to :user
+  before_validation :set_proper_type!
+  before_validation :set_unique_identifier!
 
+  include HasAttachment
+  include Encryptable
+
+  # FIXME: after_commit on destroy
   before_destroy :decrement_total_weight
 
-  before_validation on: :create do
-    if file_content_type == 'application/octet-stream'
-      mime_type = MIME::Types.type_for(file_file_name)
-      self.file_content_type = mime_type.first.content_type if mime_type.first
-    end
-  end
-
-  has_attached_file :file,
-                    hash_secret: Settings.uploads.secret_key,
-                    hash_data: 'uploads/file/:id/:style/:updated_at',
-                    url: '/system/uploads/:id_partition/:hash.:extension',
-                    path: ':rails_root/public/system/uploads/:id_partition/:hash.:extension'
-
-  # TODO: move to s3
-  # path: "/uploads/:id_partition/:hash.:extension",
-  # url: ":s3_domain_url",
-  # storage: :s3,
-  # s3_credentials: Settings.uploads.aws_s3.s3_credentials,
-  # bucket: Settings.uploads.aws_s3.bucket
-
-  # skip content type validation
-  validates_attachment_content_type :file, content_type: /.*/
+  belongs_to :user
 
   validates :sid, presence: true, uniqueness: true
   validates :user_id, presence: true
   validate :must_have_free_storage_space
 
-  before_validation :set_proper_type!
-  before_validation :set_unique_identifier!
-
-  after_commit :analyze_language, on: :create
   after_commit :increment_total_weight, on: :create
-
-  # after_create :move_to_s3
 
   # TODO: compress links and code with gzip
 
@@ -46,31 +24,12 @@ class Upload < ActiveRecord::Base
     define_method("#{type}?") { self.type == "Upload::#{type.camelize}" }
   end
 
-  def self.upload_type
-    nil
-  end
-
-  def image?
-    file? && file.content_type.include?('image')
-  end
-
   def secured?
     password.present?
   end
 
-  def encrypted?
-    false
-  end
-
   def size
-    size = if code?
-             code.bytesize
-           elsif link?
-             link.bytesize
-           else
-             file_file_size
-           end
-    size.to_i
+    nil
   end
 
   def raw_viewable?
@@ -84,10 +43,6 @@ class Upload < ActiveRecord::Base
   def download!
     self.downloads += 1
     save
-  end
-
-  def analyze_language
-    Resque.enqueue(Jobs::LanguageDetector, sid) if file.try(:path) && !encrypted?
   end
 
   def must_have_free_storage_space

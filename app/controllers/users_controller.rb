@@ -8,16 +8,12 @@ class UsersController < ApplicationController
   end
 
   def generate_api_key
-    current_user.generate_api_key
-    if current_user.save!
-      render(json: { success: true, api_key: current_user.api_key }) && return
-    end
+    current_user.generate_api_key! &&
+      render(json: { success: true, api_key: current_user.api_key })
   end
 
   def destroy_api_key
-    current_user.api_key = nil
-    if current_user.save!
-      render(json: { success: true, api_key: current_user.api_key }) && return
-    end
+    current_user.destroy_api_key! &&
+      render nothing: true, status: 204
   end
 end

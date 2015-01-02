@@ -1,5 +1,7 @@
 class Upload::Code < Upload
-  def self.upload_type
-    'code'
+  include LanguageDetectable
+
+  def size
+     code.bytesize
   end
 end

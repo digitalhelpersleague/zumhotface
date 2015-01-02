@@ -1,5 +1,6 @@
 class Upload::Link < Upload
-  def self.upload_type
-    'link'
+
+  def size
+    link.bytesize
   end
 end
