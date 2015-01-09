@@ -13,8 +13,8 @@ Zumhotface::Application.routes.draw do
   get '/about', to:'pages#about'
   get '/privacy', to:'pages#privacy'
 
-  get 'account', to:'account#index', as: :account
-  patch 'account', to:'account#update', as: :update_account
+  get 'account', to:'account#index', as: :account, constraints: { format: /html|json/ }
+  patch 'account', to:'account#update', as: :update_account, constraints: { format: /html|json/ }
 
   get '/request_invitation', to:'users#request_invitation'
   post '/request_invitation', to:'users#request_invitation'
@@ -23,11 +23,14 @@ Zumhotface::Application.routes.draw do
 
   devise_for :users
 
-  resources :uploads, only: [:index, :create, :new]
-  get '/:sid', to:'uploads#show', as: :upload
-  get '/download/:sid', to:'uploads#download', as: :download_upload
-  get '/raw/:sid', to:'uploads#download', as: :raw_upload, raw: true
-  delete '/uploads/:sid', to:'uploads#destroy', as: :destroy_upload
+  resources :uploads, path: '', param: :sid, only: [:show], constraints: { format: /html|json/ } do
+    member do
+      get :download
+      get :raw
+    end
+  end
+
+  resources :uploads, param: :sid, only: [:index, :create, :destroy], constraints: { format: /html|json/ }
 
   get '/error_404', to: 'errors#error_404'
   get '/error_500', to: 'errors#error_500'
