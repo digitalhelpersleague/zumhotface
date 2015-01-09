@@ -32,7 +32,7 @@ div ng-controller='zum.UploadsListCtrl'
         td.upload-date : span am-time-ago='upload.created_at' bo-text='upload.created_at'
         td.actions
           a.btn.btn-success.btn-xs target='_blank' bo-href-i='/download/{{ upload.sid }}?raw=true' bo-show='upload.lang || upload.upload_type == "code"' RAW
-          a.btn.btn-success.btn-xs target='_blank' bo-href-i='/download/{{ upload.sid }}' bo-show='upload.upload_type == "file"' DOWNLOAD
+          a.btn.btn-success.btn-xs target='_blank' bo-href-i='/download/{{ upload.sid }}' bo-show='upload.upload_type == "blob"' DOWNLOAD
           a.btn.btn-success.btn-xs target='_blank' bo-href-i='/{{ upload.sid }}' bo-show='upload.upload_type == "link"' GO
           a.btn.btn-danger.btn-xs href='javascript:;' ng-really-message='Are you sure?' ng-really-click='destroy(upload)' DESTROY
 
