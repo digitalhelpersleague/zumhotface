@@ -12,7 +12,7 @@ class Upload < ActiveRecord::Base
 
   belongs_to :user
 
-  validates :sid, presence: true, uniqueness: true
+  validates :sid, presence: true
   validates :user_id, presence: true
   validate :must_have_free_storage_space
 
