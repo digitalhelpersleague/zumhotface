@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   end
 
   def render_404
-    @error_message = 'Page not found'
+    @error_message = 'Steve can\'t find this page'
     render template: 'errors/error', status: 404
   end
 end

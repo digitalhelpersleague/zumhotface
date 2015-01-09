@@ -1,7 +1,7 @@
 class ErrorsController < ActionController::Base
 
   def error_404
-    @error_message = 'Page not found'
+    @error_message = 'Steve can\'t find page'
     render :error, status: 404
   end
 

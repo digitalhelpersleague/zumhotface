@@ -19,7 +19,15 @@ class UploadsController < ApplicationController
     @upload = current_user.uploads.create(upload_params)
     # reload class after create
     @upload = @upload.becomes @upload.type.constantize
-    respond_with upload
+    respond_to do |format|
+      unless @upload.errors.any?
+        format.json { render action: :show }
+      else
+        format.json {
+          render json: { errors: @upload.errors }, status: 422
+        }
+      end
+    end
   end
 
   def destroy
@@ -31,13 +39,20 @@ class UploadsController < ApplicationController
   end
 
   def download
-    @upload = Upload.find_by_sid!(params[:sid])
+    @upload = Upload.find_by_sid! params[:sid]
     validate_access!
     upload.download!
     if upload.file?
-      options = { x_sendfile: true, filename: upload.file_file_name, type: upload.file.content_type }
+      options = {
+        x_sendfile: true,
+        filename: upload.file_file_name,
+        type: upload.file.content_type
+      }
       if params[:raw]
-        options.merge!(disposition: 'inline', type: upload.image? ? upload.content_type : 'text/plain')
+        options.merge!(
+          disposition: 'inline',
+          type: upload.image? ? upload.content_type : 'text/plain'
+        )
       end
       send_file upload.file.path, options
       headers['Content-Length'] = upload.size.to_s
@@ -68,6 +83,7 @@ class UploadsController < ApplicationController
   end
 
   def validate_access!
+    # TODO: Use active model validations and respond_with
     if upload.secured? && !upload.validate_access(with_password: params[:password])
       flash[:error] = 'Bad password'
       redirect_to(action: :show) and return
