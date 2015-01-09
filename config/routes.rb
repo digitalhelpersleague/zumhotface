@@ -21,7 +21,12 @@ Zumhotface::Application.routes.draw do
   put '/users/generate_api_key', to:'users#generate_api_key'
   delete '/users/destroy_api_key', to:'users#destroy_api_key'
 
+  get '/error_404', to: 'errors#error_404'
+  get '/error_500', to: 'errors#error_500'
+
   devise_for :users
+
+  resources :uploads, param: :sid, only: [:index, :new, :create, :destroy], constraints: { format: /html|json/ }
 
   resources :uploads, path: '', param: :sid, only: [:show], constraints: { format: /html|json/ } do
     member do
@@ -29,11 +34,6 @@ Zumhotface::Application.routes.draw do
       get :raw
     end
   end
-
-  resources :uploads, param: :sid, only: [:index, :create, :destroy], constraints: { format: /html|json/ }
-
-  get '/error_404', to: 'errors#error_404'
-  get '/error_500', to: 'errors#error_500'
 
   get '/*q', to: 'errors#error_404'
 end
