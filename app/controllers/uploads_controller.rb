@@ -16,9 +16,9 @@ class UploadsController < ApplicationController
   end
 
   def create
-    @upload = current_user.uploads.create(upload_params)
-    # reload class after create
-    @upload = @upload.becomes @upload.type.constantize
+    @upload = current_user.uploads.build(upload_params)
+    reload_upload_type
+    @upload.save
     respond_to do |format|
       unless @upload.errors.any?
         format.json { render action: :show }
@@ -92,5 +92,15 @@ class UploadsController < ApplicationController
 
   def upload_params
     params.require(:upload).permit(:file, :link, :code, :lang)
+  end
+
+  def reload_upload_type
+    if @upload.code
+      @upload = @upload.becomes(Upload::Code)
+    elsif @upload.link
+      @upload = @upload.becomes(Upload::Link)
+    elsif @upload.file.file?
+      @upload = @upload.becomes(Upload::Blob)
+    end
   end
 end

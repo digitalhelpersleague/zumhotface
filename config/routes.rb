@@ -31,7 +31,7 @@ Zumhotface::Application.routes.draw do
   resources :uploads, path: '', param: :sid, only: [:show], constraints: { format: /html|json/ } do
     member do
       get :download
-      get :raw
+      get :raw, to:'uploads#download', raw: true
     end
   end
 

@@ -3,12 +3,10 @@ class Upload < ActiveRecord::Base
 
   before_validation :set_proper_type!
   before_validation :set_unique_identifier!
+  before_destroy :decrement_total_weight
 
   include HasAttachment
   include Encryptable
-
-  # FIXME: after_commit on destroy
-  before_destroy :decrement_total_weight
 
   belongs_to :user
 
@@ -17,7 +15,6 @@ class Upload < ActiveRecord::Base
   validate :must_have_free_storage_space
 
   after_commit :increment_total_weight, on: :create
-
   # TODO: compress links and code with gzip
 
   %w(blob link code).each do |type|
@@ -53,20 +50,20 @@ class Upload < ActiveRecord::Base
 
   def set_proper_type!
     if code
-      self.becomes!(Code)
+      self.type = "Upload::Code"
     elsif link
-      self.becomes!(Link)
-    elsif file
-      self.becomes!(Blob)
+      self.type = "Upload::Link"
+    elsif file.file?
+      self.type = "Upload::Blob"
     end
   end
 
   def increment_total_weight
-    user.update_total_weight(size)
+    user.update_total_weight(size) if size
   end
 
   def decrement_total_weight
-    user.update_total_weight(-size)
+    user.update_total_weight(-size) if size
   end
 
   def set_unique_identifier!
