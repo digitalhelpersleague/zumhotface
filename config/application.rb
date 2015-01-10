@@ -2,12 +2,13 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
-# require Settings
-require './config/initializers/_settings'
-
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
+
+# load dotenv and Settings
+Dotenv.load
+require './config/initializers/_settings'
 
 module Zumhotface
   class Application < Rails::Application
@@ -23,6 +24,9 @@ module Zumhotface
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    config.active_job.queue_adapter = :resque
+    config.active_record.raise_in_transactional_callbacks = true
+
     config.autoload_paths << Rails.root.join('lib')
     config.autoload_paths << Rails.root.join('app', 'api')
 
@@ -30,11 +34,11 @@ module Zumhotface
     config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
     config.assets.initialize_on_precompile = false
 
-    config.action_mailer.default_url_options = { host: ENV['ZHF_HOST'] || 'localhost' }
-    config.action_mailer.asset_host = "http://#{ENV['ZHF_HOST'] || 'localhost'}"
+    config.action_mailer.default_url_options = { host: Settings.server.host }
+    config.action_mailer.asset_host = "http://#{Settings.server.host}"
 
     config.middleware.use Rack::ContentLength
 
-    config.cache_store = :redis_store, { namespace: 'zhf:cache', expires_in: 90.minutes }
+    config.cache_store = :redis_store, { namespace: "#{Settings.redis.namespace}:cache", expires_in: 90.minutes }
   end
 end

@@ -5,6 +5,6 @@ FactoryGirl.define do
   end
 
   factory :code, class: Upload do
-    code { Faker::Internet.url }
+    code { Faker::Lorem.sentence }
   end
 end

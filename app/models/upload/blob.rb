@@ -1,5 +1,7 @@
 class Upload::Blob < Upload
-  def self.upload_type
-    'blob'
+  include LanguageDetectable
+
+  def size
+    file.size
   end
 end

@@ -13,7 +13,7 @@ development:
 
 test:
   <<: *defaults
-  database: zumhotface_test
+  database: <%= ENV['TRAVIS'] == 'yes' ? ENV['DB_NAME'] : 'zumhotface_test' %>
 
 production:
   <<: *defaults

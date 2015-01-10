@@ -32,7 +32,7 @@ div ng-controller='zum.UploadsNewCtrl'
                   |  {{ upload.error }}
 
             td.actions
-              a href="javascript:;" ng-click="remove_upload(upload)"
+              a href="javascript:;" ng-click="remove_upload(upload)" ng-if='!upload.url'
                 span.glyphicon.glyphicon-remove
           tr.total-row ng-show='uploads.length > 1'
             td

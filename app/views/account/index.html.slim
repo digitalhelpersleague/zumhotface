@@ -4,14 +4,14 @@ div ng-controller='zum.AccountCtrl'
     li : button.btn.btn-transparent.btn-lg href="#account" role="tab" ng-class='{ active: setting == "account", "btn-default": setting != "account" }' ng-click='setting="account"' Account
     /li : button.btn.btn-transparent.btn-lg href="#invitations" role="tab" ng-class='{ active: setting == "invitations", "btn-default": setting != "invitations" }' ng-click='setting="invitations"' Invitations
 
-  .tab-content ng-show='setting == "overview"'
+  .tab-content ng-show='setting == "overview"' ng-cloak=true
     .storage
       h4 Storage
       .progress
         .progress-bar.progress-bar-info role="progressbar" aria-valuenow="{{ current_user.storage_percent_used }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ current_user.storage_percent_used }}%;"
           | {{ current_user.storage_percent_used }}%
       | Used {{ current_user.storage_used  | humanizeSize }} of {{ current_user.storage_total  | humanizeSize }} total.
-  .tab-content ng-show='setting == "account"'
+  .tab-content ng-show='setting == "account"' ng-cloak=true
     h4 API Key
     .form-group ng-show='!!current_user.api_key'
       input.form-control type='text' value='{{ current_user.api_key }}' placeholder='none' onclick='$(this).focus(); $(this).select();'
@@ -37,7 +37,7 @@ div ng-controller='zum.AccountCtrl'
 
     .form-group
       input.form-control type='password' name='user[password_confirmation]' placeholder='Confirm new password' autocomplete="off" ng-model='password_confirmation' ng-class='{ "password-confirmation-error": password_confirmation && password != password_confirmation, "password-confirmation-success": password_confirmation && password == password_confirmation }'
-    
+
     .form-group
       button.btn.btn-primary.btn-lg name='commit' type='submit' ng-disabled='!current_password || !password || !password_confirmation || (password != password_confirmation)' CHANGE MY PASSWORD
 

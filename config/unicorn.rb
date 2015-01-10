@@ -14,11 +14,11 @@ old_pid    = "#{pid_file}.oldbin"
 rails_env = ENV['RAILS_ENV'] || 'production'
 
 working_directory app_root
-worker_processes ENV['ZHF_UNICORN_WORKERS'] || 4
+worker_processes Settings.server.workers
 
 preload_app true
 timeout 30
-listen Settings.server.port
+listen Settings.server.socket || Settings.server.port
 
 pid pid_file
 stderr_path err_log

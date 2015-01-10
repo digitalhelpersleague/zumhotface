@@ -2,7 +2,6 @@ require 'linguist'
 
 class UploadDecorator < ApplicationDecorator
   delegate_all
-
   decorates :upload
 
   def icon
@@ -11,8 +10,8 @@ class UploadDecorator < ApplicationDecorator
       'paperclip'
     when 'code'
       'file'
-    when 'link'
-      'link'
+    else
+      upload_type
     end
   end
 
@@ -33,7 +32,7 @@ class UploadDecorator < ApplicationDecorator
   end
 
   def upload_type
-    object.class.upload_type
+    object.class.name.demodulize.downcase
   end
 
   def name
@@ -41,6 +40,6 @@ class UploadDecorator < ApplicationDecorator
   end
 
   def url
-    h.url_for controller: 'uploads', action: 'show', sid: object.sid, host: Settings.host
+    h.url_for controller: 'uploads', action: 'show', sid: object.sid, host: Settings.server.host
   end
 end

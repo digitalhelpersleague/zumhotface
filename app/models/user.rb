@@ -44,10 +44,15 @@ class User < ActiveRecord::Base
     update_attribute :uploads_total_weight, uploads.find_each.map(&:size).reduce(:+).to_i
   end
 
-  def generate_api_key
+  def generate_api_key!
     loop do
       self.api_key = SecureRandom.hex(32)
       break unless self.class.exists?(api_key: api_key)
     end
+    save!
+  end
+
+  def destroy_api_key!
+    update_attributes(api_key: nil)
   end
 end
