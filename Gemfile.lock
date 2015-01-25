@@ -1,3 +1,13 @@
+GIT
+  remote: git://github.com/kressh/gon.git
+  revision: 5a37e216fbf0b3d34220ed9a6e863f7c9e683ba8
+  specs:
+    gon (5.2.3)
+      actionpack (>= 2.3.0)
+      json
+      multi_json
+      request_store (>= 1.0.5)
+
 GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
@@ -127,11 +137,6 @@ GEM
       rugged (~> 0.22.0b4)
     globalid (0.3.0)
       activesupport (>= 4.1.0)
-    gon (5.2.3)
-      actionpack (>= 2.3.0)
-      json
-      multi_json
-      request_store (>= 1.0.5)
     gon_responder (0.1.1)
       gon (~> 5.0)
       responders (>= 1.0)
@@ -389,7 +394,7 @@ DEPENDENCIES
   faker
   foreman
   github-linguist
-  gon
+  gon!
   gon_responder
   grape
   grape_documenter
@@ -407,14 +412,14 @@ DEPENDENCIES
   rack-mini-profiler
   rack-ssl-enforcer
   rails (~> 4.0)
-  rails-assets-angular (~> 1.3.0)
-  rails-assets-angular-animate
-  rails-assets-angular-moment
-  rails-assets-angular-resource
-  rails-assets-angular-sanitize
-  rails-assets-bootstrap-sass-official
-  rails-assets-lodash
-  rails-assets-moment
+  rails-assets-angular (~> 1.3.0)!
+  rails-assets-angular-animate!
+  rails-assets-angular-moment!
+  rails-assets-angular-resource!
+  rails-assets-angular-sanitize!
+  rails-assets-bootstrap-sass-official!
+  rails-assets-lodash!
+  rails-assets-moment!
   redis
   redis-namespace
   redis-rails

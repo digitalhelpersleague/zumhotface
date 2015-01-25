@@ -15,7 +15,7 @@ gem 'resque'
 gem 'devise'
 gem 'devise_invitable'
 gem 'draper'
-gem 'gon'
+gem 'gon', github: 'kressh/gon'
 gem 'responders'
 gem 'gon_responder'
 
@@ -44,14 +44,14 @@ end
 
 # Assets
 gem 'jquery-rails'
-gem 'rails-assets-lodash'
-gem 'rails-assets-angular', '~> 1.3.0'
-gem 'rails-assets-angular-animate'
-gem 'rails-assets-angular-resource'
-gem 'rails-assets-angular-sanitize'
-gem 'rails-assets-bootstrap-sass-official'
-gem 'rails-assets-moment'
-gem 'rails-assets-angular-moment'
+gem 'rails-assets-lodash', source: 'https://rails-assets.org/'
+gem 'rails-assets-angular', '~> 1.3.0', source: 'https://rails-assets.org/'
+gem 'rails-assets-angular-animate', source: 'https://rails-assets.org/'
+gem 'rails-assets-angular-resource', source: 'https://rails-assets.org/'
+gem 'rails-assets-angular-sanitize', source: 'https://rails-assets.org/'
+gem 'rails-assets-bootstrap-sass-official', source: 'https://rails-assets.org/'
+gem 'rails-assets-moment', source: 'https://rails-assets.org/'
+gem 'rails-assets-angular-moment', source: 'https://rails-assets.org/'
 
 gem 'ng-rails-csrf'
 
