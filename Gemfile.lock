@@ -407,7 +407,7 @@ DEPENDENCIES
   rack-mini-profiler
   rack-ssl-enforcer
   rails (~> 4.0)
-  rails-assets-angular
+  rails-assets-angular (~> 1.3.0)
   rails-assets-angular-animate
   rails-assets-angular-moment
   rails-assets-angular-resource

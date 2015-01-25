@@ -45,7 +45,7 @@ end
 # Assets
 gem 'jquery-rails'
 gem 'rails-assets-lodash'
-gem 'rails-assets-angular'
+gem 'rails-assets-angular', '~> 1.3.0'
 gem 'rails-assets-angular-animate'
 gem 'rails-assets-angular-resource'
 gem 'rails-assets-angular-sanitize'
