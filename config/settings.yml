@@ -1,6 +1,7 @@
 defaults: &defaults
   server:
     host: <%= ENV['ZHF_HOST'] || 'localhost' %>
+    socket: <%= ENV['ZHF_SOCK'] %>
     port: <%= ENV['ZHF_PORT'] || 3000 %>
     pid: <%= ENV['ZHF_PID'] %>
     log: <%= ENV['ZHF_LOG'] %>
