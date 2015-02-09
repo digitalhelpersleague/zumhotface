@@ -62,7 +62,7 @@ Zumhotface::Application.configure do
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = false
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found).
@@ -81,4 +81,16 @@ Zumhotface::Application.configure do
     config.middleware.use Rack::SslEnforcer, ignore: '/assets'
   end
 
+  if Settings.mail.enable
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      address:              Settings.mail.smtp.host,
+      port:                 Settings.mail.smtp.port,
+      user_name:            Settings.mail.smtp.login,
+      password:             Settings.mail.smtp.password,
+      authentication:       Settings.mail.smtp.authentication,
+      enable_starttls_auto: Settings.mail.smtp.starttls,
+      tls:                  Settings.mail.smtp.tls
+    }
+  end
 end

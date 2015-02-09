@@ -34,6 +34,7 @@ module Zumhotface
     config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
     config.assets.initialize_on_precompile = false
 
+    config.action_mailer.perform_deliveries = Settings.mail.enable
     config.action_mailer.default_url_options = { host: Settings.server.host }
     config.action_mailer.asset_host = "http://#{Settings.server.host}"
 

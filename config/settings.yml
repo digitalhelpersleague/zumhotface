@@ -10,7 +10,16 @@ defaults: &defaults
     email: <%= ENV['ZHF_ADMIN_EMAIL'] || 'admin@example.com' %>
     password: <%= ENV['ZHF_ADMIN_PASSWORD'] || 'password' %>
   mail:
+    enable: <%= ENV['ZHF_MAIL_ENABLE'] == 'true' %>
     from: <%= ENV['ZHF_MAIL_FROM'] || "root@#{ENV['ZHF_APP_HOST']}" %>
+    smtp:
+      host: <%= ENV['ZHF_SMTP_HOST'] %>
+      port: <%= ENV['ZHF_SMTP_PORT'] || 25 %>
+      login: <%= ENV['ZHF_SMTP_LOGIN'] %>
+      password: <%= ENV['ZHF_SMTP_PASSWORD'] %>
+      authentication: <%= ENV['ZHF_SMTP_AUTH_TYPE'] || 'login' %>
+      starttls: <%= ENV['ZHF_SMTP_STARTTLS'] == 'true' %>
+      tls: <%= ENV['ZHF_SMTP_TLS'] == 'true' %>
   uploads:
     directory: <%= ENV['ZHF_DATA_DIRECTORY'] || '/data' %>
     secret_key: <%= ENV['ZHF_SECRET_KEY'] %>
