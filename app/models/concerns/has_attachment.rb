@@ -13,8 +13,8 @@ module HasAttachment
     has_attached_file :file,
       hash_secret: Settings.uploads.secret_key,
       hash_data: 'uploads/file/:id/:style/:updated_at',
-      url: '/system/uploads/:id_partition/:hash.:extension',
-      path: ':rails_root/public/system/uploads/:id_partition/:hash.:extension',
+      url: '/uploads/:id_partition/:hash.:extension',
+      path: "#{Settings.uploads.directory}:url",
       escape_url:      false,
       styles: {
         icon: "64x64^",

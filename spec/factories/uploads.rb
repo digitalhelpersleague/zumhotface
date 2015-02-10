@@ -4,7 +4,10 @@ FactoryGirl.define do
     link { Faker::Internet.url }
   end
 
-  factory :code, class: Upload do
+  factory :code, class: Upload::Code do
     code { Faker::Lorem.sentence }
+  end
+
+  factory :blob, class: Upload::Blob do
   end
 end
