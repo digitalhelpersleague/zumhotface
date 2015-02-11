@@ -2,6 +2,10 @@ require 'hashie'
 
 unless defined?(Settings)
 
+  def rails_root_path(path)
+    path[0] == '/' ? path : File.expand_path(File.join('../../../', path), __FILE__)
+  end
+
   app_root = defined?(Rails) && Rails.root ? Rails.root : File.expand_path('../../..', __FILE__)
   app_env = defined?(Rails) ? Rails.env : ENV['RAILS_ENV'] || ENV['RACK_ENV']
 

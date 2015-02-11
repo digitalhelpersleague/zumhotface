@@ -40,6 +40,6 @@ class UploadDecorator < ApplicationDecorator
   end
 
   def url
-    h.url_for controller: 'uploads', action: 'show', sid: object.sid, host: Settings.server.host
+    h.url_for controller: 'uploads', action: 'show', sid: object.sid, host: Settings.hostname
   end
 end

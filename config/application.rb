@@ -24,22 +24,11 @@ module Zumhotface
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    config.active_job.queue_adapter = :resque
     config.active_record.raise_in_transactional_callbacks = true
 
     config.autoload_paths << Rails.root.join('lib')
     config.autoload_paths << Rails.root.join('app', 'api')
 
-    config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
-    config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
-    config.assets.initialize_on_precompile = false
-
-    config.action_mailer.perform_deliveries = Settings.mail.enable
-    config.action_mailer.default_url_options = { host: Settings.server.host }
-    config.action_mailer.asset_host = "http://#{Settings.server.host}"
-
     config.middleware.use Rack::ContentLength
-
-    config.cache_store = :redis_store, { namespace: "#{Settings.redis.namespace}:cache", expires_in: 90.minutes }
   end
 end

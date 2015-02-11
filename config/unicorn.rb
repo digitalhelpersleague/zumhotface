@@ -6,19 +6,19 @@ $LOAD_PATH << "#{app_root}/lib"
 require 'bundler/setup'
 require 'config/initializers/_settings'
 
-log_file   = Settings.server.log || "#{app_root}/log/unicorn.log"
-err_log    = "#{app_root}/log/unicorn_error.log"
-pid_file   = Settings.server.pid || "#{app_root}/tmp/pids/unicorn.pid"
+log_file   = rails_root_path(Settings.app.log)
+err_log   = rails_root_path(Settings.app.errlog)
+pid_file   = rails_root_path(Settings.app.pid)
 old_pid    = "#{pid_file}.oldbin"
 
 rails_env = ENV['RAILS_ENV'] || 'production'
 
-working_directory app_root
-worker_processes Settings.server.workers
+working_directory rails_root_path('')
+worker_processes Settings.app.workers
 
 preload_app true
-timeout 30
-listen Settings.server.socket || Settings.server.port
+timeout 120
+listen Settings.app.socket || Settings.app.port
 
 pid pid_file
 stderr_path err_log

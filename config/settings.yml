@@ -1,10 +1,12 @@
 defaults: &defaults
-  server:
+  hostname: <%= ENV['ZHF_HOSTNAME'] || 'localhost' %>
+  app:
     host: <%= ENV['ZHF_APP_HOST'] || 'localhost' %>
     socket: <%= ENV['ZHF_APP_SOCK'] %>
     port: <%= ENV['ZHF_APP_PORT'] || 3000 %>
-    pid: <%= ENV['ZHF_APP_PID'] || "#{Rails.root}/tmp/pids/zumhotface.pid"  %>
-    log: <%= ENV['ZHF_APP_LOG'] || "#{Rails.root}/log/#{Rails.env}.log" %>
+    pid: <%= ENV['ZHF_APP_PID'] || "tmp/pids/zumhotface.pid"  %>
+    log: <%= ENV['ZHF_APP_LOG'] || "log/#{ENV['RAILS_ENV']}.log" %>
+    errlog: <%= ENV['ZHF_APP_ERRLOG'] || "log/unicorn_err.log" %>
     workers: <%= ENV['ZHF_UNICORN_WORKERS'] || 4 %>
   admin:
     email: <%= ENV['ZHF_ADMIN_EMAIL'] || 'admin@example.com' %>
@@ -21,7 +23,7 @@ defaults: &defaults
       starttls: <%= ENV['ZHF_SMTP_STARTTLS'] == 'true' %>
       tls: <%= ENV['ZHF_SMTP_TLS'] == 'true' %>
   uploads:
-    directory: <%= ENV['ZHF_DATA_DIRECTORY'] || '/data' %>
+    directory: <%= rails_root_path(ENV['ZHF_DATA_DIRECTORY'] || "public/system") %>
     secret_key: <%= ENV['ZHF_SECRET_KEY'] %>
     aws_s3:
       bucket: <%= ENV['AWS_BUCKET'] %>
@@ -35,6 +37,7 @@ defaults: &defaults
     port: <%= ENV['REDIS_PORT'] || 6379 %>
     database: <%= ENV['REDIS_DATABASE'] || 0 %>
     namespace: <%= ENV['REDIS_NAMESPACE'] || 'zhf' %>
+  asd: <%= ':dsa' %>
 
 development:
   <<: *defaults
