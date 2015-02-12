@@ -13,7 +13,7 @@ module HasAttachment
     has_attached_file :file,
       hash_secret: Settings.uploads.secret_key,
       hash_data: 'uploads/file/:id/:style/:updated_at',
-      url: '/uploads/:id_partition/:hash.:extension',
+      url: '/static/uploads/:id_partition/:hash.:extension',
       path: "#{Settings.uploads.directory}:url",
       escape_url:      false,
       styles: {

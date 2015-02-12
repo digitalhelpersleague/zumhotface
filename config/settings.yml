@@ -37,7 +37,6 @@ defaults: &defaults
     port: <%= ENV['REDIS_PORT'] || 6379 %>
     database: <%= ENV['REDIS_DATABASE'] || 0 %>
     namespace: <%= ENV['REDIS_NAMESPACE'] || 'zhf' %>
-  asd: <%= ':dsa' %>
 
 development:
   <<: *defaults
