@@ -23,7 +23,7 @@ defaults: &defaults
       starttls: <%= ENV['ZHF_SMTP_STARTTLS'] == 'true' %>
       tls: <%= ENV['ZHF_SMTP_TLS'] == 'true' %>
   uploads:
-    directory: <%= rails_root_path(ENV['ZHF_DATA_DIRECTORY'] || "public/system") %>
+    directory: <%= rails_root_path(ENV['ZHF_DATA_DIRECTORY'] || "public") %>
     secret_key: <%= ENV['ZHF_SECRET_KEY'] %>
     aws_s3:
       bucket: <%= ENV['AWS_BUCKET'] %>

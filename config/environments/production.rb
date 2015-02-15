@@ -80,17 +80,4 @@ Zumhotface::Application.configure do
   if Settings.force_ssl
     config.middleware.use Rack::SslEnforcer, ignore: '/assets'
   end
-
-  if Settings.mail.enable
-    config.action_mailer.delivery_method = :smtp
-    config.action_mailer.smtp_settings = {
-      address:              Settings.mail.smtp.host,
-      port:                 Settings.mail.smtp.port,
-      user_name:            Settings.mail.smtp.login,
-      password:             Settings.mail.smtp.password,
-      authentication:       Settings.mail.smtp.authentication,
-      enable_starttls_auto: Settings.mail.smtp.starttls,
-      tls:                  Settings.mail.smtp.tls
-    }
-  end
 end

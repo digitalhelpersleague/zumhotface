@@ -5,7 +5,6 @@ class Upload < ActiveRecord::Base
   before_validation :set_unique_identifier!
   before_destroy :decrement_total_weight
 
-  include HasAttachment
   include Encryptable
 
   belongs_to :user

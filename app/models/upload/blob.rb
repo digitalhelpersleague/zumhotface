@@ -2,6 +2,8 @@ require 'linguist'
 
 class Upload::Blob < Upload
 
+  include HasAttachment
+
   after_commit on: :create do
     LanguageDetectorJob.perform_later(self) if !encrypted?
   end

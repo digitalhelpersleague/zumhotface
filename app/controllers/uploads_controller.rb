@@ -16,9 +16,7 @@ class UploadsController < ApplicationController
   end
 
   def create
-    @upload = current_user.uploads.build(upload_params)
-    reload_upload_type
-    @upload.save
+    @upload = upload_klass.create(upload_params.merge(user: current_user))
     respond_to do |format|
       unless @upload.errors.any?
         format.json { render action: :show }
@@ -94,13 +92,15 @@ class UploadsController < ApplicationController
     params.require(:upload).permit(:file, :link, :code, :lang)
   end
 
-  def reload_upload_type
-    if @upload.code
-      @upload = @upload.becomes(Upload::Code)
-    elsif @upload.link
-      @upload = @upload.becomes(Upload::Link)
-    elsif @upload.file.file?
-      @upload = @upload.becomes(Upload::Blob)
+  def upload_klass
+    if upload_params.has_key? :file
+      Upload::Blob
+    elsif upload_params.has_key? :code
+      Upload::Code
+    elsif upload_params.has_key? :link
+      Upload::Link
+    else
+      Upload
     end
   end
 end

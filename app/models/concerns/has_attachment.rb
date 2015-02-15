@@ -18,12 +18,8 @@ module HasAttachment
       escape_url:      false,
       use_timestamp:   false,
       styles: {
-        icon: "64x64^",
-        thumb: "150x150^" },
-      convert_options: {
-        icon: "-gravity center -extent 64x64",
-        thumb: "-gravity center -extent 150x150" }
-
+        icon: "100x100>",
+        thumb: "200x200>" }
 
     # TODO: move to s3
     # path: "/uploads/:id_partition/:hash.:extension",
@@ -32,6 +28,7 @@ module HasAttachment
     # s3_credentials: Settings.uploads.aws_s3.s3_credentials,
     # bucket: Settings.uploads.aws_s3.bucket
 
+    validates :file, attachment_presence: true
     do_not_validate_attachment_file_type :file
 
     # TODO: delayed_paperclip

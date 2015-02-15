@@ -24,11 +24,23 @@ class APIv1 < Grape::API
     end
 
     def upload_params
-      if params[:file]
-        params[:file] = ActionDispatch::Http::UploadedFile.new(params[:file])
+      @upload_params ||= ActionController::Parameters.new(
+        params.tap do |p|
+          p[:file] = ActionDispatch::Http::UploadedFile.new(p[:file]) if p[:file]
+        end
+      ).permit(:file, :link, :code, :lang)
+    end
+
+    def upload_klass
+      if upload_params.has_key? :file
+        Upload::Blob
+      elsif upload_params.has_key? :code
+        Upload::Code
+      elsif upload_params.has_key? :link
+        Upload::Link
+      else
+        Upload
       end
-      ActionController::Parameters.new(params)
-        .permit(:file, :link, :code, :lang)
     end
   end
 
@@ -56,7 +68,7 @@ class APIv1 < Grape::API
       exactly_one_of :file, :link, :code
     end
     post '' do
-      @upload = current_user.uploads.create(upload_params)
+      @upload = upload_klass.create(upload_params.merge(user: current_user))
       unless @upload.errors.any?
         status 201
         { url: UploadDecorator.decorate(@upload).url }
