@@ -55,4 +55,9 @@ class User < ActiveRecord::Base
   def destroy_api_key!
     update_attributes(api_key: nil)
   end
+
+  # Override devise to send mail through ActiveJob
+  def send_devise_notification(notification, *args)
+    devise_mailer.send(notification, self, *args).deliver_later
+  end
 end

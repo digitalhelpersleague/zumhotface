@@ -16,6 +16,7 @@ module HasAttachment
       url: '/static/uploads/:id_partition/:hash.:extension',
       path: "#{Settings.uploads.directory}:url",
       escape_url:      false,
+      use_timestamp:   false,
       styles: {
         icon: "64x64^",
         thumb: "150x150^" },
