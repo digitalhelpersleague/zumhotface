@@ -8,6 +8,7 @@ defaults: &defaults
     log: <%= ENV['ZHF_APP_LOG'] || "log/#{ENV['RAILS_ENV']}.log" %>
     errlog: <%= ENV['ZHF_APP_ERRLOG'] || "log/unicorn_err.log" %>
     workers: <%= ENV['ZHF_UNICORN_WORKERS'] || 4 %>
+    force_ssl: <%= ENV['ZHF_FORCE_SSL'] == 'true' %>
   admin:
     email: <%= ENV['ZHF_ADMIN_EMAIL'] || 'admin@example.com' %>
     password: <%= ENV['ZHF_ADMIN_PASSWORD'] || 'password' %>

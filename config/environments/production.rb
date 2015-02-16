@@ -76,8 +76,4 @@ Zumhotface::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
-
-  if Settings.force_ssl
-    config.middleware.use Rack::SslEnforcer, ignore: '/assets'
-  end
 end

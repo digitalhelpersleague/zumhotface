@@ -55,13 +55,13 @@ gem 'rails-assets-angular-moment', source: 'https://rails-assets.org/'
 gem 'ng-rails-csrf'
 
 gem 'rspec-rails', group: [:development, :test]
+gem 'rack-ssl-enforcer'
 
 group :production do
   gem 'execjs', platforms: :ruby
   gem 'uglifier', '>= 1.3.0'
   gem 'SyslogLogger'
   gem 'unicorn'
-  gem 'rack-ssl-enforcer'
 end
 
 group :development do

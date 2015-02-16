@@ -30,5 +30,10 @@ module Zumhotface
     config.autoload_paths << Rails.root.join('app', 'api')
 
     config.middleware.use Rack::ContentLength
+
+    if Settings.app.force_ssl
+      config.middleware.use Rack::SslEnforcer, ignore: '/assets'
+    end
+
   end
 end
