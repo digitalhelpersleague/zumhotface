@@ -1,5 +1,5 @@
-zumhotface
-==========
+[![Zumhotface](https://zhf.io/oLoBmV/raw)](https://zhf.io)
+
 [![Buid status][travis-badge]][travis-url]
 [![Code Climate][codeclimate-badge]][codeclimate-url]
 [![Test Coverage](https://codeclimate.com/github/digitalhelpersleague/zumhotface/badges/coverage.svg)](https://codeclimate.com/github/digitalhelpersleague/zumhotface)
