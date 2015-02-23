@@ -1,8 +1,9 @@
 zumhotface
 ==========
 [![Buid status][travis-badge]][travis-url]
-[![Dependency Status][gemnasium-badge]][gemnasium-url]
 [![Code Climate][codeclimate-badge]][codeclimate-url]
+[![Test Coverage](https://codeclimate.com/github/digitalhelpersleague/zumhotface/badges/coverage.svg)](https://codeclimate.com/github/digitalhelpersleague/zumhotface)
+[![Dependency Status][gemnasium-badge]][gemnasium-url]
 
 Simple and secure file/links sharing system written in Rails.
 
