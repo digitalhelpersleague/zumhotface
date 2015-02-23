@@ -1,3 +1,5 @@
+require 'linguist' # for languages list on uploads#new
+
 class UploadsController < ApplicationController
   respond_to :html, :json
   helper_method :upload, :uploads

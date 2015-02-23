@@ -22,7 +22,14 @@
 #= require_self
 #= require_tree .
 
-@zum = angular.module 'zum', ['ngResource', 'ng-rails-csrf', 'ngSanitize', 'angularMoment', 'ngAnimate', 'pasvaz.bindonce']
+@zum = angular.module 'zum',
+  [ 'ngResource'
+  , 'ng-rails-csrf'
+  , 'ngSanitize'
+  , 'angularMoment'
+  , 'ngAnimate'
+  , 'pasvaz.bindonce'
+  ]
 @zum.value 'data', window.gon
 
 $ ->

@@ -43,7 +43,12 @@ class UploadDecorator < ApplicationDecorator
   end
 
   def pygmentize(opts = nil)
-    opts ||= { linenos: 'table' }
+    opts ||=
+      { linenos: 'table',
+        anchorlinenos: true,
+        lineanchors: 'line',
+        linespans: 'line'
+      }
     raw =
       if object.code?
         code
