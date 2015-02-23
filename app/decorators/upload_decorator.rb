@@ -29,13 +29,15 @@ class UploadDecorator < ApplicationDecorator
   end
 
   def name
-    if blob?
+    nm = if blob?
       file_file_name
     elsif link?
       link
     elsif code?
-      truncate(code, length: 30, escape: false)
+      code
     end
+    return truncate(nm, length: 20, escape: false)+nm[-10..-1] if nm.size >= 35
+    nm
   end
 
   def url
