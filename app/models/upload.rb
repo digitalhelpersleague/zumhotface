@@ -41,6 +41,10 @@ class Upload < ActiveRecord::Base
     save
   end
 
+  def image?
+    blob? && file.content_type.include?('image')
+  end
+
   def must_have_free_storage_space
     errors.add(:file, 'no space left') if size.to_i > user.storage.free
   end

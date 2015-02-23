@@ -1,4 +1,5 @@
 require 'linguist'
+require 'pygments'
 
 class UploadDecorator < ApplicationDecorator
   delegate_all
@@ -16,19 +17,11 @@ class UploadDecorator < ApplicationDecorator
   end
 
   def content_type
-    lang || file.try(:content_type)
+    lang || (blob? && file.try(:content_type))
   end
 
   def raw_preview
-    if lang
-      return ("<div class='syntax'>" + Linguist::FileBlob.new(file.path).colorize + '</div>').html_safe if object.blob?
-      return (
-              "<div class='syntax'>" +
-                Linguist::Language.new(name: lang).colorize(code) +
-              '</div>'
-             ).html_safe if object.code
-    end
-    return ("<div class='syntax'><pre>" + code + '</pre></div>').html_safe if object.code?
+    pygmentize if lang || object.code?
   end
 
   def upload_type
@@ -36,10 +29,27 @@ class UploadDecorator < ApplicationDecorator
   end
 
   def name
-    file_file_name || link || code
+    if blob?
+      file_file_name
+    elsif link?
+      link
+    elsif code?
+      truncate(code, length: 30, escape: false)
+    end
   end
 
   def url
     h.url_for controller: 'uploads', action: 'show', sid: object.sid, host: Settings.hostname
+  end
+
+  def pygmentize(opts = nil)
+    opts ||= { linenos: 'table' }
+    raw =
+      if object.code?
+        code
+      elsif object.blob?
+        File.read(file.path)
+      end
+    "<div class='syntax'>#{Pygments.highlight(raw, lexer: lang, options: opts)}</div>".html_safe
   end
 end

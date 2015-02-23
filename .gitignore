@@ -5,6 +5,5 @@
 /tmp
 *.swp
 *.swo
-/public/system
-/public/assets
+/public
 /vendor/bundle

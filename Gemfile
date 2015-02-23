@@ -1,4 +1,17 @@
+source 'https://rails-assets.org/' do
+  gem 'rails-assets-lodash'
+  gem 'rails-assets-angular', '~> 1.3.0'
+  gem 'rails-assets-angular-animate'
+  gem 'rails-assets-angular-resource'
+  gem 'rails-assets-angular-sanitize'
+  gem 'rails-assets-bootstrap-sass-official'
+  gem 'rails-assets-moment'
+  gem 'rails-assets-angular-moment'
+end
+
 source 'https://rubygems.org'
+
+gem 'bundler', '>= 1.7.0'
 
 gem 'rails', '~> 4.0'
 gem 'pg'
@@ -24,7 +37,8 @@ gem 'autoprefixer-rails'
 gem 'oj'
 gem 'hashie'
 
-gem 'github-linguist'
+gem 'github-linguist', '~> 4.4.2'
+gem 'pygments.rb'
 
 gem 'slim-rails'
 gem 'sass-rails'
@@ -43,14 +57,6 @@ end
 
 # Assets
 gem 'jquery-rails'
-gem 'rails-assets-lodash', source: 'https://rails-assets.org/'
-gem 'rails-assets-angular', '~> 1.3.0', source: 'https://rails-assets.org/'
-gem 'rails-assets-angular-animate', source: 'https://rails-assets.org/'
-gem 'rails-assets-angular-resource', source: 'https://rails-assets.org/'
-gem 'rails-assets-angular-sanitize', source: 'https://rails-assets.org/'
-gem 'rails-assets-bootstrap-sass-official', source: 'https://rails-assets.org/'
-gem 'rails-assets-moment', source: 'https://rails-assets.org/'
-gem 'rails-assets-angular-moment', source: 'https://rails-assets.org/'
 
 gem 'ng-rails-csrf'
 
@@ -66,9 +72,6 @@ end
 
 group :development do
   gem 'thin'
-  #gem 'capistrano', '~> 2.0'
-  #gem 'capistrano-unicorn', require: false
-  #gem 'capistrano-rbenv', require: false
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'rack-mini-profiler'

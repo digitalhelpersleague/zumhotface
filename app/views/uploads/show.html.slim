@@ -3,19 +3,19 @@ div
     table.table.upload-info
       tbody
         tr
-          - if upload.file?
+          - if upload.blob?
             td.upload-name = upload.name
           td.upload-content-type = upload.content_type
           td.upload-size = upload.size.to_s(:human_size)
-          td.actions 
+          td.actions
             - if upload.raw_viewable?
               = link_to "RAW", raw_upload_path(upload.sid), class: 'btn btn-success btn-xs'
             - if upload.image?
               = link_to "VIEW", raw_upload_path(upload.sid), class: 'btn btn-success btn-xs'
-            - if upload.file?
+            - if upload.blob?
               = link_to "DOWNLOAD", download_upload_path(upload.sid), class: 'btn btn-success btn-xs'
     - if upload.image?
-      img.preview.preview-fit src='#{upload.file.url}' alt='#{upload.file_file_name}' ng-zoom-preview=true
+      img.preview.preview-fit src='#{raw_upload_path(upload.sid)}' alt='#{upload.file_file_name}' ng-zoom-preview=true
 
     - if upload.raw_viewable?
       - cache do

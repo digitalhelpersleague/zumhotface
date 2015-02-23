@@ -41,8 +41,4 @@ module HasAttachment
   def skip_for_non_image
     image?
   end
-
-  def image?
-    file? && file.content_type.include?('image')
-  end
 end
