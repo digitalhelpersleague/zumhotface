@@ -1,9 +1,10 @@
 source 'https://rails-assets.org/' do
   gem 'rails-assets-lodash'
-  gem 'rails-assets-angular', '~> 1.3.0'
+  gem 'rails-assets-angular', '~> 1.4.0'
   gem 'rails-assets-angular-animate'
   gem 'rails-assets-angular-resource'
   gem 'rails-assets-angular-sanitize'
+  gem 'rails-assets-angular-loading-bar'
   gem 'rails-assets-bootstrap-sass-official'
   gem 'rails-assets-moment'
   gem 'rails-assets-angular-moment'
@@ -74,7 +75,7 @@ group :development do
   gem 'thin'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'rack-mini-profiler'
+  #gem 'rack-mini-profiler'
   gem 'quiet_assets'
   gem 'letter_opener'
 end
